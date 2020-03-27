@@ -23,12 +23,12 @@ class TabelBencana extends Migration
             $table->string('status_jenis');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->json('skill_minimal');
-            $table->json('mental_minimal');
+            $table->text('skill_minimal');
+            $table->text('mental_minimal');
             $table->text('detail_tugas');
             $table->string('durasi_tugas');
             $table->text('lokasi_tugas');
-            $table->json('koordinat_tugas');
+            $table->text('koordinat_tugas');
             $table->string('supervisi_tugas');
             $table->text('jaminan_perlindungan');
             $table->string('kordinator_relawan');

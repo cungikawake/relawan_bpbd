@@ -16,7 +16,7 @@ class TabelRelawanPengalaman extends Migration
         Schema::create('relawan_pengalaman', function (Blueprint $table) {
             $table->id(); 
             $table->integer('id_relawan');
-            $table->json('detail_pengalaman');//jenis, lokasi, tahun
+            $table->text('detail_pengalaman');//jenis, lokasi, tahun
             $table->timestamps();
         });
     }
