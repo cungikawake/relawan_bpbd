@@ -27,6 +27,7 @@
     <!-- END PAGE LEVEL JS-->
 
     <!-- CUSTOM JS--> 
+    @stack('script')
 
   </body>
 </html>

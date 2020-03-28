@@ -13,7 +13,7 @@ class TabelIndukRelawan extends Migration
      */
     public function up()
     {
-        Schema::create('induk_oranisasi', function (Blueprint $table) {
+        Schema::create('induk_organisasi', function (Blueprint $table) {
             $table->id(); 
             $table->string('nama_organisasi');
             $table->string('tlp_organisasi');
@@ -31,6 +31,6 @@ class TabelIndukRelawan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('induk_oranisasi');
+        Schema::dropIfExists('induk_organisasi');
     }
 }

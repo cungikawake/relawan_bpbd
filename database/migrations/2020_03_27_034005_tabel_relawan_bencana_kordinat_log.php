@@ -29,6 +29,6 @@ class TabelRelawanBencanaKordinatLog extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bencana');
+        Schema::dropIfExists('relawan_bencana_kordinat_log');
     }
 }
