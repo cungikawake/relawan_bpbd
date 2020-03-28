@@ -74,8 +74,13 @@
                                         </fieldset>
                                     </div>
                                     <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
-                                        <div class="float-right">
+                                        <div class="float-left">
                                             <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Simpan</button>
+                                        </div>
+                                        <div class="float-right">
+                                            <a href="{{ route('induk_organisasi.index') }}">
+                                                <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1">Batal</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
