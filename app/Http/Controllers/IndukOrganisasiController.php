@@ -59,7 +59,7 @@ class IndukOrganisasiController extends Controller
             $data->alamat_organisasi = $request->alamat;
             $data->save();
 
-            return redirect()->route('induk_organisasi.index')->with('message', 'Data added.');
+            return redirect()->route('induk_organisasi.index')->with('message', 'Data tersimpan.');
         }
     }
 
