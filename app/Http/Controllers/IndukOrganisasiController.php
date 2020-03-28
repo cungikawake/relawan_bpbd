@@ -42,7 +42,7 @@ class IndukOrganisasiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required',
+                'nama' => 'required|unique:induk_organisasi,nama_organisasi',
                 'tlp' => 'required',
                 'email' => 'required'
             ]
@@ -59,7 +59,7 @@ class IndukOrganisasiController extends Controller
             $data->alamat_organisasi = $request->alamat;
             $data->save();
 
-            return redirect()->route('induk_organisasi.index')->with('message', 'Data added.');
+            return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil disimpan.');
         }
     }
 
@@ -97,7 +97,7 @@ class IndukOrganisasiController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required',
+                'nama' => 'required|unique:induk_organisasi,nama_organisasi'.($id ? ",$id" : '').',id',
                 'tlp' => 'required',
                 'email' => 'required'
             ]
@@ -114,7 +114,7 @@ class IndukOrganisasiController extends Controller
             $data->alamat_organisasi = $request->alamat;
             $data->save();
 
-            return redirect()->route('induk_organisasi.index')->with('message', 'Data updated.');
+            return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil diubah.');
         }
     }
 
@@ -129,6 +129,6 @@ class IndukOrganisasiController extends Controller
         $data = IndukOrganisasi::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('induk_organisasi.index')->with('message', 'Data deleted.');
+        return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil dihapus.');
     }
 }
