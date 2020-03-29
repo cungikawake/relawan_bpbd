@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-})->name('dashboard');
+Route::group(['middleware'=> ['auth']], function (){
+    Route::get('/dashboard', function () {
+        return view('dashboard.dashboard');
+    })->name('dashboard');
 
-Route::group(['as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
-    Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
-    Route::resource('skill', 'SkillController')->names('skill');
-    Route::resource('bencana', 'BencanaController')->names('bencana');
+    Route::group(['as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+        Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
+        Route::resource('skill', 'SkillController')->names('skill');
+        Route::resource('bencana', 'BencanaController')->names('bencana');
+    });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
