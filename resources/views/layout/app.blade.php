@@ -1,5 +1,0 @@
-@include('layout.header')
-@include('layout.topbar')
-@include('layout.sidebar')
-@yield('content')
-@include('layout.footer')

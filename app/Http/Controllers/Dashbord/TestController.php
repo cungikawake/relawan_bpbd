@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashbord;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SkillController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.

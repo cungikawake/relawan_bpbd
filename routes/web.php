@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
 })->name('dashboard');
 
-Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
+Route::group(['as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+    Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
+    Route::resource('skill', 'SkillController')->names('skill');
+    Route::resource('bencana', 'BencanaController')->names('bencana');
+});

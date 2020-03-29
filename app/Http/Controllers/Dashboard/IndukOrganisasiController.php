@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -18,7 +19,7 @@ class IndukOrganisasiController extends Controller
     {
         $datas = IndukOrganisasi::orderBy('created_at', 'asc')->paginate(10);
 
-        return view('induk_organisasi.index', compact('datas'));
+        return view('dashboard.induk_organisasi.index', compact('datas'));
     }
 
     /**
@@ -30,7 +31,7 @@ class IndukOrganisasiController extends Controller
     {
         $model = new IndukOrganisasi();
 
-        return view('induk_organisasi.form', compact('model'));
+        return view('dashboard.induk_organisasi.form', compact('model'));
     }
 
     /**
@@ -59,7 +60,7 @@ class IndukOrganisasiController extends Controller
             $data->alamat_organisasi = $request->alamat;
             $data->save();
 
-            return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil disimpan.');
+            return redirect()->route('dashboard.induk_organisasi.index')->with('message', 'Data berhasil disimpan.');
         }
     }
 
@@ -84,7 +85,7 @@ class IndukOrganisasiController extends Controller
     {
         $model = IndukOrganisasi::findOrFail($id);
 
-        return view('induk_organisasi.form', compact('model'));
+        return view('dashboard.induk_organisasi.form', compact('model'));
     }
 
     /**
@@ -114,7 +115,7 @@ class IndukOrganisasiController extends Controller
             $data->alamat_organisasi = $request->alamat;
             $data->save();
 
-            return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil diubah.');
+            return redirect()->route('dashboard.induk_organisasi.index')->with('message', 'Data berhasil diubah.');
         }
     }
 
@@ -129,6 +130,6 @@ class IndukOrganisasiController extends Controller
         $data = IndukOrganisasi::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('induk_organisasi.index')->with('message', 'Data berhasil dihapus.');
+        return redirect()->route('dashboard.induk_organisasi.index')->with('message', 'Data berhasil dihapus.');
     }
 }

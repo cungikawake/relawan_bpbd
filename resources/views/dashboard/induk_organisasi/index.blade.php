@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('dashboard.layout.app')
 
 @section('title', 'Dashboard')
 
@@ -43,7 +43,7 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body">
-                                <a href="{{ route('induk_organisasi.create') }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
+                                <a href="{{ route('dashboard.induk_organisasi.create') }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
                                 
                                 @if(Session::has('message'))
                                     <div class="alert with-close alert-info mt-2">
@@ -75,9 +75,9 @@
                                                         <td>{{$data->email_organisasi}}</td>
                                                         <td>{{$data->nama_pimpinan_organisasi}}</td>
                                                         <td>
-                                                            <a href="{{route('induk_organisasi.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
+                                                            <a href="{{route('dashboard.induk_organisasi.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
-                                                            <form action="{{route('induk_organisasi.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
+                                                            <form action="{{route('dashboard.induk_organisasi.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
