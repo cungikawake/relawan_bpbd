@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('frontpage.home.index');
 })->name('dashboard');
 
 Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
