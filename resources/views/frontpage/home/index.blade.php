@@ -1,4 +1,4 @@
-@extends('frontpage.layout.app')
+@extends('frontpage.layout.app') 
 
 @section('title', 'E-Relawan')
 
