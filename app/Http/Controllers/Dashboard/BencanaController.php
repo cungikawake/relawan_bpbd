@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\Bencana;
 use App\Models\Skill;
+use App\Models\Persyaratan;
 
 class BencanaController extends Controller
 {
@@ -32,9 +33,11 @@ class BencanaController extends Controller
     {
         $model = new Bencana();
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
-        $model_skills = array(); 
+        $model_skills = array();
+        $persyaratan = Persyaratan::orderBy('nama', 'asc')->get();
+        $model_persyaratan = array();
 
-        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills'));
+        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan'));
     }
 
     /**
@@ -62,7 +65,7 @@ class BencanaController extends Controller
                 'koordinat_tugas' => 'required',
                 'supervisi_tugas' => 'required',
                 'jaminan_perlindungan' => 'required',
-                'kordinator_relawan' => 'required',
+                // 'kordinator_relawan' => 'required',
                 'foto_bencana' => 'required|image|mimes:jpeg,jpg,png||max:2048'
             ]
         );
@@ -80,14 +83,14 @@ class BencanaController extends Controller
             $data->tgl_mulai = date('Y-m-d', strtotime($request->tgl_mulai));
             $data->tgl_selesai = date('Y-m-d', strtotime($request->tgl_selesai));
             $data->skill_minimal = json_encode($request->skill_minimal);
-            $data->mental_minimal = $request->mental_minimal;
+            $data->mental_minimal = json_encode($request->mental_minimal);
             $data->detail_tugas = $request->detail_tugas;
             $data->durasi_tugas = $request->durasi_tugas;
             $data->lokasi_tugas = $request->lokasi_tugas;
             $data->koordinat_tugas = $request->koordinat_tugas;
             $data->supervisi_tugas = $request->supervisi_tugas;
             $data->jaminan_perlindungan = $request->jaminan_perlindungan;
-            $data->kordinator_relawan = $request->kordinator_relawan;
+            // $data->kordinator_relawan = $request->kordinator_relawan;
 
             $image = $request->foto_bencana;
             $imageName = Str::slug(strtolower($request->judul_bencana), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
@@ -121,9 +124,11 @@ class BencanaController extends Controller
     {
         $model = Bencana::findOrFail($id);
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
-        $model_skills = is_array(json_decode($model->skill_minimal)) ? json_decode($model->skill_minimal) : array(); 
+        $model_skills = is_array(json_decode($model->skill_minimal)) ? json_decode($model->skill_minimal) : array();
+        $persyaratan = Persyaratan::orderBy('nama', 'asc')->get();
+        $model_persyaratan = is_array(json_decode($model->mental_minimal)) ? json_decode($model->mental_minimal) : array();
 
-        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills'));
+        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan'));
     }
 
     /**
@@ -152,7 +157,7 @@ class BencanaController extends Controller
                 'koordinat_tugas' => 'required',
                 'supervisi_tugas' => 'required',
                 'jaminan_perlindungan' => 'required',
-                'kordinator_relawan' => 'required',
+                // 'kordinator_relawan' => 'required',
                 'foto_bencana' => 'nullable|image|mimes:jpeg,jpg,png||max:2048'
             ]
         );
@@ -170,14 +175,14 @@ class BencanaController extends Controller
             $data->tgl_mulai = date('Y-m-d', strtotime($request->tgl_mulai));
             $data->tgl_selesai = date('Y-m-d', strtotime($request->tgl_selesai));
             $data->skill_minimal = json_encode($request->skill_minimal);
-            $data->mental_minimal = $request->mental_minimal;
+            $data->mental_minimal = json_encode($request->mental_minimal);
             $data->detail_tugas = $request->detail_tugas;
             $data->durasi_tugas = $request->durasi_tugas;
             $data->lokasi_tugas = $request->lokasi_tugas;
             $data->koordinat_tugas = $request->koordinat_tugas;
             $data->supervisi_tugas = $request->supervisi_tugas;
             $data->jaminan_perlindungan = $request->jaminan_perlindungan;
-            $data->kordinator_relawan = $request->kordinator_relawan;
+            // $data->kordinator_relawan = $request->kordinator_relawan;
 
             if ($request->has('foto_bencana')) {
                 $path = 'uploads/bencana/';

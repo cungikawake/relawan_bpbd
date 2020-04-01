@@ -23,6 +23,7 @@ Route::group(['middleware'=> ['auth']], function (){
         Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
         Route::resource('skill', 'SkillController')->names('skill');
         Route::resource('bencana', 'BencanaController')->names('bencana');
+        Route::resource('persyaratan', 'PersyaratanController')->names('persyaratan');
     });
 });
 

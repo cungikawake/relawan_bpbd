@@ -31,7 +31,7 @@ class TabelBencana extends Migration
             $table->text('koordinat_tugas');
             $table->string('supervisi_tugas');
             $table->text('jaminan_perlindungan');
-            $table->string('kordinator_relawan');
+            $table->string('kordinator_relawan')->nullable();
             $table->text('foto_bencana');
             $table->timestamps();
         });

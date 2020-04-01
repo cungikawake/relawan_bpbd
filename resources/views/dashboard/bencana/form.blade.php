@@ -73,7 +73,12 @@
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Jenis Bencana <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="jenis_bencana" value="{{old('jenis_bencana', $model->jenis_bencana)}}" placeholder="Jenis Bencana">
+                                                    {{-- <input type="text" class="form-control" name="jenis_bencana" value="{{old('jenis_bencana', $model->jenis_bencana)}}" placeholder="Jenis Bencana"> --}}
+                                                    <select class="form-control" name="jenis_bencana">
+                                                        <option hidden>Pilih Jenis Bencana</option>
+                                                        <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Internal</option>
+                                                        <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik</option>
+                                                    </select>
                                                 </fieldset>
                                             </div>
                                             
@@ -87,7 +92,12 @@
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Status Jenis <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="status_jenis" value="{{old('status_jenis', $model->status_jenis)}}" placeholder="Status Jenis">
+                                                    {{-- <input type="text" class="form-control" name="status_jenis" value="{{old('status_jenis', $model->status_jenis)}}" placeholder="Status Jenis"> --}}
+                                                    <select class="form-control" name="status_jenis">
+                                                        <option hidden>Pilih Status Jenis</option>
+                                                        <option value="1" {{ old('status_jenis', $model->status_jenis) == '1' ? 'selected' : '' }}>Aktif</option>
+                                                        <option value="0" {{ old('status_jenis', $model->status_jenis) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                    </select>
                                                 </fieldset>
                                             </div>
                                             
@@ -109,17 +119,17 @@
                                                 <h5 class="mt-2">Skill Minimal <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     {{-- <input type="text" class="form-control" name="skill_minimal" value="{{old('skill_minimal', $model->skill_minimal)}}" placeholder="Skill Minimal"> --}}
-                                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">
+                                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#skillModal">
                                                         Daftar Skill Minimal
                                                     </button>
                                                 </fieldset>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="skillModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Daftar Skill Minimal</h5>
+                                                        <h5 class="modal-title" id="skillModalLabel">Daftar Skill Minimal</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -145,8 +155,39 @@
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Mental Minimal <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="mental_minimal" value="{{old('mental_minimal', $model->mental_minimal)}}" placeholder="Mental Minimal">
+                                                    {{-- <input type="text" class="form-control" name="mental_minimal" value="{{old('mental_minimal', $model->mental_minimal)}}" placeholder="Mental Minimal"> --}}
+                                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#persyaratanModal">
+                                                        Daftar Mental Minimal
+                                                    </button>
                                                 </fieldset>
+                                                
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="persyaratanModal" tabindex="-1" role="dialog" aria-labelledby="persyaratanModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="persyaratanModalLabel">Daftar Mental Minimal</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @if(count($persyaratan) > 0)
+                                                                @foreach($persyaratan as $row)
+                                                                    {{-- <p>{{$row->nama_skill}}</p> --}}
+                                                                    <fieldset class="form-group">
+                                                                        <input class="form-check-input m-0" type="checkbox" value="{{$row->id}}" name="mental_minimal[]" {{ in_array($row->id, old('mental_minimal', $model_persyaratan)) ? 'checked' : '' }}> <span class="ml-2">{{$row->nama}}</span>
+                                                                    </fieldset>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             
                                             <div class="col-md-12">
@@ -166,14 +207,14 @@
                                             <div class="col-md-12">
                                                 <h5 class="mt-2">Lokasi Tugas <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="lokasi_tugas" value="{{old('lokasi_tugas', $model->lokasi_tugas)}}" placeholder="Lokasi Tugas">
+                                                    <input type="text" class="form-control" name="lokasi_tugas" value="{{old('lokasi_tugas', $model->lokasi_tugas)}}" placeholder="Lokasi Tugas" id="lokasi_tugas" onFocus="geolocate()">
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Koordinat Tugas <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="koordinat_tugas" value="{{old('koordinat_tugas', $model->koordinat_tugas)}}" placeholder="Koordinat Tugas">
+                                                    <input type="text" class="form-control" name="koordinat_tugas" value="{{old('koordinat_tugas', $model->koordinat_tugas)}}" placeholder="Koordinat Tugas" id="koordinat_tugas">
                                                 </fieldset>
                                             </div>
                                             
@@ -184,19 +225,20 @@
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <h5 class="mt-2">Jaminan Perlindungan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="jaminan_perlindungan" value="{{old('jaminan_perlindungan', $model->jaminan_perlindungan)}}" placeholder="Jaminan Perlindungan">
+                                                    {{-- <input type="text" class="form-control" name="jaminan_perlindungan" value="{{old('jaminan_perlindungan', $model->jaminan_perlindungan)}}" placeholder="Jaminan Perlindungan"> --}}
+                                                    <textarea class="form-control" name="jaminan_perlindungan" rows="3">{{old('jaminan_perlindungan', $model->jaminan_perlindungan)}}</textarea>
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-6">
+                                            {{-- <div class="col-md-6">
                                                 <h5 class="mt-2">Kordinator Relawan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     <input type="text" class="form-control" name="kordinator_relawan" value="{{old('kordinator_relawan', $model->kordinator_relawan)}}" placeholder="Kordinator Relawan">
                                                 </fieldset>
-                                            </div>
+                                            </div> --}}
                                             
                                             <div class="col-md-12">
                                                 <h5 class="mt-2">Foto Bencana <span class="danger">*</span></h5>
@@ -231,6 +273,94 @@
 <!--STOP CONTENT-->
 @stop
 
-@section('script')
-<script></script>
-@stop
+@push('script')
+<script>
+    // This sample uses the Autocomplete widget to help the user select a
+    // place, then it retrieves the address components associated with that
+    // place, and then it populates the form fields with those details.
+    // This sample requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script
+    // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var placeSearch, autocomplete;
+
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        // Create the autocomplete object, restricting the search predictions to
+        // geographical location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('lokasi_tugas'), {types: ['geocode']});
+
+        // Avoid paying for data that you don't need by restricting the set of
+        // place fields that are returned to just the address components.
+        autocomplete.setFields(['address_component']);
+
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        // autocomplete.addListener('place_changed', fillInAddress);
+
+        // console.log(autocomplete.getPlace());
+
+        
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('lokasi_tugas'), {types: ['geocode']});
+        autocomplete.addListener('place_changed', getAddressDetails);
+    }
+
+    function getAddressDetails(){
+        var place = autocomplete.getPlace();   
+        var lat = place.geometry.location.lat();
+        var long = place.geometry.location.lng();
+        
+        document.getElementById('koordinat_tugas').value = lat+','+long;
+    }
+
+    // function fillInAddress() {
+    //     // Get the place details from the autocomplete object.
+    //     var place = autocomplete.getPlace();
+    //     console.log(place);
+
+    //     // for (var component in componentForm) {
+    //     //     document.getElementById(component).value = '';
+    //     //     document.getElementById(component).disabled = false;
+    //     // }
+
+    //     // // Get each component of the address from the place details,
+    //     // // and then fill-in the corresponding field on the form.
+    //     // for (var i = 0; i < place.address_components.length; i++) {
+    //     //     var addressType = place.address_components[i].types[0];
+    //     //     if (componentForm[addressType]) {
+    //     //         var val = place.address_components[i][componentForm[addressType]];
+    //     //         document.getElementById(addressType).value = val;
+    //     //     }
+    //     // }
+    // }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({center: geolocation, radius: position.coords.accuracy});
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initAutocomplete" async defer></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJTIHh1GRN37zuOlt-4XWrsm-XY2LwzNc&libraries=places&callback=initAutocomplete" async defer></script> --}}
+@endpush
