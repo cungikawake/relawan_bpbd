@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roleText()
+    {
+        if($this->role){
+            return 'Admin';
+
+        }else if($this->role){
+            return 'Private';
+
+        }else if($this->role){
+            return 'Public';
+
+        }else {
+            return 'Default';
+        }
+    }
 }

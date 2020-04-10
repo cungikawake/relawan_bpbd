@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use App\Models\Skill;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class SkillController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,9 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $datas = Skill::orderBy('created_at', 'asc')->paginate(10);
+        $datas = User::orderBy('created_at', 'asc')->paginate(10);
 
-        return view('dashboard.skill.index', compact('datas'));
+        return view('dashboard.user.index', compact('datas'));
     }
 
     /**
@@ -29,9 +30,9 @@ class SkillController extends Controller
      */
     public function create()
     {
-        $model = new Skill();
+        $model = new User();
 
-        return view('dashboard.skill.form', compact('model'));
+        return view('dashboard.user.form', compact('model'));
     }
 
     /**
@@ -43,20 +44,24 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required|unique:skill,nama_skill',
-                'prioritas' => 'required'
+                'name'       => 'required',
+                'email'      => 'required|email|unique:users,email',
+                'password'   => 'required|string|min:6|confirmed',
+                'role'       => 'required',
             ]
         );
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
-            $data = new Skill();
-            $data->nama_skill = $request->nama;
-            $data->prioritas_skill = $request->prioritas;
+            $data = new User();
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->password = Hash::make($request->password);
+            $data->role = $request->role;
             $data->save();
 
-            return redirect()->route('dashboard.skill.index')->with('message', 'Data berhasil disimpan.');
+            return redirect()->route('dashboard.user.index')->with('message', 'Data berhasil disimpan.');
         }
     }
 
@@ -79,9 +84,9 @@ class SkillController extends Controller
      */
     public function edit($id)
     {
-        $model = Skill::findOrFail($id);
+        $model = User::findOrFail($id);
 
-        return view('dashboard.skill.form', compact('model'));
+        return view('dashboard.user.form', compact('model'));
     }
 
     /**
@@ -94,20 +99,26 @@ class SkillController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required|unique:skill,nama_skill'.($id ? ",$id" : '').',id',
-                'prioritas' => 'required'
+                'name'       => 'required',
+                'email'      => 'required|email|unique:users,email'.($id ? ",$id" : '').',id',
+                'password'   => 'nullable|string|min:6|confirmed',
+                'role'       => 'required',
             ]
         );
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
-            $data = Skill::findOrFail($id);
-            $data->nama_skill = $request->nama;
-            $data->prioritas_skill = $request->prioritas;
+            $data = User::findOrFail($id);
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->role = $request->role;
+            if($request->password){
+                $data->password = Hash::make($request->password);
+            }
             $data->save();
 
-            return redirect()->route('dashboard.skill.index')->with('message', 'Data berhasil diubah.');
+            return redirect()->route('dashboard.user.index')->with('message', 'Data diupdate diubah.');
         }
     }
 
@@ -119,9 +130,9 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        $data = Skill::findOrFail($id);
+        $data = User::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('dashboard.skill.index')->with('message', 'Data berhasil dihapus.');
+        return redirect()->route('dashboard.user.index')->with('message', 'Data berhasil dihapus.');
     }
 }

@@ -20,10 +20,12 @@ Route::group(['middleware'=> ['auth']], function (){
     })->name('dashboard'); 
 
     Route::group(['as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+        Route::resource('user', 'UserController')->names('user');
         Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
         Route::resource('skill', 'SkillController')->names('skill');
         Route::resource('bencana', 'BencanaController')->names('bencana');
         Route::resource('persyaratan', 'PersyaratanController')->names('persyaratan');
+        Route::resource('relawan', 'RelawanController')->names('relawan');
     });
 });
 
