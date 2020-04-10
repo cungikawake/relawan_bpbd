@@ -24,6 +24,7 @@ Route::group(['middleware'=> ['auth']], function (){
         Route::resource('skill', 'SkillController')->names('skill');
         Route::resource('bencana', 'BencanaController')->names('bencana');
         Route::resource('persyaratan', 'PersyaratanController')->names('persyaratan');
+        Route::resource('relawan', 'PersyaratanController')->names('relawan');
     });
 });
 
