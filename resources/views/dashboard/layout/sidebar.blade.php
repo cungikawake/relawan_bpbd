@@ -9,8 +9,10 @@
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          </li> 
+          <li class=" nav-item {{ (request()->is('dashboard/user*')) ? 'active' : '' }}"><a href="{{route('dashboard.user.index')}}"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">User</span></a>
           </li>
-            <li class=" nav-item {{ (request()->is('dashboard/induk-organisasi*')) ? 'active' : '' }}"><a href="{{route('dashboard.induk_organisasi.index')}}"><i class="la la-flag"></i><span class="menu-title" data-i18n="">Induk Organisasi</span></a>
+            <li class=" nav-item {{ (request()->is('dashboard/induk-organisasi*')) ? 'active' : '' }}"><a href="{{route('dashboard.induk_organisasi.index')}}"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Induk Organisasi</span></a> 
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/skill*')) ? 'active' : '' }}"><a href="{{route('dashboard.skill.index')}}"><i class="la la-graduation-cap"></i><span class="menu-title" data-i18n="">Skill</span></a>
           </li>
@@ -23,6 +25,8 @@
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Penanggulangan</span></a>
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-comment"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
+          </li>
+          <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Relawan</span></a>
           </li>
         </ul>
       </div>
