@@ -183,7 +183,7 @@
                                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">KECAKAPAN DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
+                                                        <h5 class="my-2">KECAKAPAN DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
                                                         @if(count($skills) > 0)
                                                             @foreach($skills as $row)
                                                                 <fieldset class="form-group">
@@ -192,16 +192,56 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
+                                                </div>
 
+                                                <div class="row">
                                                     <div class="col-md-12">
                                                         <h5 class="mt-2">PELATIHAN PENANGGULANGAN BENCANA YANG PERNAH DIIKUTI <span class="danger">*</span></h5>
-                                                        @for($i = 0; $i <= 1; $i++)
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="penanggulangan[]" value="" placeholder="penanggulangan">
-                                                            </fieldset>
-                                                        @endfor
                                                     </div>
-                                                    
+                                                </div>
+                                                <div id="form-pelatihan">
+                                                    <div class="row mt-3 input-pelatihan">
+                                                        <div class="col-md-6">
+                                                            <h5 class="mt-0">Jenis Pelatihan</h5>
+                                                            <fieldset class="form-group mb-1">
+                                                                <input type="hidden" class="form-control" name="id_pelatihan[]" value="" placeholder="ID Pelatihan">
+                                                                <input type="text" class="form-control" name="jenis_pelatihan[]" value="" placeholder="Jenis Pelatihan">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h5 class="mt-0">Tempat</h5>
+                                                            <fieldset class="form-group mb-1">
+                                                                <input type="text" class="form-control" name="tempat_pelatihan[]" value="" placeholder="Tempat">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <h5 class="mt-0">Detail Pengalaman</h5>
+                                                            <fieldset class="form-group mb-1">
+                                                                <input type="text" class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pengalaman">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h5 class="mt-0">Penyelenggara</h5>
+                                                            <fieldset class="form-group">
+                                                                <input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="" placeholder="Penyelenggara">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <h5 class="mt-0">Tahun</h5>
+                                                            <fieldset class="form-group">
+                                                                <input type="text" class="form-control" name="tahun_pelatihan[]" value="" placeholder="Tahun">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <h5 class="mt-0">&nbsp;</h5>
+                                                            <div class="float-right">
+                                                                <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pelatihan">Tambah</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-2">
                                                     <div class="col-md-12">
                                                         <div class="float-right">
                                                             <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-contact-tab">Selanjutnya</a>
@@ -220,13 +260,46 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h5 class="mt-2">PENGALAMAN PENANGGULANGAN BENCANA YANG PERNAH DILAKUKAN <span class="danger">*</span></h5>
-                                                        @for($i = 0; $i <= 1; $i++)
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="pengalaman[]" value="" placeholder="pengalaman">
-                                                            </fieldset>
-                                                        @endfor
                                                     </div>
+                                                </div>
+
+                                                <div id="form-pengalaman">
+                                                    <div class="row mt-3 input-pengalaman">
+                                                        <div class="col-md-12">
+                                                            <h5 class="mt-0">Jenis Bencana</h5>
+                                                            <fieldset class="form-group mb-1">
+                                                                <input type="hidden" class="form-control" name="id_pengalaman[]" value="" placeholder="ID Bencana">
+                                                                <input type="text" class="form-control" name="jenis_bencana[]" value="" placeholder="Jenis Bencana">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <h5 class="mt-0">Detail Pengalaman</h5>
+                                                            <fieldset class="form-group mb-1">
+                                                                <input type="text" class="form-control" name="detail_pengalaman[]" value="" placeholder="Detail Pengalaman">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h5 class="mt-0">Lokasi</h5>
+                                                            <fieldset class="form-group">
+                                                                <input type="text" class="form-control" name="lokasi[]" value="" placeholder="Lokasi">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <h5 class="mt-0">Tahun</h5>
+                                                            <fieldset class="form-group">
+                                                                <input type="text" class="form-control" name="tahun[]" value="" placeholder="Tahun">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <h5 class="mt-0">&nbsp</h5>
+                                                            <div class="float-right">
+                                                                <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pengalaman">Tambah</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                     
+                                                <div class="row mt-2">
                                                     <div class="col-md-12">
                                                         <div class="float-right">
                                                             <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Simpan</button>
@@ -262,6 +335,101 @@
 <script>
     $('.btnNav').click(function(){
         $('#'+$(this).attr('data-target')).click();
+    });
+    
+    $("#add-pelatihan").click(function(){
+        var data = '<div class="row mt-3 input-pelatihan">'+
+                        '<div class="col-md-6">'+
+                            '<h5 class="mt-0">Jenis Pelatihan</h5>'+
+                            '<fieldset class="form-group mb-1">'+
+                                '<input type="hidden" class="form-control" name="id_pelatihan[]" value="" placeholder="ID Pelatihan">'+
+                                '<input type="text" class="form-control" name="jenis_pelatihan[]" value="" placeholder="Jenis Pelatihan">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-6">'+
+                            '<h5 class="mt-0">Tempat</h5>'+
+                            '<fieldset class="form-group mb-1">'+
+                                '<input type="text" class="form-control" name="tempat_pelatihan[]" value="" placeholder="Tempat">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-12">'+
+                            '<h5 class="mt-0">Detail Pengalaman</h5>'+
+                            '<fieldset class="form-group mb-1">'+
+                                '<input type="text" class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pengalaman">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-6">'+
+                            '<h5 class="mt-0">Penyelenggara</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="" placeholder="Penyelenggara">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-4">'+
+                            '<h5 class="mt-0">Tahun</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="text" class="form-control" name="tahun_pelatihan[]" value="" placeholder="Tahun">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-2">'+
+                            '<h5 class="mt-0">&nbsp;</h5>'+
+                            '<div class="float-right">'+
+                                '<a class="btn btn-danger btn-min-width mr-1 mb-1 text-white remove-pelatihan" data-target="pills-home-tab">Hapus</a>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
+        $("#form-pelatihan").append(data);
+    });
+
+    $(document).on('click', '.remove-pelatihan', function(){
+        if(window.confirm('Sure delete this data?')){
+            $(this).parents('.input-pelatihan').remove();
+        }
+    });
+    
+    
+    
+    $("#add-pengalaman").click(function(){
+        var data = '<div class="row mt-3 input-pengalaman">'+
+                        '<div class="col-md-12">'+
+                            '<h5 class="mt-0">Jenis Bencana</h5>'+
+                            '<fieldset class="form-group mb-1">'+
+                                '<input type="hidden" class="form-control" name="id_pengalaman[]" value="" placeholder="ID Bencana">'+
+                                '<input type="text" class="form-control" name="jenis_bencana[]" value="" placeholder="Jenis Bencana">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-12">'+
+                            '<h5 class="mt-0">Detail Pengalaman</h5>'+
+                            '<fieldset class="form-group mb-1">'+
+                                '<input type="text" class="form-control" name="detail_pengalaman[]" value="" placeholder="Detail Pengalaman">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-6">'+
+                            '<h5 class="mt-0">Lokasi</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="text" class="form-control" name="lokasi[]" value="" placeholder="Lokasi">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-4">'+
+                            '<h5 class="mt-0">Tahun</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="text" class="form-control" name="tahun[]" value="" placeholder="Tahun">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-2">'+
+                            '<h5 class="mt-0">&nbsp</h5>'+
+                            '<div class="float-right">'+
+                                '<a class="btn btn-danger btn-min-width mr-1 mb-1 text-white remove-pengalaman" data-target="pills-home-tab">Hapus</a>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
+        
+        $("#form-pengalaman").append(data);
+    });
+
+    $(document).on('click', '.remove-pengalaman', function(){
+        if(window.confirm('Sure delete this data?')){
+            $(this).parents('.input-pengalaman').remove();
+        }
     });
 </script>
 @endpush

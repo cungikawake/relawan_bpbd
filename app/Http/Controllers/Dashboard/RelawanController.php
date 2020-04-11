@@ -12,6 +12,8 @@ use App\Models\SkillRelawan;
 use App\Models\RelawanPelatihan;
 use App\Models\RelawanPengalaman;
 use App\Models\IndukOrganisasi;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class RelawanController extends Controller
 {
@@ -48,14 +50,90 @@ class RelawanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+    public function createUser($request)
+    {
+        if($request->jenis_relawan == 1){
+            //Private
+            $role = 2;
+        }else{
+            //Public
+            $role = 3;
+        }
+
+        $string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $password = substr(str_shuffle(str_repeat($string, 6)), 0, 6);
+
+        $user = new User();
+        $user->name = $request->nama_lengkap;
+        $user->email = $request->email;
+        $user->password = Hash::make($password);
+        $user->role = $role;
+        $user->status_verified = 0;
+        $user->save();
+
+        return ['id' => $user->id, 'password' => $password];
+    }
+    public function createSkill($request, $data)
+    {
+        $delete = SkillRelawan::where('id_relawan', '=', $data->id)->delete();
+        foreach($request->skill as $row){
+            $detail = new SkillRelawan();
+            $detail->id_relawan = $data->id;
+            $detail->id_skill = $row;
+            $detail->save();
+
+        }
+    }
+
+    public function createPelatihan($request, $data)
+    {
+        $delete = RelawanPelatihan::where('id_relawan', '=', $data->id)->delete();
+
+        for($i=0; $i < count($request->id_pelatihan); $i++){
+
+            if($request->detail_pelatihan[$i] || $request->jenis_pelatihan[$i] || $request->tempat_pelatihan[$i] || $request->penyelenggara_pelatihan[$i] || $request->tahun_pelatihan[$i]){
+                $detail = new RelawanPelatihan();
+                $detail->id_relawan = $data->id;
+                $detail->detail_pelatihan = $request->detail_pelatihan[$i];
+                $detail->jenis_pelatihan = $request->jenis_pelatihan[$i];
+                $detail->tempat = $request->tempat_pelatihan[$i];
+                $detail->penyelenggara = $request->penyelenggara_pelatihan[$i];
+                $detail->tahun = $request->tahun_pelatihan[$i];
+                $detail->save();
+
+            }
+        }
+    }
+
+    public function createPengalaman($request, $data)
+    {
+        $delete = RelawanPengalaman::where('id_relawan', '=', $data->id)->delete();
+
+        for($i=0; $i < count($request->id_pengalaman); $i++){
+
+            if($request->detail_pengalaman[$i] || $request->jenis_bencana[$i] || $request->lokasi[$i] || $request->tahun[$i]){
+                $detail = new RelawanPengalaman();
+                $detail->id_relawan = $data->id;
+                $detail->detail_pengalaman = $request->detail_pengalaman[$i];
+                $detail->jenis_bencana = $request->jenis_bencana[$i];
+                $detail->lokasi = $request->lokasi[$i];
+                $detail->tahun = $request->tahun[$i];
+                $detail->save();
+
+            }
+        }
+        
+    }
+
     public function store(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make( $request->all(), [
-                'id_user' => 'required',
+                // 'id_user' => 'required',
                 'id_induk_relawan' => 'required',
                 'nama_lengkap' => 'required',
-                'email' => 'required',
+                'email' => 'required|email|unique:users,email',
                 'tgl_lahir' => 'required',
                 'jenis_kelamin' => 'required',
                 'pendidikan' => 'required',
@@ -68,17 +146,19 @@ class RelawanController extends Controller
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
 
-                'skill.*' => 'required',
-                'penanggulangan.*' => 'required',
-                'pengalaman.*' => 'required'
+                'skill.*' => 'required'
             ]
         );
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
+            $user = $this->createUser($request);
+            $user_id = $user['id'];
+            $password = $user['password'];
+
             $data = new Relawan();
-            $data->id_user = $request->id_user;
+            $data->id_user = $user_id;
             $data->id_induk_relawan = $request->id_induk_relawan;
             $data->nama_lengkap = $request->nama_lengkap;
             $data->email = $request->email;
@@ -105,33 +185,38 @@ class RelawanController extends Controller
 
             $data->save();
             
-            foreach($request->skill as $row){
-                $detail = new SkillRelawan();
-                $detail->id_relawan = $data->id;
-                $detail->id_skill = $row;
-                $detail->save();
-            }
+            $this->createSkill($request, $data);
+            $this->createPelatihan($request, $data);
+            $this->createPengalaman($request, $data);
             
-            foreach($request->penanggulangan as $row){
-                if($row){
-                    $detail = new RelawanPelatihan();
-                    $detail->id_relawan = $data->id;
-                    $detail->detail_pelatihan = $row;
-                    $detail->save();
+            \Mail::send(
+                'mail.relawan-konfirmasi',
+                compact('data','password'),
+                function ($m) use ($data) {
+                    $m->from('e-relawan@mail.com', 'Admin'); 
+                    $m->to($data->email, $data->nama_lengkap);
+                    $m->subject('E-Relawan');
                 }
-            }
-            
-            foreach($request->pengalaman as $row){
-                if($row){
-                    $detail = new RelawanPengalaman();
-                    $detail->id_relawan = $data->id;
-                    $detail->detail_pengalaman = $row;
-                    $detail->save();
-                }
-            }
+            );
 
             return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil disimpan.');
         }
+    }
+
+    public function mail()
+    {
+        $data = Relawan::findOrFail(7);
+        $password = 'dfskdd';
+        
+        \Mail::send(
+            'mail.relawan-konfirmasi',
+            compact('data','password'),
+            function ($m) use ($data) {
+                $m->from('e-relawan@mail.com', 'Admin'); 
+                $m->to($data->email, $data->nama_lengkap);
+                $m->subject('E-Relawan');
+            }
+        );
     }
 
     /**

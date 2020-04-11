@@ -16,7 +16,7 @@ class TabelRelawanPelatihan extends Migration
         Schema::create('relawan_pelatihan', function (Blueprint $table) {
             $table->id(); 
             $table->integer('id_relawan');
-            $table->text('detail_pelatihan');//tempat, jenis, penyelenggara, tahun
+            $table->text('detail_pelatihan')->nullable();//tempat, jenis, penyelenggara, tahun
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class TabelRelawan extends Migration
             $table->string('alamat')->nullable();
             $table->string('tlp');
             $table->string('jenis_relawan');
-            $table->string('nomor_relawan');
+            $table->string('nomor_relawan')->nullable();
             $table->timestamps();
         });
     }
