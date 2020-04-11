@@ -10,7 +10,9 @@
                   <h2><span>e</span>Relawan</h2>
                 </div>
 
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <p>Pedoman Relawan Penanggulangan Bencana ini dimaksudkan untuk
+menjadi acuan dan panduan bagi relawan dan lembaga pembina relawan
+dalam melibatkan diri pada kegiatan-kegiatan penanggulangan bencana.</p>
                 <div class="footer-icons">
                   <ul>
                     <li>
@@ -31,7 +33,7 @@
             </div>
           </div>
           <!-- end single footer -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          <!-- div class="col-md-4 col-sm-4 col-xs-12">
             <div class="footer-content">
               <div class="footer-head">
                 <h4>information</h4>
@@ -45,9 +47,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- end single footer -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          <!-- <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="footer-content">
               <div class="footer-head">
                 <h4>Instagram</h4>
@@ -61,7 +63,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -71,7 +73,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="copyright text-center">
               <p>
-                &copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+                &copy; Copyright <strong>eRelawan</strong>. All Rights Reserved
               </p>
             </div>
             <div class="credits">
@@ -81,7 +83,7 @@
               Licensing information: https://bootstrapmade.com/license/
               Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
             -->
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
             </div>
           </div>
         </div>
