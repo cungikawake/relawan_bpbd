@@ -59,6 +59,7 @@
                                                 <th>Nama</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
+                                                <th>Verifikasi</th>
                                                 <th width="20%"></th>
                                             </tr>
                                         </thead>
@@ -72,6 +73,7 @@
                                                         <td>{{$data->name}}</td>
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->roleText()}}</td>
+                                                        <td>{!! $data->verifyDisplay() !!}</td>
                                                         <td>
                                                             <a href="{{route('dashboard.user.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>

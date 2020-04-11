@@ -60,8 +60,9 @@
                                                 <th>Email</th>
                                                 <th>Ktp</th>
                                                 <th width="20%">Foto</th>
+                                                <th>Verifikasi</th>
                                                 {{-- <th width="20%">Ktp</th> --}}
-                                                <th width="20%"></th>
+                                                <th width="10%"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,16 +78,18 @@
                                                         <td>
                                                             <img src="{{$data->displayFoto()}}" width="100" alt="">
                                                         </td>
+                                                        <td>{!! $data->userVerifyDisplay() !!}</td>
                                                         {{-- <td>
                                                             <img src="{{$data->displayKtp()}}" width="100" alt="">
                                                         </td> --}}
                                                         <td>
-                                                            <a href="{{route('dashboard.relawan.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
-                                                            <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
+                                                            {{-- <a href="{{route('dashboard.relawan.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a> --}}
+                                                            {{-- <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
                                                             <form action="{{route('dashboard.relawan.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                            </form>
+                                                            </form> --}}
+                                                            <a href="{{route('dashboard.relawan.print', $data->id)}}" target="_blank" class="btn btn-icon btn-primary btn-sm"><i class="la la-print"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

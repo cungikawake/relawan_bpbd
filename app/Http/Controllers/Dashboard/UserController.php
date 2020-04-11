@@ -59,6 +59,7 @@ class UserController extends Controller
             $data->email = $request->email;
             $data->password = Hash::make($request->password);
             $data->role = $request->role;
+            $data->status_verified = $request->status_verified ? $request->status_verified : 0;
             $data->save();
 
             return redirect()->route('dashboard.user.index')->with('message', 'Data berhasil disimpan.');
@@ -113,6 +114,7 @@ class UserController extends Controller
             $data->name = $request->name;
             $data->email = $request->email;
             $data->role = $request->role;
+            $data->status_verified = $request->status_verified ? $request->status_verified : 0;
             if($request->password){
                 $data->password = Hash::make($request->password);
             }

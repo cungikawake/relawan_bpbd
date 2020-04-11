@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         $data->email = 'admin@admin.com';
         $data->password = Hash::make('12345678');
         $data->role = 1;
+        $data->status_verified = 1;
         $data->save();
     }
 }

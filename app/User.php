@@ -52,4 +52,12 @@ class User extends Authenticatable
             return 'Default';
         }
     }
+    public function verifyDisplay()
+    {
+        if($this->status_verified == 1){
+            return '<span class="badge badge-success">Verified</span>';
+        }else{
+            return '<span class="badge badge-light">Unverified</span>';
+        }
+    }
 }

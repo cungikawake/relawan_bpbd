@@ -27,6 +27,7 @@ Route::group(['middleware'=> ['auth']], function (){
         Route::resource('persyaratan', 'PersyaratanController')->names('persyaratan');
         Route::resource('relawan', 'RelawanController')->names('relawan');
         Route::get('relawan-mail', 'RelawanController@mail');
+        Route::get('relawan/{id}/print', 'RelawanController@print')->name('relawan.print');
     });
 });
 

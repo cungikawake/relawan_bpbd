@@ -203,22 +203,6 @@ class RelawanController extends Controller
         }
     }
 
-    public function mail()
-    {
-        $data = Relawan::findOrFail(7);
-        $password = 'dfskdd';
-        
-        \Mail::send(
-            'mail.relawan-konfirmasi',
-            compact('data','password'),
-            function ($m) use ($data) {
-                $m->from('e-relawan@mail.com', 'Admin'); 
-                $m->to($data->email, $data->nama_lengkap);
-                $m->subject('E-Relawan');
-            }
-        );
-    }
-
     /**
      * Display the specified resource.
      *
@@ -267,5 +251,28 @@ class RelawanController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function print($id)
+    {
+        $model = Relawan::findOrFail($id);
+
+        return view('dashboard.relawan.print', compact('model'));
+    }
+
+    public function mail()
+    {
+        $data = Relawan::findOrFail(7);
+        $password = 'dfskdd';
+        
+        \Mail::send(
+            'mail.relawan-konfirmasi',
+            compact('data','password'),
+            function ($m) use ($data) {
+                $m->from('e-relawan@mail.com', 'Admin'); 
+                $m->to($data->email, $data->nama_lengkap);
+                $m->subject('E-Relawan');
+            }
+        );
     }
 }
