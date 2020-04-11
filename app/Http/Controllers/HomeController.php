@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bencana; 
 
 class HomeController extends Controller
 {
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontpage.home.index');
+        $bencanas = Bencana::where('jenis_bencana', '1')
+                    ->where('status_jenis', '1')
+                    ->Orderby('id', 'Desc')
+                    ->limit(3)
+                    ->get(); 
+
+        return view('frontpage.home.index', compact('bencanas'));
     }
 }

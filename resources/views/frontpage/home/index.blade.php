@@ -108,7 +108,7 @@ penanggulangan bencana</h1>
             <div class="well-left">
               <div class="single-well">
                 <a href="#">
-                  <img src="{{ asset('frontpage/assets/img/about/1.jpg') }}" alt="">
+                  <img src="{{ asset('frontpage/assets/img/img-0169.jpg') }}" alt="">
                 </a>
               </div>
             </div>
@@ -221,74 +221,6 @@ penanggulangan bencana
       </div>
     </div><!-- End Services Section -->
 
-    <!-- ======= Services Section ======= -->
-    <div id="services" class="services-area area-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline services-head text-center">
-              <h2>Hak Relawan</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row text-center">
-          <!-- Start Left services -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" href="#">
-                    <i class="fa fa-code"></i>
-                  </a>
-                  <h4></h4>
-                  <p>
-                  Memperoleh pengakuan dan tanda pengenal relawan penanggulangan
-bencana
-                  </p>
-                </div>
-              </div>
-              <!-- end about-details -->
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" href="#">
-                    <i class="fa fa-camera-retro"></i>
-                  </a>
-                  <h4></h4>
-                  <p>
-                  Mendapatkan peningkatan kapasitas yang berhubungan dengan
-penanggulangan bencana
-                  </p>
-                </div>
-              </div>
-              <!-- end about-details -->
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <!-- end col-md-4 -->
-            <div class=" about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" href="#">
-                    <i class="fa fa-wordpress"></i>
-                  </a>
-                  <h4></h4>
-                  <p>
-                  Mendapatkan perlindungan hukum dalam pelaksanaan tugas
-penanggulangan bencana
-                  </p>
-                </div>
-              </div>
-              <!-- end about-details -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- End Services Section -->
-
     <!-- ======= Blog Section ======= -->
     <div id="blog" class="blog-area">
       <div class="blog-inner area-padding">
@@ -302,101 +234,47 @@ penanggulangan bencana
             </div>
           </div>
           <div class="row">
+          @foreach($bencanas as $bencana)
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
                 <div class="single-blog-img">
                   <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/1.jpg') }}" alt="">
+                    <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
                   </a>
                 </div>
                 <div class="blog-meta">
                   <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">13 comments</a>
+                    <i class="fa fa-user"></i>
+                    <a href="#">{{ $bencana->quota_relawan }} relawan</a>
                   </span>
                   <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
+                    <i class="fa fa-calendar"></i>Kegiatan {{ date('d M Y', strtotime($bencana->tgl_mulai)) }}
                   </span>
                 </div>
                 <div class="blog-text">
                   <h4>
-                    <a href="blog.html">Assumenda repud eum veniam</a>
+                    <a href="#">{{ $bencana->judul_bencana }}</a>
                   </h4>
                   <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
+                  {{  substr($bencana->detail_tugas, 0, 100) }} 
                   </p>
                 </div>
+                
+                <div class="blog-meta">
+                  <span class="comments-type">
+                    <i class="fa fa-map"></i>
+                    <small>{{ $bencana->lokasi_tugas }}</small>
+                  </span>
+                </div>
                 <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
+                  <a href="#" class="ready-btn">Ikut Membantu</a>
                 </span>
               </div>
               <!-- Start single blog -->
             </div>
+            @endforeach
             <!-- End Left Blog-->
-            <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/2.jpg') }}" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">130 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Explicabo magnam quibusdam.</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-              <!-- Start single blog -->
-            </div>
-            <!-- End Left Blog-->
-            <!-- Start Right Blog-->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/3.jpg') }}" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">10 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Lorem ipsum dolor sit amet</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-            </div>
-            <!-- End Right Blog-->
           </div>
         </div>
       </div>
@@ -406,10 +284,10 @@ penanggulangan bencana
       <div class="work-us">
         <div class="work-left-text">
           <a href="#">
-            <img src="{{ asset('frontpage/assets/img/about/2.jpg') }}" alt="">
+            <img src="{{ asset('frontpage/assets/img/img-9707.jpg') }}" alt="">
           </a>
         </div>
-        <div class="work-right-text text-center">
+        <div class="work-right-text text-center" style="padding:10px;">
           <h2>Peran Relawan pada Saat Tanggap Darurat</h2>
           <h5>Kaji cepat terhadap cakupan wilayah yang terkena, jumlah korban dan
 kerusakan, kebutuhan sumber daya, ketersediaan sumber daya serta
@@ -420,127 +298,15 @@ prediksi perkembangan situasi ke depan</h5>
     </div><!-- End Rviews Section -->
 
      
-    <!-- ======= Blog Section ======= -->
-    <div id="blog" class="blog-area">
-      <div class="blog-inner area-padding">
-        <div class="blog-overly"></div>
-        <div class="container ">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="section-headline text-center">
-                <h2>Berita Terupdate</h2>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/1.jpg') }}" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">13 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Assumenda repud eum veniam</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-              <!-- Start single blog -->
-            </div>
-            <!-- End Left Blog-->
-            <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/2.jpg') }}" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">130 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Explicabo magnam quibusdam.</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-              <!-- Start single blog -->
-            </div>
-            <!-- End Left Blog-->
-            <!-- Start Right Blog-->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="{{ asset('frontpage/assets/img/blog/3.jpg') }}" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">10 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Lorem ipsum dolor sit amet</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-            </div>
-            <!-- End Right Blog-->
-          </div>
-        </div>
-      </div>
-    </div><!-- End Blog Section -->
-
+     
     <!-- ======= Suscribe Section ======= -->
     <div class="suscribe-area">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
             <div class="suscribe-text text-center">
-              <h3>Welcome to our eBusiness company</h3>
-              <a class="sus-btn" href="#">Get A quate</a>
+              <h3>Selamat Bergabung Menjadi Relawan BPBD BALI</h3>
+              <a class="sus-btn" href="#">Daftar Bergabung</a>
             </div>
           </div>
         </div>
@@ -600,15 +366,15 @@ prediksi perkembangan situasi ke depan</h5>
           <div class="row">
 
             <!-- Start Google Map -->
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <!-- Start Map -->
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.231418185189!2d115.22745651383141!3d-8.669528793770741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd240f34df12451%3A0xa674714046884aa6!2sPUSDALOPS%20PB%20BPBD%20PROVINSI%20BALI!5e0!3m2!1sid!2sid!4v1586584514719!5m2!1sid!2sid" width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
               <!-- End Map -->
             </div>
             <!-- End Google Map -->
 
-            <!-- Start  contact -->
-            <div class="col-md-6 col-sm-6 col-xs-12">
+             <!-- Start  contact -->
+            <!--<div class="col-md-6 col-sm-6 col-xs-12">
               <div class="form contact-form">
                 <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                   <div class="form-group">
@@ -635,7 +401,7 @@ prediksi perkembangan situasi ke depan</h5>
                   <div class="text-center"><button type="submit">Send Message</button></div>
                 </form>
               </div>
-            </div>
+            </div> -->
             <!-- End Left contact -->
           </div>
         </div>

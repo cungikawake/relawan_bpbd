@@ -56,9 +56,11 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>#</th>
-                                                <th>Judul</th>
-                                                <th>Nama Pelaksana</th>
+                                                <th>Judul</th> 
                                                 <th>Instansi</th>
+                                                <th>Jenis</th>
+                                                <th>Mulai</th>
+                                                <th>Sampai</th>
                                                 <th width="20%">Foto</th>
                                                 <th width="20%"></th>
                                             </tr>
@@ -70,9 +72,17 @@
                                                         <th scope="row">
                                                             {{ ($datas->perPage() * ($datas->currentPage() - 1)) + ($key + 1) }}
                                                         </th>
-                                                        <td>{{$data->judul_bencana}}</td>
-                                                        <td>{{$data->nama_pelaksana}}</td>
+                                                        <td>{{$data->judul_bencana}}</td> 
                                                         <td>{{$data->instansi}}</td>
+                                                        <td>
+                                                            @if($data->jenis_bencana == 2)
+                                                                Publik
+                                                            @else
+                                                                Private
+                                                            @endif
+                                                        </td>
+                                                        <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
+                                                        <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
                                                         <td>
                                                             <img src="{{$data->displayImage()}}" width="100" alt="">
                                                         </td>
