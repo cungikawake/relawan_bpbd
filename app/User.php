@@ -66,13 +66,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role','role');
     }
  
-    public function hasRole($roles)
+    public function hasRole($role)
     {
         $this->have_role = $this->getUserRole();
-         
-        if($this->have_role->role_name === $roles){
-           return true;
-        }  
+        if($this->have_role->role_name === $role){
+            return $this->have_role->role_name;
+        } 
 
         return false;
     }

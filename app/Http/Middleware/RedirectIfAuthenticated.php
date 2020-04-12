@@ -19,9 +19,11 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            
             if(Auth::guard($guard)->user()->role == 2 || Auth::guard($guard)->user()->role == 3){
                 return redirect('relawan/dashboard');
             }
+            
             return redirect(RouteServiceProvider::HOME);
         }
 

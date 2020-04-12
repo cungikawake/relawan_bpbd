@@ -19,18 +19,20 @@ class CekStatus
     {
         $roles = $this->CekRoute($request->route());
         
-        //cek midelware sama role user login
-        if($request->user()->hasRole($roles))
-        {
-            return $next($request);
+        foreach($roles as $role){
+            if($request->user()->hasRole($role) == $role)
+            {
+                return $next($request);
+            }
         }
-        return redirect('/');
+       
+        return abort(503, 'Anda tidak memiliki hak akses, silahkan menghubungi tim IT kami.');
     }
 
     private function CekRoute($route)
     {
         $actions = $route->getAction(); 
-         
+        
         return isset($actions['cekstatus']) ? $actions['cekstatus'] : null;
     }
 }

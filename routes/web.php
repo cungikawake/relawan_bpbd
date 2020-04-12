@@ -17,13 +17,13 @@ Auth::routes();
 
 //role admin 
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
-    Route::group(['cekstatus'=> 'admin'], function () {
+    Route::group(['cekstatus'=> ['admin']], function () {
         Route::get('/dashboard', function () {
             return view('dashboard.dashboard');
         })->name('dashboard'); 
     });
 
-    Route::group(['cekstatus'=> 'admin', 'as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+    Route::group(['cekstatus'=> ['admin'], 'as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
         Route::resource('user', 'UserController')->names('user');
         Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
         Route::resource('skill', 'SkillController')->names('skill');
@@ -41,20 +41,10 @@ Route::get('/', 'HomeController@index')->name('home');
 //route relawan
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     //role private
-    Route::group(['cekstatus'=> 'private'], function () {
+    Route::group(['cekstatus'=> ['private','public']], function () {
         Route::get('/relawan/dashboard', function () {
             return view('relawan.dashboard.index');
-        })->name('relawan.dashboard'); 
- 
-         
-    });
-
-    //role public
-    Route::group(['cekstatus'=> 'public'], function () {
-        Route::get('/relawan/dashboard', function () {
-            return view('relawan.dashboard.index');
-        })->name('relawan.dashboard'); 
- 
-         
-    });
+        })->name('relawan.dashboard');  
+    }); 
 });
+ 
