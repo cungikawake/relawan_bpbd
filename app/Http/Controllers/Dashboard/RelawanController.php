@@ -40,8 +40,11 @@ class RelawanController extends Controller
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
         $model_skills = array();
         $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
+        
+        $pelatihan[] = new RelawanPelatihan;
+        $pengalaman[] = new RelawanPengalaman;
 
-        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi'));
+        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman'));
     }
 
     /**
@@ -129,6 +132,7 @@ class RelawanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make( $request->all(), [
                 // 'id_user' => 'required',
                 'id_induk_relawan' => 'required',
@@ -146,7 +150,7 @@ class RelawanController extends Controller
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
 
-                'skill.*' => 'required'
+                'skill' => 'required'
             ]
         );
 
@@ -170,7 +174,7 @@ class RelawanController extends Controller
             $data->alamat = $request->alamat;
             $data->tlp = $request->tlp;
             $data->jenis_relawan = $request->jenis_relawan;
-            $data->nomor_relawan = $request->nomor_relawan;
+            // $data->nomor_relawan = $request->nomor_relawan;
             $data->save();
             
             $image = $request->ktp_file;
@@ -227,7 +231,10 @@ class RelawanController extends Controller
         $model_skills = SkillRelawan::where('id_relawan', '=', $id)->pluck('id_skill')->toArray();
         $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
 
-        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi'));
+        $pelatihan = $model->pelatihanEdit();
+        $pengalaman = $model->pengalamanEdit();
+
+        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman'));
     }
 
     /**
@@ -239,7 +246,76 @@ class RelawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
+        $validator = Validator::make( $request->all(), [
+                // 'id_user' => 'required',
+                'id_induk_relawan' => 'required',
+                'nama_lengkap' => 'required',
+                'email' => 'required|email',
+                'tgl_lahir' => 'required',
+                'jenis_kelamin' => 'required',
+                'pendidikan' => 'required',
+                'pekerjaan' => 'required',
+                'ktp' => 'required',
+                // 'ktp_file' => 'required',
+                // 'foto_file' => 'required',
+                'alamat' => 'required',
+                'tlp' => 'required',
+                'jenis_relawan' => 'required',
+                // 'nomor_relawan' => 'required',
+
+                'skill' => 'required'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }else{
+            $data = Relawan::findOrFail($id);
+            $data->id_induk_relawan = $request->id_induk_relawan;
+            $data->nama_lengkap = $request->nama_lengkap;
+            $data->email = $request->email;
+            $data->tgl_lahir = $request->tgl_lahir;
+            $data->jenis_kelamin = $request->jenis_kelamin;
+            $data->pendidikan = $request->pendidikan;
+            $data->pekerjaan = $request->pekerjaan;
+            $data->ktp = $request->ktp;
+            $data->alamat = $request->alamat;
+            $data->tlp = $request->tlp;
+            $data->jenis_relawan = $request->jenis_relawan;
+            $data->save();
+            
+            if ($request->has('ktp_file')) {
+                $path = 'uploads/relawan/'.$data->id.'/';
+                if (file_exists(public_path($path.$data->ktp_file)) && !is_null($data->ktp_file) && $data->ktp_file != '') {
+                    $del_image = unlink(public_path($path.$data->ktp_file));
+                }
+
+                $image = $request->ktp_file;
+                $imageName = 'ktp-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+                $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
+                $data->ktp_file = $imageName;
+            }
+            
+            if ($request->has('foto_file')) {
+                $path = 'uploads/relawan/'.$data->id.'/';
+                if (file_exists(public_path($path.$data->foto_file)) && !is_null($data->foto_file) && $data->foto_file != '') {
+                    $del_image = unlink(public_path($path.$data->foto_file));
+                }
+
+                $image = $request->foto_file;
+                $imageName = 'foto-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+                $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
+                $data->foto_file = $imageName;
+            }
+
+            $data->save();
+            
+            $this->createSkill($request, $data);
+            $this->createPelatihan($request, $data);
+            $this->createPengalaman($request, $data);
+
+            return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil disimpan.');
+        }
     }
 
     /**
@@ -250,7 +326,48 @@ class RelawanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = Relawan::findOrFail($id);
+        if($model->user){
+            $model->user->delete();
+
+        }
+        foreach($model->skills as $row){
+            $row->delete();
+
+        }
+        foreach($model->pelatihan as $row){
+            $row->delete();
+
+        }
+        foreach($model->pengalaman as $row){
+            $row->delete();
+
+        }
+        $path = 'uploads/relawan/'.$model->id.'/';
+        if (file_exists(public_path($path.$model->ktp_file)) && !is_null($model->ktp_file) && $model->ktp_file != '') {
+            $del_image = unlink(public_path($path.$model->ktp_file));
+        }
+        if (file_exists(public_path($path.$model->foto_file)) && !is_null($model->foto_file) && $model->foto_file != '') {
+            $del_image = unlink(public_path($path.$model->foto_file));
+        }
+        $model->delete();
+
+        return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil dihapus.');
+    }
+
+    public function verify($id)
+    {
+        $model = Relawan::findOrFail($id);
+        if($model->user){
+            $user = $model->user;
+            $user->status_verified = 1;
+            $user->save();
+
+            return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil diverifikasi.');
+
+        }else{
+            return redirect()->route('dashboard.relawan.index')->with('message-warning', 'Data relawan tidak ditemukan.');
+        }
     }
     
     public function print($id)

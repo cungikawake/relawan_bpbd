@@ -50,6 +50,12 @@
                                         {{Session::get('message')}}
                                     </div>
                                 @endif
+
+                                @if(Session::has('message-warning'))
+                                    <div class="alert with-close alert-warning mt-2">
+                                        {{Session::get('message-warning')}}
+                                    </div>
+                                @endif
                                 
                                 <div class="table-responsive">
                                     <table class="table">
@@ -61,8 +67,7 @@
                                                 <th>No Hp</th>
                                                 <th>Jenis</th> 
                                                 <th>Verifikasi</th>
-                                                {{-- <th width="20%">Ktp</th> --}}
-                                                <th width="10%"></th>
+                                                <th width="20%"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -76,19 +81,25 @@
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->tlp}}</td>
                                                         <td>{{($data->jenis_relawan == 1)? 'Private': 'Publik'}}</td>
-                                                        
                                                         <td>{!! $data->userVerifyDisplay() !!}</td>
-                                                        {{-- <td>
-                                                            <img src="{{$data->displayKtp()}}" width="100" alt="">
-                                                        </td> --}}
                                                         <td>
-                                                            {{-- <a href="{{route('dashboard.relawan.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a> --}}
-                                                            {{-- <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
+
+                                                            <a href="{{route('dashboard.relawan.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
+                                                            <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}" title="Hapus"><i class="la la-ban"></i></button>
                                                             <form action="{{route('dashboard.relawan.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                            </form> --}}
-                                                            <a href="{{route('dashboard.relawan.print', $data->id)}}" target="_blank" class="btn btn-icon btn-primary btn-sm"><i class="la la-print"></i></a>
+                                                            </form>
+
+                                                            <a href="{{route('dashboard.relawan.print', $data->id)}}" target="_blank" class="btn btn-icon btn-primary btn-sm" title="Print" style="margin-top: 0.3rem !important;"><i class="la la-print"></i></a>
+                                                            @if(!$data->userVerifyCheck())
+                                                                <button type="button" class="btn btn-icon btn-success btn-sm verify" data-id="{{$data->id}}" title="Verify" style="margin-top: 0.3rem !important;"><i class="la la-check"></i></button>
+                                                                <form action="{{route('dashboard.relawan.verify', $data->id)}}" id="verify-{{$data->id}}" method="POST">
+                                                                    @csrf
+                                                                </form>
+                                                            @else 
+                                                                <br>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -121,6 +132,13 @@
             if(window.confirm('Sure delete this data?')){
                 var id = $(this).attr('data-id');
                 $('form#delete-'+id).submit();
+            }
+        });
+        
+        $('.verify').click(function(){
+            if(window.confirm('Sure verify this data?')){
+                var id = $(this).attr('data-id');
+                $('form#verify-'+id).submit();
             }
         });
     });

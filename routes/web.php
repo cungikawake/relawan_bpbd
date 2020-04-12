@@ -31,6 +31,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::resource('persyaratan', 'PersyaratanController')->names('persyaratan');
         Route::resource('relawan', 'RelawanController')->names('relawan');
         Route::get('relawan-mail', 'RelawanController@mail');
+        Route::post('relawan/{id}/verify', 'RelawanController@verify')->name('relawan.verify');
         Route::get('relawan/{id}/print', 'RelawanController@print')->name('relawan.print');
     });
 });

@@ -15,7 +15,7 @@ class TabelRole extends Migration
     {
         Schema::create('role', function (Blueprint $table) {
             $table->id(); 
-            $table->integer('role_name');
+            $table->string('role_name');
         });
     }
 

@@ -200,45 +200,51 @@
                                                     </div>
                                                 </div>
                                                 <div id="form-pelatihan">
-                                                    <div class="row mt-3 input-pelatihan">
-                                                        <div class="col-md-6">
-                                                            <h5 class="mt-0">Jenis Pelatihan</h5>
-                                                            <fieldset class="form-group mb-1">
-                                                                <input type="hidden" class="form-control" name="id_pelatihan[]" value="" placeholder="ID Pelatihan">
-                                                                <input type="text" class="form-control" name="jenis_pelatihan[]" value="" placeholder="Jenis Pelatihan">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <h5 class="mt-0">Tempat</h5>
-                                                            <fieldset class="form-group mb-1">
-                                                                <input type="text" class="form-control" name="tempat_pelatihan[]" value="" placeholder="Tempat">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <h5 class="mt-0">Detail Pengalaman</h5>
-                                                            <fieldset class="form-group mb-1">
-                                                                <input type="text" class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pengalaman">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <h5 class="mt-0">Penyelenggara</h5>
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="" placeholder="Penyelenggara">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h5 class="mt-0">Tahun</h5>
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="tahun_pelatihan[]" value="" placeholder="Tahun">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <h5 class="mt-0">&nbsp;</h5>
-                                                            <div class="float-right">
-                                                                <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pelatihan">Tambah</a>
+                                                    @for($i=0; $i<count($pelatihan) ; $i++)
+                                                        <div class="row mt-3 input-pelatihan">
+                                                            <div class="col-md-6">
+                                                                <h5 class="mt-0">Jenis Pelatihan</h5>
+                                                                <fieldset class="form-group mb-1">
+                                                                <input type="hidden" class="form-control" name="id_pelatihan[]" value="{{ $pelatihan[$i]->id }}" placeholder="ID Pelatihan">
+                                                                    <input type="text" class="form-control" name="jenis_pelatihan[]" value="{{ $pelatihan[$i]->jenis_pelatihan }}" placeholder="Jenis Pelatihan">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="mt-0">Tempat</h5>
+                                                                <fieldset class="form-group mb-1">
+                                                                    <input type="text" class="form-control" name="tempat_pelatihan[]" value="{{ $pelatihan[$i]->tempat }}" placeholder="Tempat">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <h5 class="mt-0">Detail Pengalaman</h5>
+                                                                <fieldset class="form-group mb-1">
+                                                                    <input type="text" class="form-control" name="detail_pelatihan[]" value="{{ $pelatihan[$i]->detail_pelatihan }}" placeholder="Detail Pengalaman">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="mt-0">Penyelenggara</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="{{ $pelatihan[$i]->penyelenggara }}" placeholder="Penyelenggara">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h5 class="mt-0">Tahun</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="text" class="form-control" name="tahun_pelatihan[]" value="{{ $pelatihan[$i]->tahun }}" placeholder="Tahun">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <h5 class="mt-0">&nbsp;</h5>
+                                                                <div class="float-right">
+                                                                    @if($i)
+                                                                        <a class="btn btn-danger btn-min-width mr-1 mb-1 text-white remove-pelatihan" data-target="pills-home-tab">Hapus</a>
+                                                                    @else 
+                                                                        <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pelatihan">Tambah</a>
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endfor
                                                 </div>
 
                                                 <div class="row mt-2">
@@ -264,39 +270,46 @@
                                                 </div>
 
                                                 <div id="form-pengalaman">
-                                                    <div class="row mt-3 input-pengalaman">
-                                                        <div class="col-md-12">
-                                                            <h5 class="mt-0">Jenis Bencana</h5>
-                                                            <fieldset class="form-group mb-1">
-                                                                <input type="hidden" class="form-control" name="id_pengalaman[]" value="" placeholder="ID Bencana">
-                                                                <input type="text" class="form-control" name="jenis_bencana[]" value="" placeholder="Jenis Bencana">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <h5 class="mt-0">Detail Pengalaman</h5>
-                                                            <fieldset class="form-group mb-1">
-                                                                <input type="text" class="form-control" name="detail_pengalaman[]" value="" placeholder="Detail Pengalaman">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <h5 class="mt-0">Lokasi</h5>
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="lokasi[]" value="" placeholder="Lokasi">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h5 class="mt-0">Tahun</h5>
-                                                            <fieldset class="form-group">
-                                                                <input type="text" class="form-control" name="tahun[]" value="" placeholder="Tahun">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <h5 class="mt-0">&nbsp</h5>
-                                                            <div class="float-right">
-                                                                <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pengalaman">Tambah</a>
+                                                    @for($i=0; $i<count($pengalaman) ; $i++)
+                                                        <div class="row mt-3 input-pengalaman">
+                                                            <div class="col-md-12">
+                                                                <h5 class="mt-0">Jenis Bencana</h5>
+                                                                <fieldset class="form-group mb-1">
+                                                                    <input type="hidden" class="form-control" name="id_pengalaman[]" value="{{ $pengalaman[$i]->id }}" placeholder="ID Bencana">
+                                                                    <input type="text" class="form-control" name="jenis_bencana[]" value="{{ $pengalaman[$i]->jenis_bencana }}" placeholder="Jenis Bencana">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <h5 class="mt-0">Detail Pengalaman</h5>
+                                                                <fieldset class="form-group mb-1">
+                                                                    <input type="text" class="form-control" name="detail_pengalaman[]" value="{{ $pengalaman[$i]->detail_pengalaman }}" placeholder="Detail Pengalaman">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="mt-0">Lokasi</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="text" class="form-control" name="lokasi[]" value="{{ $pengalaman[$i]->lokasi }}" placeholder="Lokasi">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h5 class="mt-0">Tahun</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="text" class="form-control" name="tahun[]" value="{{ $pengalaman[$i]->tahun }}" placeholder="Tahun">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <h5 class="mt-0">&nbsp</h5>
+                                                                <div class="float-right">
+                                                                    @if($i)
+                                                                        <a class="btn btn-danger btn-min-width mr-1 mb-1 text-white remove-pengalaman" data-target="pills-home-tab">Hapus</a>
+                                                                    @else 
+                                                                        <a class="btn btn-success btn-min-width mr-1 mb-1 text-white" data-target="pills-home-tab" id="add-pengalaman">Tambah</a>
+                                                                    @endif
+
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endfor
                                                 </div>
                                                     
                                                 <div class="row mt-2">
