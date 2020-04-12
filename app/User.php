@@ -69,7 +69,7 @@ class User extends Authenticatable
     public function hasRole($roles)
     {
         $this->have_role = $this->getUserRole();
-       
+         
         if($this->have_role->role_name === $roles){
            return true;
         }  

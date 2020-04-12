@@ -18,7 +18,7 @@ class CekStatus
     public function handle($request, Closure $next)
     {
         $roles = $this->CekRoute($request->route());
-        //dd($request->user()->hasRole($roles));
+        
         //cek midelware sama role user login
         if($request->user()->hasRole($roles))
         {

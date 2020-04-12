@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
+
+Auth::routes();
+
 //role admin 
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     Route::group(['cekstatus'=> 'admin'], function () {
@@ -33,7 +35,6 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     });
 });
 
-Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home'); 
 
@@ -41,6 +42,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     //role private
     Route::group(['cekstatus'=> 'private'], function () {
+        Route::get('/relawan/dashboard', function () {
+            return view('relawan.dashboard.index');
+        })->name('relawan.dashboard'); 
+ 
+         
+    });
+
+    //role public
+    Route::group(['cekstatus'=> 'public'], function () {
         Route::get('/relawan/dashboard', function () {
             return view('relawan.dashboard.index');
         })->name('relawan.dashboard'); 
