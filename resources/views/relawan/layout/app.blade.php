@@ -1,0 +1,5 @@
+@include('relawan.layout.header')
+@include('relawan.layout.topbar')
+@include('relawan.layout.sidebar')
+@yield('content')
+@include('relawan.layout.footer')

@@ -39,17 +39,17 @@ class User extends Authenticatable
 
     public function roleText()
     {
-        if($this->role){
-            return 'Admin';
+        if($this->role == 1){
+            return 'admin';
 
-        }else if($this->role){
-            return 'Private';
+        }else if($this->role == 2){
+            return 'private';
 
-        }else if($this->role){
-            return 'Public';
+        }else if($this->role == 3){
+            return 'public';
 
         }else {
-            return 'Default';
+            return 'default';
         }
     }
     public function verifyDisplay()
@@ -59,5 +59,30 @@ class User extends Authenticatable
         }else{
             return '<span class="badge badge-light">Unverified</span>';
         }
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role','role');
+    }
+ 
+    public function hasRole($roles)
+    {
+        $this->have_role = $this->getUserRole();
+       
+        if($this->have_role->role_name === $roles){
+           return true;
+        }  
+
+        return false;
+    }
+    private function getUserRole()
+    {
+       return $this->role()->getResults();
+    }
+    
+    private function cekUserRole($role)
+    {  
+        return (strtolower($role) == strtolower($this->have_role->role_name)) ? true : false;
     }
 }

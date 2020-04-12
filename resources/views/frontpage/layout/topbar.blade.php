@@ -15,7 +15,7 @@
           <li><a href="#blog">Berita</a></li> 
           <li><a href="#contact">Kontak</a></li>
           <li><a href="{{ route('login') }}">Login</a></li>
-          <li><a class="ready-btn" href="{{ route('login') }}" style="margin-top:0px;">Jadi Relawan</a></li>
+          <li><a class="ready-btn" href="{{ route('register') }}" style="margin-top:0px;">Jadi Relawan</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

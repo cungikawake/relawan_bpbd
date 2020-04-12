@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
  
- 
-Route::group(['middleware'=> ['auth']], function (){
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard'); 
+//role admin 
+Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
+    Route::group(['cekstatus'=> 'admin'], function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard.dashboard');
+        })->name('dashboard'); 
+    });
 
-    Route::group(['as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+    Route::group(['cekstatus'=> 'admin', 'as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
         Route::resource('user', 'UserController')->names('user');
         Route::resource('induk-organisasi', 'IndukOrganisasiController')->names('induk_organisasi');
         Route::resource('skill', 'SkillController')->names('skill');
@@ -33,4 +35,16 @@ Route::group(['middleware'=> ['auth']], function (){
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home'); 
+
+//route relawan
+Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
+    //role private
+    Route::group(['cekstatus'=> 'private'], function () {
+        Route::get('/relawan/dashboard', function () {
+            return view('relawan.dashboard.index');
+        })->name('relawan.dashboard'); 
+ 
+         
+    });
+});

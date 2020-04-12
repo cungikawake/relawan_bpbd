@@ -332,8 +332,8 @@ prediksi perkembangan situasi ke depan</h5>
                 <div class="single-icon">
                   <i class="fa fa-mobile"></i>
                   <p>
-                    Call: +1 5589 55488 55<br>
-                    <span>Monday-Friday (9am-5pm)</span>
+                    Call: +62 8134 1232 1234<br>
+                    <span>Senin-Jumat (8am-4pm)</span>
                   </p>
                 </div>
               </div>
@@ -356,8 +356,8 @@ prediksi perkembangan situasi ke depan</h5>
                 <div class="single-icon">
                   <i class="fa fa-map-marker"></i>
                   <p>
-                    Location: A108 Adam Street<br>
-                    <span>NY 535022, USA</span>
+                  Renon, Jalan D.I Panjaitan No.6, Panjer, Kec. Denpasar Sel. <br>
+                    <span>Kota Denpasar, Bali 80235</span>
                   </p>
                 </div>
               </div>
