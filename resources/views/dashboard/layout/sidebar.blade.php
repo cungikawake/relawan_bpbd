@@ -26,7 +26,7 @@
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-comment"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
           </li>
-          <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Relawan</span></a>
+          <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Laporan</span></a>
           </li>
         </ul>
       </div>

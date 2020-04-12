@@ -58,8 +58,8 @@
                                                 <th>#</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
-                                                <th>Ktp</th>
-                                                <th width="20%">Foto</th>
+                                                <th>No Hp</th>
+                                                <th>Jenis</th> 
                                                 <th>Verifikasi</th>
                                                 {{-- <th width="20%">Ktp</th> --}}
                                                 <th width="10%"></th>
@@ -74,10 +74,9 @@
                                                         </th>
                                                         <td>{{$data->nama_lengkap}}</td>
                                                         <td>{{$data->email}}</td>
-                                                        <td>{{$data->ktp}}</td>
-                                                        <td>
-                                                            <img src="{{$data->displayFoto()}}" width="100" alt="">
-                                                        </td>
+                                                        <td>{{$data->tlp}}</td>
+                                                        <td>{{($data->jenis_relawan == 1)? 'Private': 'Publik'}}</td>
+                                                        
                                                         <td>{!! $data->userVerifyDisplay() !!}</td>
                                                         {{-- <td>
                                                             <img src="{{$data->displayKtp()}}" width="100" alt="">
