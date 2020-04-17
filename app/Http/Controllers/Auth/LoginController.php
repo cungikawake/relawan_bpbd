@@ -47,7 +47,7 @@ class LoginController extends Controller
                     return '/relawan/dashboard';
                 break; 
             default:
-                    return '/login'; 
+                    return '/'; 
                 break;
         }
     }

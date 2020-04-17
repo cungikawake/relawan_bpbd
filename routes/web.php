@@ -37,15 +37,18 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
 });
 
 
-Route::get('/', 'HomeController@index')->name('home'); 
-
 //route relawan
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     //role private
     Route::group(['cekstatus'=> ['private','public']], function () {
-        Route::get('/relawan/dashboard', function () {
-            return view('relawan.dashboard.index');
-        })->name('relawan.dashboard');  
+        Route::get('/relawan/dashboard', 'Relawan\DashboardController@index')->name('relawan.dashboard');
+        Route::get('relawan/verifikasi', 'Relawan\RelawanController@create')->name('relawan.verifikasi');  
+        Route::post('relawan/verifikasi/store', 'Relawan\RelawanController@store')->name('relawan.verifikasi.store');
+        Route::put('relawan/verifikasi/update', 'Relawan\RelawanController@store')->name('relawan.verifikasi.update'); 
+        Route::get('relawan/profile', 'Relawan\RelawanController@profile')->name('relawan.profile');  
     }); 
 });
+
+Route::get('/', 'HomeController@index')->name('home'); 
+Route::get('/relawan/register', 'Relawan\RelawanController@index')->name('home'); 
  

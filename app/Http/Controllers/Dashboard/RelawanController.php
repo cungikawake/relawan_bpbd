@@ -380,13 +380,13 @@ class RelawanController extends Controller
     public function mail()
     {
         $data = Relawan::findOrFail(7);
-        $password = 'dfskdd';
+        $password = 'bpbdbali#2020';
         
         \Mail::send(
             'mail.relawan-konfirmasi',
             compact('data','password'),
             function ($m) use ($data) {
-                $m->from('e-relawan@mail.com', 'Admin'); 
+                $m->from('e-relawan@bpbdbali.com', 'Admin bpbd bali'); 
                 $m->to($data->email, $data->nama_lengkap);
                 $m->subject('E-Relawan');
             }

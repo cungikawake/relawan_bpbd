@@ -8,9 +8,18 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class="nav-item {{ (request()->is('relawan.dashboard')) ? 'active' : '' }}"><a href="{{route('relawan.dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>   
+          <li class="nav-item {{ (request()->is('relawan.profile')) ? 'active' : '' }}"><a href="{{route('relawan.profile')}}"><i class="ft-user"></i><span class="menu-title" data-i18n="">Profile</span></a>
+          </li>
+          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-map-pin"></i><span class="menu-title" data-i18n="">Bencana</span></a>
+          </li>  
+          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-file"></i><span class="menu-title" data-i18n="">Tugas</span></a>
+          </li>
+          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
+          </li> 
         </ul>
       </div>
+       
       <div class="navigation-background"></div>
     </div>

@@ -7,6 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class Relawan extends Model
 {
     protected $table = 'relawan';
+
+    protected $fillable = [
+        'id_user',
+        'id_induk_relawan',
+        'nama_lengkap',
+        'email',
+        'tgl_lahir',
+        'jenis_kelamin',
+        'pendidikan',
+        'pekerjaan',
+        'ktp',
+        'ktp_file',
+        'foto_file',
+        'alamat',
+        'tlp',
+        'jenis_relawan',
+        'nomor_relawan',
+    ];
     
     public function displayKtp()
     {
