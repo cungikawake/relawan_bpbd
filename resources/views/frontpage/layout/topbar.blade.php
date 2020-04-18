@@ -11,9 +11,8 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="{{ route('home') }}">Home</a></li> 
-          <li><a href="#bencana">Bencana</a></li> 
-          <li><a href="#blog">Berita</a></li> 
-          <li><a href="#contact">Kontak</a></li>
+          <li><a href="/#blog">Bencana</a></li>  
+          <li><a href="/#contact">Kontak</a></li>
           <li><a href="{{ route('login') }}">Login</a></li>
           <li><a class="ready-btn" href="{{ route('register') }}" style="margin-top:0px;">Jadi Relawan</a></li>
         </ul>

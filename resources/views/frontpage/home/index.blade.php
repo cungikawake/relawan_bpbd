@@ -28,7 +28,7 @@
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Jadi Relawan</a>
+                  <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
                   <a class="ready-btn page-scroll" href="#about">Download App</a>
                 </div>
               </div>
@@ -54,7 +54,7 @@ penanggulangan bencana</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Jadi Relawan</a>
+                  <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
                   <a class="ready-btn page-scroll" href="#about">Download App</a>
                 </div>
               </div>
@@ -79,7 +79,7 @@ penanggulangan bencana</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">Jadi Relawan</a>
+                  <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
                   <a class="ready-btn page-scroll" href="#about">Download App</a>
                 </div>
               </div>
@@ -171,7 +171,7 @@ penanggulangan bencana.
               <div class="services-details">
                 <div class="single-services">
                   <a class="services-icon" href="#">
-                    <i class="fa fa-code"></i>
+                    <i class="fa fa-address-book"></i>
                   </a>
                   <h4></h4>
                   <p>
@@ -187,7 +187,7 @@ penanggulangan bencana.
               <div class="services-details">
                 <div class="single-services">
                   <a class="services-icon" href="#">
-                    <i class="fa fa-camera-retro"></i>
+                    <i class="fa fa-american-sign-language-interpreting"></i>
                   </a>
                   <h4></h4>
                   <p>
@@ -205,7 +205,7 @@ penanggulangan bencana.
               <div class="services-details">
                 <div class="single-services">
                   <a class="services-icon" href="#">
-                    <i class="fa fa-wordpress"></i>
+                    <i class="fa fa-angle-double-up"></i>
                   </a>
                   <h4></h4>
                   <p>
@@ -257,7 +257,7 @@ penanggulangan bencana
                     <a href="#">{{ $bencana->judul_bencana }}</a>
                   </h4>
                   <p>
-                  {{  substr($bencana->detail_tugas, 0, 100) }} 
+                  {{  substr($bencana->detail_tugas, 0, 100) }}... 
                   </p>
                 </div>
                 
@@ -268,7 +268,7 @@ penanggulangan bencana
                   </span>
                 </div>
                 <span>
-                  <a href="#" class="ready-btn">Ikut Membantu</a>
+                  <a href="{{url('bencana/detail/'.$bencana->id)}}" class="ready-btn">Ikut Membantu</a>
                 </span>
               </div>
               <!-- Start single blog -->
@@ -292,7 +292,7 @@ penanggulangan bencana
           <h5>Kaji cepat terhadap cakupan wilayah yang terkena, jumlah korban dan
 kerusakan, kebutuhan sumber daya, ketersediaan sumber daya serta
 prediksi perkembangan situasi ke depan</h5>
-          <a href="#contact" class="ready-btn scrollto">Jadi Relawan</a>
+          <a href="{{ route('register') }}" class="ready-btn scrollto">Jadi Relawan</a>
         </div>
       </div>
     </div><!-- End Rviews Section -->
@@ -306,7 +306,7 @@ prediksi perkembangan situasi ke depan</h5>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
             <div class="suscribe-text text-center">
               <h3>Selamat Bergabung Menjadi Relawan BPBD BALI</h3>
-              <a class="sus-btn" href="#">Daftar Bergabung</a>
+              <a class="sus-btn" href="{{ route('register') }}">Daftar Bergabung</a>
             </div>
           </div>
         </div>
