@@ -10,7 +10,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
             <div class="content-header-left col-md-4 col-12 mb-2">
-                <h3 class="content-header-title">Daftar Bencana Yang Kami Ikuti</h3>
+                <h3 class="content-header-title">Daftar Bencana Yang Kamu Ikuti</h3>
             </div>
             <div class="content-header-right col-md-8 col-12">
                 <div class="breadcrumbs-top float-md-right">
@@ -34,7 +34,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">{{$bencana->judul_bencana}}</h4>
-                                <span class="badge badge-pill badge-danger">Menunggu Konfirmasi</span>
+                                @if($bencana->status_join == 1)
+                                    <span class="badge badge-pill badge-success">Di Setujui</span>
+                                @elseif($bencana->status_join == 2)
+                                    <span class="badge badge-pill badge-danger">Di Batalkan</span>
+                                @else
+                                    <span class="badge badge-pill badge-info">Menunggu Konfirmasi</span>
+                                @endif
+
                             </div>
                             
                             <img class="" src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="Card image cap" style="max-height:150px;">
@@ -45,6 +52,10 @@
                                 <span class="float-left"><i class="la la-calendar-check-o"></i> {{$bencana->tgl_mulai}} s/d {{$bencana->tgl_selesai}} </span>
                             </div>
                             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
+                                <span class="float-left">
+                                    <a onclick="myFunction()" href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link"><i class="la la-angle-left keluar_bencana"></i> Tinggalkan Bencana
+                                    </a>
+                                </span>
                                 <span class="float-right">
                                     <a href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link">Lihat Detail
                                         <i class="la la-angle-right"></i>
@@ -64,5 +75,11 @@
 @stop
 
 @section('script')
-<script></script>
+<script>
+function myFunction() {
+    if (window.confirm("Do you really want to leave?")) { 
+        window.open("exit.html", "Thanks for Visiting!");
+    }
+}
+</script>
 @stop

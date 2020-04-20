@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bencana;  
+use App\Models\Skill;  
+use App\Models\Persyaratan;  
 use App\Models\Relawan;
 use App\Models\RelawanBencana;  
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +19,18 @@ class BencanaController extends Controller
                     ->where('id', $id)
                     ->Orderby('id', 'Desc')
                     ->first(); 
-        
+         
+        $skill_minimal = array();
+        foreach(json_decode($bencana->skill_minimal) as $id){
+            $skill_minimal[] = Skill::where('id', $id)->first();
+        }
 
-        return view('frontpage.bencana.detail_bencana', compact('bencana'));
+        $syarat_minimal = array();
+        foreach(json_decode($bencana->mental_minimal) as $id){
+            $syarat_minimal[] = Persyaratan::where('id', $id)->first();
+        }
+         
+        return view('frontpage.bencana.detail_bencana', compact('bencana', 'skill_minimal', 'syarat_minimal'));
     }
 
     public function join($id = null){
@@ -46,7 +57,7 @@ class BencanaController extends Controller
                     $date1=date_create(date('Y-m-d'));//hari ini
                     $date2=date_create($bencana->tgl_selesai);
                     //bencana yang sama
-                    if($id == $bencana->id_bencana || $date1 < $date2){
+                    if($id == $bencana->id_bencana || $date1 <= $date2){
                         return redirect('bencana/detail/'.$id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung disalah satu kegiatan yang waktunya berlangsung bersamaan.');
 
                     }else{
@@ -69,14 +80,15 @@ class BencanaController extends Controller
             $date1=date_create(date('Y-m-d'));//hari ini
             $date2=date_create($detail_bencana->tgl_selesai);
 
-            if($date1 >= $date2){ 
+            if($date1 <= $date2){ 
 
                 $bencanas = RelawanBencana::where('id_relawan', $relawan->id)
                     ->where('status_join', '0')
+                    ->where('id_bencana', $id)
                     ->get();
                 
                 if(count($bencanas) > 0){
-                    return redirect('bencana/detail/'.$id)->with('message', 'Maaf, anda sudah bergabung pada kegiatan ini. ');
+                    return redirect('bencana/detail/'.$id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
                 }
                 
                 $join = new RelawanBencana;

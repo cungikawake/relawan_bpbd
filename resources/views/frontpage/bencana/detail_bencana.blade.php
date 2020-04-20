@@ -59,12 +59,24 @@
                     <i class="fa fa-child"></i> Tim Pelaksana : {{$bencana->nama_pelaksana}}
                   </li> 
                   <li>
+                    <i class="fa fa-list"></i> Kemampuan Minimal : 
+                    @foreach($skill_minimal as $skill)
+                      <p>* {{$skill->nama_skill}}</p>
+                    @endforeach
+                  </li> 
+                  <li>
+                    <i class="fa fa-list"></i> Ketentuan : 
+                    @foreach($syarat_minimal as $syarat)
+                      <p>* {{$syarat->nama}}</p>
+                    @endforeach
+                  </li> 
+                  <li>
                     <?php 
                         $date1=date_create(date('Y-m-d'));
                         $date2=date_create($bencana->tgl_selesai);
                         //$diff=date_diff($date1,$date2);
                     ?>
-                    @if($date1 >= $date2)
+                    @if($date1 <= $date2)
                         <span>
                             <a href="{{url('bencana/join/'.$bencana->id)}}" class="ready-btn right-btn page-scroll">Gabung Sekarang</a>
                         </span>

@@ -14,9 +14,20 @@ class RelawanBencanaController extends Controller
         $user = Auth::user();
         $relawan = Relawan::where('id_user', $user->id)->first();
         $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
-                ->where('id_relawan', $relawan->id)
+                ->where('relawan_bencana.id_relawan', $relawan->id) 
+                ->orderBy('relawan_bencana.id', 'desc')
                 ->get();
         
         return view('relawan.bencana.index', compact('relawan', 'user', 'bencanas'));        
+    }
+
+    public function keluar($id){
+        $user = Auth::user();
+        $relawan = Relawan::where('id_user', $user->id)->first();
+        $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->where('relawan_bencana.id_relawan', $relawan->id) 
+                ->where('relawan_bencana.id', $id)->first();
+        $bencanas->update(['status_join', '2']);
+        return redirect('relawan/bencana');
     }
 }
