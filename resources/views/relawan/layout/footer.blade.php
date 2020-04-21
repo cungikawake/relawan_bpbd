@@ -28,6 +28,7 @@
 
     <!-- CUSTOM JS--> 
     @yield('script')
+    @stack('script')
 
   </body>
 </html>

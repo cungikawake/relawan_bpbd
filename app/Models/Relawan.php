@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Relawan extends Model
 {
@@ -91,5 +92,24 @@ class Relawan extends Model
             $data[] = new \App\Models\RelawanPengalaman;
             return $data;
         }
+    }
+    public function bencana()
+    {
+        return $this->hasMany('App\Models\RelawanBencana', 'id_relawan');
+    }
+    public function bencanaDetail($start, $end)
+    {
+        $datas = DB::table('relawan_bencana')
+            ->select('bencana.id', 'bencana.judul_bencana')
+            ->join('bencana', 'relawan_bencana.id_bencana', '=', 'bencana.id')
+            ->where('relawan_bencana.id_relawan', '=', $this->id)
+            ->where('relawan_bencana.status_join', '=', 1)
+            ->where(function($query) use ($start, $end){
+                $query->whereBetween('bencana.tgl_mulai', [$start, $end]);
+                $query->orWhereBetween('bencana.tgl_selesai', [$start, $end]);
+            })
+            ->get();
+        
+        return $datas;
     }
 }

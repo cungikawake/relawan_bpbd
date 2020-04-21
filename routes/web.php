@@ -33,6 +33,11 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::get('relawan-mail', 'RelawanController@mail');
         Route::post('relawan/{id}/verify', 'RelawanController@verify')->name('relawan.verify');
         Route::get('relawan/{id}/print', 'RelawanController@print')->name('relawan.print');
+        
+        Route::get('list-kegiatan', 'ListKegiatanController@index')->name('list_kegiatan.index');
+        Route::get('list-kegiatan/{id}/detail', 'ListKegiatanController@detail')->name('list_kegiatan.detail');
+        Route::post('list-kegiatan/{id}/update', 'ListKegiatanController@update')->name('list_kegiatan.update');
+        Route::get('list-kegiatan/send-email', 'ListKegiatanController@sendEmail')->name('list_kegiatan.send_email');
     });
 });
 
