@@ -43,39 +43,92 @@ class ListKegiatanController extends Controller
     }
     public function sendEmail()
     {
-        $datas = RelawanBencana::where('email_status', 0)->orderBy('tgl_join', 'asc')->get();
+        $datas = RelawanBencana::where('email_status', 0)->where('status_join', '>', 0)->orderBy('tgl_join', 'asc')->get();
         foreach($datas as $data){
-            if($data->status_join == 1){
-                \Mail::send(
-                    'mail.konfirmasi-relawan-join',
-                    compact('data'),
-                    function ($m) use ($data) {
-                        $m->from('e-relawan@mail.com', 'Admin'); 
-                        $m->to($data->relawan->email, $data->relawan->nama_lengkap);
-                        $m->subject('E-Relawan');
-                    }
-                );
+            $userkey = "xxxxxx";
+            $passkey = "xxxxxx";
+            $telepon = $data->relawan->tlp;
+            $message = "";
 
-                $data->email_status = 1;
-                $data->save();
+            if($data->status_join == 1){
+                $message .= "Halo ".$data->relawan->nama_lengkap.", Anda diterima untuk bergabung pada kegiatan penanganan bencana ".$data->bencana->judul_bencana.".";
+
 
             }else if($data->status_join == 2){
-                \Mail::send(
-                    'mail.konfirmasi-relawan-reject',
-                    compact('data'),
-                    function ($m) use ($data) {
-                        $m->from('e-relawan@mail.com', 'Admin'); 
-                        $m->to($data->relawan->email, $data->relawan->nama_lengkap);
-                        $m->subject('E-Relawan');
-                    }
-                );
+                $message .= "Halo ".$data->relawan->nama_lengkap.", Anda belum diterima untuk bergabung pada kegiatan penanganan bencana ".$data->bencana->judul_bencana.".";
                 
-                $data->email_status = 1;
-                $data->save();
+                if(count($data->relawan->bencanaDetail($data->bencana->tgl_mulai, $data->bencana->tgl_selesai))) {
+                    $message .= " Dikarenakan anda sudah bergabung dalam kegiatan ".$data->relawan->bencanaDetail($data->bencana->tgl_mulai, $data->bencana->tgl_selesai)->first()->judul_bencana.".";
+                }else{ 
+                    $message .= " Dikarenakan Jumlah peserta sudah melebihi quota kegiatan.";
+                }
                 
+            }
+
+            if($message != ""){
+                // $url = "https://reguler.zenziva.net/apps/smsapi.php";
+                // $curlHandle = curl_init();
+                // curl_setopt($curlHandle, CURLOPT_URL, $url);
+                // curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+                // curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+                // curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+                // curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+                // curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+                // curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+                // curl_setopt($curlHandle, CURLOPT_POST, 1);
+                // $results = curl_exec($curlHandle);
+                // curl_close($curlHandle);
+
+                // \Log::info([
+                //     'zenziva-smsapi' => true,
+                //     'results' => $results
+                // ]);
+
+                
+                
+                // $data->email_status = 1;
+                // $data->save();
+
+                echo $message." ".$telepon."<br> <br>";
             }
         }
 
-        return 'sendEmail';
+        // return 'sendEmail';
+
+        
+        // $datas = RelawanBencana::where('email_status', 0)->orderBy('tgl_join', 'asc')->get();
+        // foreach($datas as $data){
+        //     if($data->status_join == 1){
+        //         \Mail::send(
+        //             'mail.konfirmasi-relawan-join',
+        //             compact('data'),
+        //             function ($m) use ($data) {
+        //                 $m->from('e-relawan@mail.com', 'Admin'); 
+        //                 $m->to($data->relawan->email, $data->relawan->nama_lengkap);
+        //                 $m->subject('E-Relawan');
+        //             }
+        //         );
+
+        //         $data->email_status = 1;
+        //         $data->save();
+
+        //     }else if($data->status_join == 2){
+        //         \Mail::send(
+        //             'mail.konfirmasi-relawan-reject',
+        //             compact('data'),
+        //             function ($m) use ($data) {
+        //                 $m->from('e-relawan@mail.com', 'Admin'); 
+        //                 $m->to($data->relawan->email, $data->relawan->nama_lengkap);
+        //                 $m->subject('E-Relawan');
+        //             }
+        //         );
+                
+        //         $data->email_status = 1;
+        //         $data->save();
+                
+        //     }
+        // }
+
+        // return 'sendEmail';
     }
 }
