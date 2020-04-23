@@ -81,10 +81,21 @@ class BencanaController extends Controller
                             $join->id_user = $user->id;
                             $join->id_bencana = $detail_bencana->id;
                             $join->tgl_join = date('Y-m-d H:i:s');
-                            $join->status_join = '0';
-                            $join->save();
+                            
+                            if($detail_bencana->jenis_bencana == 1){
+                                $join->status_join = '0';
+                                $join->save();
 
-                            return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                                return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                            }else{
+                                //diterima
+                                $join->status_join = '1';
+                                $join->save();
+
+                                return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                            } 
+
+                            
                         }
 
                         
@@ -114,12 +125,22 @@ class BencanaController extends Controller
                         $join->id_user = $user->id;
                         $join->id_bencana = $detail_bencana->id;
                         $join->tgl_join = date('Y-m-d H:i:s');
-                        $join->status_join = '0';
                         $join->durasi_join = '0';
                         $join->lokasi_terakhir = '0';
-                        $join->save();
 
-                        return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                        if($detail_bencana->jenis_bencana == 1){
+                            $join->status_join = '0';
+                            $join->save();
+
+                            return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                        }else{
+                            //diterima
+                            $join->status_join = '1';
+                            $join->save();
+
+                            return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                        } 
+                        
                     }
 
                 }else{
