@@ -69,10 +69,12 @@
                                 <span class="float-left"><i class="la la-calendar-check-o"></i> {{$bencana->tgl_mulai}} s/d {{$bencana->tgl_selesai}} </span>
                             </div>
                             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
-                                <span class="float-left">
-                                    <a onclick="myFunction()" href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link"><i class="la la-angle-left keluar_bencana"></i> Tinggalkan Bencana
-                                    </a>
-                                </span>
+                                @if($bencana->status_join == 1)
+                                    <span class="float-left">
+                                        <a onclick="return  myFunction();" href="{{ url('relawan/bencana/keluar?relawan_bencana='.$bencana->id_relawan_bencana) }}" class="card-link"><i class="la la-angle-left keluar_bencana"></i> Tinggalkan Bencana
+                                        </a>
+                                    </span>
+                                @endif
                                 <span class="float-right">
                                     <a href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link">Lihat Detail
                                         <i class="la la-angle-right"></i>
@@ -95,7 +97,9 @@
 <script>
 function myFunction() {
     if (window.confirm("Do you really want to leave?")) { 
-        window.open("exit.html", "Thanks for Visiting!");
+        return true;
+    }else{
+        return false;
     }
 }
 </script>

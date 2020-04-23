@@ -129,14 +129,14 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.delete').click(function(){
-            if(window.confirm('Sure delete this data?')){
+            if(window.confirm('Yakin untuk menghapus relawan ?')){
                 var id = $(this).attr('data-id');
                 $('form#delete-'+id).submit();
             }
         });
         
         $('.verify').click(function(){
-            if(window.confirm('Sure verify this data?')){
+            if(window.confirm('Yakin untuk verifikasi relawan ?')){
                 var id = $(this).attr('data-id');
                 $('form#verify-'+id).submit();
             }

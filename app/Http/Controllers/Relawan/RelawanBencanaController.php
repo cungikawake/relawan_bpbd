@@ -16,6 +16,7 @@ class RelawanBencanaController extends Controller
         $bencanas = array();
         
         $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->select('*','relawan_bencana.id as id_relawan_bencana')
                 ->where('relawan_bencana.id_user', $user->id) 
                 ->orderBy('relawan_bencana.id', 'desc')
                 ->get();
@@ -24,13 +25,25 @@ class RelawanBencanaController extends Controller
         return view('relawan.bencana.index', compact('relawan', 'user', 'bencanas'));        
     }
 
-    public function keluar($id){
-        $user = Auth::user();
-        $relawan = Relawan::where('id_user', $user->id)->first();
-        $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
-                ->where('relawan_bencana.id_relawan', $relawan->id) 
-                ->where('relawan_bencana.id', $id)->first();
-        $bencanas->update(['status_join', '2']);
+    public function destroy(Request $request){
+        $user = Auth::user(); 
+        if(isset($request->relawan_bencana) && !empty($request->relawan_bencana)){
+            $bencana = RelawanBencana::where('id', $request->relawan_bencana)
+            ->where('id_user', $user->id)
+            ->first(); 
+             
+            if($bencana != null){
+                $bencana = RelawanBencana::findOrFail($request->relawan_bencana);
+                $bencana->status_join = '0';
+                $bencana->save();
+
+                //notif
+            }
+
+            return redirect('relawan/bencana');
+        }
+
         return redirect('relawan/bencana');
+        
     }
 }

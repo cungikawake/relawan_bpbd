@@ -44,7 +44,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
 
 //route relawan
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
-    //role private
+    //role private public
     Route::group(['cekstatus'=> ['private','public']], function () {
         Route::get('/relawan/dashboard', 'Relawan\DashboardController@index')->name('relawan.dashboard');
         Route::get('relawan/verifikasi', 'Relawan\RelawanController@create')->name('relawan.verifikasi');  
@@ -52,6 +52,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::put('relawan/verifikasi/update', 'Relawan\RelawanController@store')->name('relawan.verifikasi.update'); 
         Route::get('relawan/profile', 'Relawan\RelawanController@profile')->name('relawan.profile');  
         Route::get('relawan/bencana', 'Relawan\RelawanBencanaController@index')->name('relawan.bencana');  
+        Route::get('relawan/bencana/keluar', 'Relawan\RelawanBencanaController@destroy');  
     }); 
 });
 
