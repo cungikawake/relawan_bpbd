@@ -94,6 +94,7 @@ class BencanaController extends Controller
 
                                 $data = array(
                                     'email' => $user->email,
+                                    'nama' => $user->name,
                                     'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
                                 );
                                 $this->sendMail($data);
@@ -146,6 +147,7 @@ class BencanaController extends Controller
 
                             $data = array(
                                 'email' => $user->email,
+                                'nama' => $user->name,
                                 'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
                             );
                             $this->sendMail($data);
@@ -168,10 +170,15 @@ class BencanaController extends Controller
 
     public function sendMail($data){
         try{
-            Mail::send('mail/konfirmasi-relawan-bencana', array('pesan' => $data['pesan']) , function($pesan) use($data){
-                $pesan->to($data['email'],'e-Relawan')->subject('Notifikasi Join Bencana e-Relawan');
-                $pesan->from('info@bpbdbali.com','Info e-Relawan');
-            });
+            \Mail::send(
+                'mail.konfirmasi-relawan-bencana',
+                compact('data'),
+                function ($m) use ($data) {
+                    $m->from('info@bpbdbali.com', 'Admin e-Relawan'); 
+                    $m->to($data->email, $data->nama);
+                    $m->subject('Notifikasi Join Bencana e-Relawan');
+                }
+            );
         }catch (Exception $e){
             return response (['status' => false,'errors' => $e->getMessage()]);
         }

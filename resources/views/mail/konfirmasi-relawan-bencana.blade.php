@@ -6,6 +6,7 @@
     <title>Isi Pesan</title>
 </head>
 <body>
-    <p> {{ $pesan }}
+    <h3>Halo, {{ $data['nama'] }}</h3>
+    <p> {{ $data['pesan'] }}
 </body>
 </html>
