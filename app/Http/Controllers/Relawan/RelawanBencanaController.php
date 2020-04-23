@@ -17,7 +17,7 @@ class RelawanBencanaController extends Controller
         
         if(!empty($relawan)){
             $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
-                ->where('relawan_bencana.id_relawan', $relawan->id) 
+                ->where('relawan_bencana.id_user', $user->id) 
                 ->orderBy('relawan_bencana.id', 'desc')
                 ->get();
         }
