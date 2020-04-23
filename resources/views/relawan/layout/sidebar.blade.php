@@ -18,8 +18,7 @@
           </li> -->
           <li class="nav-item {{ (request()->is('bantuan')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
           </li> 
-        </ul>
+        </ul> 
       </div>
-       
       <div class="navigation-background"></div>
     </div>
