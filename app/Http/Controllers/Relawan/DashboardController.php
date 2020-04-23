@@ -28,4 +28,8 @@ class DashboardController extends Controller
         
         return view('relawan.dashboard.index', compact('relawan', 'user'));
     }
+
+    public function bantuan(){
+        return view('relawan.bantuan.index');
+    }
 }

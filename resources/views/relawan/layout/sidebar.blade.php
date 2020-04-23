@@ -14,9 +14,9 @@
           </li>
           <li class="nav-item {{ (request()->is('relawan.bencana')) ? 'active' : '' }}"><a href="{{route('relawan.bencana')}}"><i class="ft-map-pin"></i><span class="menu-title" data-i18n="">Bencana</span></a>
           </li>  
-          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-file"></i><span class="menu-title" data-i18n="">Tugas</span></a>
-          </li>
-          <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
+          <!-- <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-file"></i><span class="menu-title" data-i18n="">Tugas</span></a>
+          </li> -->
+          <li class="nav-item {{ (request()->is('bantuan')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
           </li> 
         </ul>
       </div>

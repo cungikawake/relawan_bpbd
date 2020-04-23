@@ -53,6 +53,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::get('relawan/profile', 'Relawan\RelawanController@profile')->name('relawan.profile');  
         Route::get('relawan/bencana', 'Relawan\RelawanBencanaController@index')->name('relawan.bencana');  
         Route::get('relawan/bencana/keluar', 'Relawan\RelawanBencanaController@destroy');  
+        Route::get('relawan/bantuan', 'Relawan\DashboardController@bantuan')->name('bantuan');  
     }); 
 });
 
