@@ -175,7 +175,7 @@ class BencanaController extends Controller
                 compact('data'),
                 function ($m) use ($data) {
                     $m->from('info@bpbdbali.com', 'Admin e-Relawan'); 
-                    $m->to($data->email, $data->nama);
+                    $m->to($data['email'], $data['nama']);
                     $m->subject('Notifikasi Join Bencana e-Relawan');
                 }
             );
