@@ -568,7 +568,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="attributes_item" width="25%">
-                                                                    <span class="f-fallback"><strong>Status : </strong></span>
+                                                                    <span class="f-fallback"><strong>Status </strong></span>
                                                                 </td>
                                                                 <td class="attributes_item">
                                                                     <span class="f-fallback">

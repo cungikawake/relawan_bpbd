@@ -76,7 +76,8 @@ class BencanaController extends Controller
                             $join = new RelawanBencana;
                             if(!empty($relawan)){
                                 $join->id_relawan = $relawan->id;
-                            }
+                            } 
+                            
                             $join->id_user = $user->id;
                             $join->id_bencana = $detail_bencana->id;
                             $join->tgl_join = date('Y-m-d H:i:s');
