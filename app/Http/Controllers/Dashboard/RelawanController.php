@@ -57,7 +57,7 @@ class RelawanController extends Controller
 
     public function createUser($request)
     {
-        if($request->jenis_relawan == 1){
+        if((int)$request->jenis_relawan == 1){
             //Private
             $role = 2;
         }else{

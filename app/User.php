@@ -61,7 +61,7 @@ class User extends Authenticatable
         }
     }
 
-    public function role()
+    public function role_data()
     {
         return $this->belongsTo('App\Models\Role','role');
     }
@@ -77,7 +77,7 @@ class User extends Authenticatable
     }
     private function getUserRole()
     {
-       return $this->role()->getResults();
+       return $this->role_data()->getResults();
     }
     
     private function cekUserRole($role)
