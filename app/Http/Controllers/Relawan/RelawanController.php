@@ -171,15 +171,24 @@ class RelawanController extends Controller
     {
         $user  = Auth::user();
         $model = Relawan::where('id_user', $user->id)->first();
+        
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
-        $model_skills = SkillRelawan::join('skill', 'skill.id', '=', 'skill_relawan.id_skill')
-                ->where('skill_relawan.id_relawan', '=', $model->id)->get();
         $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
 
-        $pelatihan = $model->pelatihanEdit();
-        $pengalaman = $model->pengalamanEdit();
+        $model_skills = array();
+        $pelatihan = array();
+        $pengalaman = array();
+
+        if(!empty($model)){
+            $model_skills = SkillRelawan::join('skill', 'skill.id', '=', 'skill_relawan.id_skill')
+                ->where('skill_relawan.id_relawan', '=', $model->id)->get();
+            
+            $pelatihan = $model->pelatihanEdit();
+            $pengalaman = $model->pengalamanEdit();
+        }
+        
         //dd($pelatihan);
-        return view('relawan.register.profile', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman'));
+        return view('relawan.register.profile', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
     }
 
 }

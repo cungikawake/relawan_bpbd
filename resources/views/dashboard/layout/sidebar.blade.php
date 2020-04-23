@@ -20,10 +20,10 @@
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/bencana*')) ? 'active' : '' }}"><a href="{{route('dashboard.bencana.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">Bencana</span></a>
           </li>
-          <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}"><a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-male"></i><span class="menu-title" data-i18n="">Relawan</span></a>
           </li>
+          <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}"><a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-user"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Penanggulangan</span></a>
           </li>
           <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}"><a href="{{route('dashboard.relawan.index')}}"><i class="la la-comment"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>

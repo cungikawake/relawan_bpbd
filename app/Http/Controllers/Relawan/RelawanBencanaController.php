@@ -13,10 +13,15 @@ class RelawanBencanaController extends Controller
     public function index(){
         $user = Auth::user();
         $relawan = Relawan::where('id_user', $user->id)->first();
-        $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+        $bencanas = array();
+        
+        if(!empty($relawan)){
+            $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
                 ->where('relawan_bencana.id_relawan', $relawan->id) 
                 ->orderBy('relawan_bencana.id', 'desc')
                 ->get();
+        }
+        
         
         return view('relawan.bencana.index', compact('relawan', 'user', 'bencanas'));        
     }
