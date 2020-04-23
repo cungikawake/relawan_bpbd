@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="content-body">
-            @if(empty($relawan)) 
+            @if(empty($bencanas)) 
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
