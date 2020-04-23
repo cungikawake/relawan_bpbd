@@ -26,6 +26,23 @@
             </div>
         </div>
         <div class="content-body">
+            @if(empty($relawan)) 
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="alert alert-secondary">
+                                    <p>Kamu belum pernah ikut bergabung, Ayo kita kerja sama bantu teman, sahabat, keluarga kita.</p>
+                                    <a href="{{ route('home') }}">
+                                        <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            
             <!-- Header footer section start -->
             <section id="header-footer">
                 <div class="row match-height">

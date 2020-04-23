@@ -24,8 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bencanas = Bencana::where('jenis_bencana', '1')
-                    ->where('status_jenis', '1')
+        $bencanas = Bencana::where('status_jenis', '1')
                     ->Orderby('id', 'Desc')
                     ->limit(3)
                     ->get(); 
