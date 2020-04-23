@@ -9,14 +9,14 @@ use App\Models\Persyaratan;
 use App\Models\Relawan;
 use App\Models\RelawanBencana;  
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class BencanaController extends Controller
 {
     public function index(){
-        $bencanas = Bencana::where('jenis_bencana', '1')
-                    ->where('status_jenis', '1')
+        $bencanas = Bencana::where('status_jenis', '1')
                     ->Orderby('id', 'Desc')
-                    ->paginate(3); 
+                    ->paginate(6); 
 
         return view('frontpage.bencana.list', compact('bencanas'));
     }
@@ -92,6 +92,12 @@ class BencanaController extends Controller
                                 $join->status_join = '1';
                                 $join->save();
 
+                                $data = array(
+                                    'email' => $user->email,
+                                    'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
+                                );
+                                $this->sendMail($data);
+
                                 return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                             } 
 
@@ -138,6 +144,12 @@ class BencanaController extends Controller
                             $join->status_join = '1';
                             $join->save();
 
+                            $data = array(
+                                'email' => $user->email,
+                                'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
+                            );
+                            $this->sendMail($data);
+
                             return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                         } 
                         
@@ -151,6 +163,17 @@ class BencanaController extends Controller
             }else{
                 return redirect('bencana/detail/'.$id)->with('message', 'Maaf, akun anda belum terverifikasi.');
             }
+        }
+    }
+
+    public function sendMail($data){
+        try{
+            Mail::send('mail/konfirmasi-relawan-bencana', array('pesan' => $data['pesan']) , function($pesan) use($data){
+                $pesan->to($data['email'],'e-Relawan')->subject('Notifikasi Join Bencana e-Relawan');
+                $pesan->from('info@bpbdbali.com','Info e-Relawan');
+            });
+        }catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
         }
     }
 }

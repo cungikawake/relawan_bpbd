@@ -27,7 +27,12 @@
                 <div class="blog-meta">
                   <span class="comments-type">
                     <i class="fa fa-user"></i>
-                    <a href="#">{{ $bencana->quota_relawan }} relawan</a>
+                    <a href="#">{{ $bencana->quota_relawan }} Orang</a>
+                    @if($bencana->jenis_bencana == 1)
+                      <span class="badge badge-pill badge-primary">Private</span>
+                    @else
+                    <span class="badge badge-pill badge-success">Publik</span>
+                    @endif
                   </span>
                   <span class="date-type">
                     <i class="fa fa-calendar"></i>Kegiatan {{ date('d M Y', strtotime($bencana->tgl_mulai)) }}
