@@ -16,7 +16,7 @@
           </li>  
           <!-- <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-file"></i><span class="menu-title" data-i18n="">Tugas</span></a>
           </li> -->
-          <li class="nav-item {{ (request()->is('bantuan')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
+          <li class="nav-item {{ (request()->is('bantuan')) ? 'active' : '' }}"><a href="{{route('bantuan')}}"><i class="ft-phone-forwarded"></i><span class="menu-title" data-i18n="">Bantuan</span></a>
           </li> 
         </ul> 
       </div>
