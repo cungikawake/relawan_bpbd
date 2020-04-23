@@ -33,7 +33,7 @@
                             <div class="card-body">
                                 <div class="alert alert-secondary">
                                     <p>Kamu belum pernah ikut bergabung, Ayo kita kerja sama bantu teman, sahabat, keluarga kita.</p>
-                                    <a href="{{ url('/becana') }}">
+                                    <a href="{{ url('/bencana') }}">
                                         <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
                                     </a>
                                 </div>

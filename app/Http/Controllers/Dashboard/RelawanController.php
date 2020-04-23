@@ -197,7 +197,7 @@ class RelawanController extends Controller
                 'mail.relawan-konfirmasi',
                 compact('data','password'),
                 function ($m) use ($data) {
-                    $m->from('e-relawan@mail.com', 'Admin'); 
+                    $m->from('info@bpbdbali.com', 'Admin e-Relawan'); 
                     $m->to($data->email, $data->nama_lengkap);
                     $m->subject('E-Relawan');
                 }
@@ -386,7 +386,7 @@ class RelawanController extends Controller
             'mail.relawan-konfirmasi',
             compact('data','password'),
             function ($m) use ($data) {
-                $m->from('e-relawan@bpbdbali.com', 'Admin bpbd bali'); 
+                $m->from('info@bpbdbali.com', 'Admin e-Relawan'); 
                 $m->to($data->email, $data->nama_lengkap);
                 $m->subject('E-Relawan');
             }
