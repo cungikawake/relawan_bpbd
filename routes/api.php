@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,13 +14,73 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/* Setup CORS */
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
 
 Route::get('/', function () {
     return [
         'app' => 'Api E-Relawan',
         'version' => '1.0.0',
     ];
+});
+
+/* User register */
+Route::post('register', 'Api\UserController@register');  
+//get user
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+// Route::post('login', 'Auth\LoginController@ApiLogin');
+Route::post('login', function (Request $request) {
+    
+    if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        // Authentication passed...
+        $user = auth()->user();
+        $user->api_token = Str::random(16);
+        $user->save();
+        return $user;
+    }
+    
+    return response()->json([
+        'error' => 'Unauthenticated user',
+        'code' => 401,
+    ], 401);
+});
+
+Route::middleware('auth:api')->post('logout', function (Request $request) {
+    
+    if (auth()->user()) {
+        $user = auth()->user();
+        $user->api_token = null; // clear api token
+        $user->save();
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Logout Success, Thank you for using our application',
+        ]);
+    }
+    
+    return response()->json([
+        'error' => 'Unable to logout user',
+        'code' => 401,
+    ], 401);
+});
+
+
+//bencana
+Route::get('list_bencana', 'Api\BencanaController@index');  
+Route::get('list_bencana/detail', 'Api\BencanaController@detail');  
+
+//relawan
+Route::group(['middleware'=> ['auth:api']], function (){
+    //master data
+    Route::get('organisasi', 'Api\RelawanController@organisasi');
+    Route::get('skill', 'Api\RelawanController@skill');
+
+    //data pribadi
+    Route::post('relawan/verifikasi', 'Api\RelawanController@store');
 });

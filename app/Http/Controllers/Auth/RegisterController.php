@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Relawan;
 use Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -72,10 +73,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 3
-        ]);
-
-        
+            'role' => 3,
+            'api_token' => Str::random(16)
+        ]); 
          
     }
 
