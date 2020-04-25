@@ -11,10 +11,7 @@
             <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
                 <a href="{{route('dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
             </li> 
-            <li class=" nav-item {{ (request()->is('dashboard/user*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.user.index')}}"><i class="ft-user"></i><span class="menu-title" data-i18n="">User</span></a>
-            </li>
-
+            
             {{-- <li class=" nav-item {{ (request()->is('dashboard/induk-organisasi*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.induk_organisasi.index')}}"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Induk Organisasi</span></a> 
             </li>
@@ -30,6 +27,10 @@
 
             <li class=" nav-item has-sub {{ (request()->is('dashboard/induk-organisasi*')) || (request()->is('dashboard/skill*')) || (request()->is('dashboard/persyaratan*')) || (request()->is('dashboard/bencana*')) ? 'open' : '' }}"><a href="#"><i class="la la-keyboard-o"></i><span class="menu-title" data-i18n="">Master Data</span></a>
                 <ul class="menu-content">
+                    <li class="{{ (request()->is('dashboard/user*')) ? 'active' : '' }}">
+                        <a href="{{route('dashboard.user.index')}}"><span class="menu-item" data-i18n="">User</span></a>
+                    </li>
+
                     <li class="{{ (request()->is('dashboard/induk-organisasi*')) ? 'active' : '' }}">
                         <a class="menu-item" href="{{route('dashboard.induk_organisasi.index')}}">Induk Organisasi</a>
                     </li>
@@ -44,21 +45,21 @@
                     </li>
                 </ul>
             </li>
-
-            <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
-            </li>
             <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-male"></i><span class="menu-title" data-i18n="">Relawan</span></a>
             </li>
+            <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}">
+                <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
+            </li> 
             <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Penanggulangan</span></a>
+                <a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
             </li>
             <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.relawan.index')}}"><i class="la la-comment"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
-            </li>
-            <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.relawan.index')}}"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Laporan</span></a>
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ft-power"></i> Logout</a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>
