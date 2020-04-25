@@ -19,29 +19,29 @@
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
+                <h4>
+                    <a href="{{url('bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
+                </h4>
                 <div class="single-blog-img">
-                  <a href="blog.html">
+                  <a href="{{url('bencana/detail/'.$bencana->id)}}">
                     <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
                   </a>
                 </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-user"></i>
-                    <a href="#">{{ $bencana->quota_relawan }} Orang</a>
-                    @if($bencana->jenis_bencana == 1)
-                      <span class="badge badge-pill badge-primary">Private</span>
-                    @else
-                    <span class="badge badge-pill badge-success">Publik</span>
-                    @endif
-                  </span>
+                <div class="blog-text"> 
+                  <div class="blog-meta">
+                    <span class="comments-type">
+                      <i class="fa fa-user"></i>
+                      <a href="#">{{ $bencana->quota_relawan }} Orang</a>
+                      @if($bencana->jenis_bencana == 1)
+                        <span class="badge badge-pill badge-primary">Private</span>
+                      @else
+                      <span class="badge badge-pill badge-success">Publik</span>
+                      @endif
+                    </span>
+                  </div>
                   <span class="date-type">
-                    <i class="fa fa-calendar"></i>Kegiatan {{ date('d M Y', strtotime($bencana->tgl_mulai)) }}
+                    <i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($bencana->tgl_mulai)) }} s/d {{ date('d M Y', strtotime($bencana->tgl_selesai)) }} 
                   </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="#">{{ $bencana->judul_bencana }}</a>
-                  </h4>
                   <p>
                   {{  substr($bencana->detail_tugas, 0, 100) }}... 
                   </p>
@@ -59,8 +59,7 @@
               </div>
               <!-- Start single blog -->
             </div>
-            @endforeach
-            <!-- End Left Blog-->
+          @endforeach
           </div>
           <br>
           <div class="m-0">

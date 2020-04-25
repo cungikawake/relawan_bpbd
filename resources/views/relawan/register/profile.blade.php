@@ -9,7 +9,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row"></div>
         
-        @if(empty($relawan)) 
+        @if(empty($model)) 
             <div class="content-body">
                 <!-- Chart -->
                 <div class="row match-height">
@@ -17,6 +17,11 @@
                         <!-- profile -->
                         <div id="user-profile">
                             <div class="row">
+                                @if(Session::has('message'))
+                                    <div class="alert with-close alert-info mt-2">
+                                        {{Session::get('message')}}
+                                    </div>
+                                @endif
                                 <div class="col-sm-12 col-xl-8">
                                     <div class="media d-flex m-1 ">
                                         <div class="align-left p-1">
@@ -85,19 +90,19 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
-                                            <strong>Warning!</strong> Akun anda belum terverifikasi
+                                            Akun anda belum terverifikasi
                                         </div>
                                     @else
                                         <i class="ft-file white"> </i>{{$model->nomor_relawan}}
                                     @endif
                                 </p>
-                                <ul class="list-inline">
+                                <!-- <ul class="list-inline">
                                     <li class="pr-1 line-height-1">
                                         <a href="#" class="font-medium-4 white ">
                                             <span class="ft-edit"></span> Edit Profile 
                                         </a>
                                     </li> 
-                                </ul> 
+                                </ul>  -->
                             </div>
                         </div>
                     </div>
@@ -193,9 +198,9 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary font-medium-4 white ">
+                        <!-- <a href="#" class="btn btn-primary font-medium-4 white ">
                             <span class="ft-edit"></span> Edit Profile 
-                        </a>
+                        </a> -->
                     </div>
                     <!--Project Timeline div ends-->
                     </div>

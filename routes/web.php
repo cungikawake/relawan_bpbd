@@ -18,10 +18,8 @@ Auth::routes();
 //role admin 
 Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
     Route::group(['cekstatus'=> ['admin']], function () {
-        Route::get('/dashboard', function () {
-            return view('dashboard.dashboard');
-        })->name('dashboard'); 
-    });
+        Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
+    }); 
 
     Route::group(['cekstatus'=> ['admin'], 'as' => 'dashboard.', 'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
         Route::resource('user', 'UserController')->names('user');

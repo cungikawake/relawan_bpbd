@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Register Akun Relawan') }}</div>
+                <div class="card-header">{{ __('Register Jadi Relawan') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password Baru') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">

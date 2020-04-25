@@ -29,10 +29,7 @@
             <section class="basic-inputs">
                 <div class="row match-height">
                     <div class="col-xl-12 col-lg-12 col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Induk Organisasi</h4>
-                            </div>
+                        <div class="card"> 
                             <form action="@if($model->exists) {{ route('dashboard.induk_organisasi.update', $model->id) }} @else {{ route('dashboard.induk_organisasi.store') }} @endif" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method($model->exists ? 'PUT' : 'POST')
@@ -58,20 +55,22 @@
                                             <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp_organisasi)}}" placeholder="Telepone">
                                         </fieldset>
                                         
+                                        <h5 class="mt-2">Alamat</h5>
+                                        <fieldset class="form-group">
+                                            <textarea class="form-control" name="alamat" rows="3" placeholder="Alamat">{{old('alamat', $model->alamat_organisasi)}}</textarea>
+                                        </fieldset>
+                                        
                                         <h5 class="mt-2">Email <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
                                             <input type="text" class="form-control" name="email" value="{{old('email', $model->email_organisasi)}}" placeholder="Email">
                                         </fieldset>
                                         
-                                        <h5 class="mt-2">Nama Pimpinan</h5>
+                                        <h5 class="mt-2">Nama Admin</h5>
                                         <fieldset class="form-group">
                                             <input type="text" class="form-control" name="nama_pimpinan" value="{{old('nama_pimpinan', $model->nama_pimpinan_organisasi)}}" placeholder="Nama Pimpinan">
                                         </fieldset>
                                         
-                                        <h5 class="mt-2">Alamat</h5>
-                                        <fieldset class="form-group">
-                                            <textarea class="form-control" name="alamat" rows="3" placeholder="Alamat">{{old('alamat', $model->alamat_organisasi)}}</textarea>
-                                        </fieldset>
+                                        
                                     </div>
                                     <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                                         <div class="float-left">

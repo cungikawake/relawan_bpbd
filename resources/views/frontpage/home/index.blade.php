@@ -238,29 +238,29 @@ penanggulangan bencana
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
+                <h4>
+                    <a href="{{url('bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
+                </h4>
                 <div class="single-blog-img">
-                  <a href="blog.html">
+                  <a href="{{url('bencana/detail/'.$bencana->id)}}">
                     <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
                   </a>
                 </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-user"></i>
-                    <a href="#">{{ $bencana->quota_relawan }} Orang</a>
-                    @if($bencana->jenis_bencana == 1)
-                      <span class="badge badge-pill badge-primary">Private</span>
-                    @else
-                    <span class="badge badge-pill badge-success">Publik</span>
-                    @endif
-                  </span>
+                <div class="blog-text"> 
+                  <div class="blog-meta">
+                    <span class="comments-type">
+                      <i class="fa fa-user"></i>
+                      <a href="#">{{ $bencana->quota_relawan }} Orang</a>
+                      @if($bencana->jenis_bencana == 1)
+                        <span class="badge badge-pill badge-primary">Private</span>
+                      @else
+                      <span class="badge badge-pill badge-success">Publik</span>
+                      @endif
+                    </span>
+                  </div>
                   <span class="date-type">
-                    <i class="fa fa-calendar"></i>Kegiatan {{ date('d M Y', strtotime($bencana->tgl_mulai)) }}
+                    <i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($bencana->tgl_mulai)) }} s/d {{ date('d M Y', strtotime($bencana->tgl_selesai)) }} 
                   </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="#">{{ $bencana->judul_bencana }}</a>
-                  </h4>
                   <p>
                   {{  substr($bencana->detail_tugas, 0, 100) }}... 
                   </p>
@@ -311,7 +311,7 @@ prediksi perkembangan situasi ke depan</h5>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
             <div class="suscribe-text text-center">
               <h3>Selamat Bergabung Menjadi Relawan BPBD BALI</h3>
-              <a class="sus-btn" href="{{ route('register') }}">Daftar Bergabung</a>
+              <a class="sus-btn" href="{{ route('register') }}">Jadi Relawan</a>
             </div>
           </div>
         </div>
@@ -337,7 +337,7 @@ prediksi perkembangan situasi ke depan</h5>
                 <div class="single-icon">
                   <i class="fa fa-mobile"></i>
                   <p>
-                    Call: +62 8134 1232 1234<br>
+                    Call: 0361 - 245397<br>
                     <span>Senin-Jumat (8am-4pm)</span>
                   </p>
                 </div>
@@ -349,8 +349,7 @@ prediksi perkembangan situasi ke depan</h5>
                 <div class="single-icon">
                   <i class="fa fa-envelope-o"></i>
                   <p>
-                    Email: info@example.com<br>
-                    <span>Web: www.example.com</span>
+                    Email: bpbdprovbali@gmail.com<br> 
                   </p>
                 </div>
               </div>
