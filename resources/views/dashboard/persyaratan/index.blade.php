@@ -17,7 +17,7 @@
               <div class="breadcrumb-wrapper mr-1">
                 <ol class="breadcrumb">
                   {{-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li> --}}
-                  <li class="breadcrumb-item active">Dashboard</li>
+                  <li class="breadcrumb-item active">Syarat & Ketentuan</li>
                 </ol>
               </div>
             </div>
