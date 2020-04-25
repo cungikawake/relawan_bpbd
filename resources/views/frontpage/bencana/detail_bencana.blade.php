@@ -1,6 +1,12 @@
 @extends('frontpage.layout.app')
 @section('title', 'Detail Bencana - '.$bencana->judul_bencana)
 @section('content')
+<style>
+#map {
+        height: 300px;
+        width:100%;
+      }
+</style>
 <main style="margin-top:40px;">
     <!-- ======= About Section ======= -->
     <div id="about" class="about-area area-padding">
@@ -44,19 +50,22 @@
                 </p>
                 <ul>
                   <li>
+                    <div id="map"></div>
+                  </li>
+                  <li>
                     <i class="fa fa-map"></i> Lokasi : {{$bencana->lokasi_tugas}}
                   </li>
                   <li>
                     <i class="fa fa-calendar"></i> Tanggal : {{$bencana->tgl_mulai}} s/d {{$bencana->tgl_selesai}}
                   </li>
                   <li>
-                    <i class="fa fa-blind"></i> Quota Relawan : {{$bencana->quota_relawan}}
+                    <i class="fa fa-blind"></i> Kebutuhan Relawan : {{$bencana->quota_relawan}}
                   </li>
                   <li>
-                    <i class="fa fa-home"></i> Instansi : {{$bencana->instansi}}
+                    <i class="fa fa-home"></i> Instansi Pelaksana : {{$bencana->instansi}}
                   </li>
                   <li>
-                    <i class="fa fa-child"></i> Tim Pelaksana : {{$bencana->nama_pelaksana}}
+                    <i class="fa fa-child"></i> Ketua Pelaksana : {{$bencana->nama_pelaksana}}
                   </li> 
                   <li>
                     <i class="fa fa-list"></i> Kemampuan Minimal : 
@@ -96,4 +105,30 @@
       </div>
     </div><!-- End About Section -->
 </main>
+@endsection
+
+@section('scripts')
+<script>
+
+      function initMap() {
+        var kor = {!! json_encode($bencana->koordinat_tugas) !!};
+        kor = kor.split(",");
+
+        var myLatLng = {lat: parseFloat(kor[0]), lng: parseFloat(kor[1])};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Lokasi Posko'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJTIHh1GRN37zuOlt-4XWrsm-XY2LwzNc&callback=initMap">
+    </script>
 @endsection

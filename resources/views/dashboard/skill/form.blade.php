@@ -30,9 +30,7 @@
                 <div class="row match-height">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Skill</h4>
-                            </div>
+                             
                             <form action="@if($model->exists) {{ route('dashboard.skill.update', $model->id) }} @else {{ route('dashboard.skill.store') }} @endif" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method($model->exists ? 'PUT' : 'POST')

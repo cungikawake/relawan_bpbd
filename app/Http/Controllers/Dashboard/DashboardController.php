@@ -10,9 +10,6 @@ use App\User;
 class DashboardController extends Controller
 {
     public function index(){
-        $user = new User();
-        dd($user->isOnline());
-
         return view('dashboard.dashboard');
     }
 }
