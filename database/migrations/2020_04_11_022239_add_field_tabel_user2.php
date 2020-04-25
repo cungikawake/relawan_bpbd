@@ -16,7 +16,7 @@ class AddFieldTabelUser2 extends Migration
         //
         Schema::table('users', function (Blueprint $table) {
             // change() tells the Schema builder that we are altering a table
-            //$table->string('api_token')->nullable();//0 new, 1 approve
+            $table->string('api_token')->nullable();//0 new, 1 approve
         });
 
     }

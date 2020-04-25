@@ -29,6 +29,11 @@ class RelawanController extends Controller
     public function create() 
     {
         $user = Auth::user();
+        $relawan = Relawan::where('id_user', $user->id)->first(); 
+        if(!empty($relawan) > 0){
+            return redirect()->route('relawan.profile');
+        }
+
         $model = new Relawan();
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
         $model_skills = array();

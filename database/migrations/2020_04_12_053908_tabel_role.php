@@ -13,10 +13,10 @@ class TabelRole extends Migration
      */
     public function up()
     {
-        /* Schema::create('role', function (Blueprint $table) {
+        Schema::create('role', function (Blueprint $table) {
             $table->id(); 
             $table->string('role_name');
-        }); */
+        });
     }
 
     /**
