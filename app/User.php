@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Cache;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
+    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -83,5 +85,10 @@ class User extends Authenticatable
     private function cekUserRole($role)
     {  
         return (strtolower($role) == strtolower($this->have_role->role_name)) ? true : false;
+    }
+
+    public function setCache()
+    {
+        return Cache::has('user-is-online-' . $this->email);
     }
 }

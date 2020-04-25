@@ -14,8 +14,8 @@ class AddEmailStatusToRelawanBencanaTable extends Migration
     public function up()
     {
         Schema::table('relawan_bencana', function (Blueprint $table) {
-            $table->integer('email_status')->nullable();
-            $table->string('email_message')->nullable();
+            //$table->integer('email_status')->nullable();
+            //$table->string('email_message')->nullable();
         });
     }
 
