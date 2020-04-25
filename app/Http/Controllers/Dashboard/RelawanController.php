@@ -149,6 +149,7 @@ class RelawanController extends Controller
                 'tlp' => 'required',
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
+                'skill_utama' => 'required',
 
                 'skill' => 'required'
             ]
@@ -175,6 +176,7 @@ class RelawanController extends Controller
             $data->tlp = $request->tlp;
             $data->jenis_relawan = $request->jenis_relawan;
             // $data->nomor_relawan = $request->nomor_relawan;
+            $data->skill_utama = $request->skill_utama;
             $data->save();
             
             $image = $request->ktp_file;
@@ -262,6 +264,7 @@ class RelawanController extends Controller
                 'tlp' => 'required',
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
+                'skill_utama' => 'required',
 
                 'skill' => 'required'
             ]
@@ -282,6 +285,7 @@ class RelawanController extends Controller
             $data->alamat = $request->alamat;
             $data->tlp = $request->tlp;
             $data->jenis_relawan = $request->jenis_relawan;
+            $data->skill_utama = $request->skill_utama;
             $data->save();
             
             if ($request->has('ktp_file')) {

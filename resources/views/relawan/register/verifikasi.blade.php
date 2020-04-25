@@ -179,9 +179,26 @@
                                             </div>
 
                                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <h5 class="my-2">KECAKAPAN DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
+                                                        <h5 class="my-2">KECAKAPAN UTAMA DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="skill_utama">
+                                                                <option value="" hidden>Pilih Kecakapan Utama</option>
+                                                                @if(count($skills) > 0)
+                                                                    @foreach($skills as $row)
+                                                                        <option value="{{$row->id}}" {{ old('skill_utama', $model->skill_utama) == $row->id ? 'selected' : '' }}>{{$row->nama_skill}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h5 class="my-2">KECAKAPAN PENDUKUNG DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
                                                         @if(count($skills) > 0)
                                                             @foreach($skills as $row)
                                                                 <fieldset class="form-group">

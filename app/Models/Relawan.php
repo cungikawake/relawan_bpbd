@@ -67,6 +67,18 @@ class Relawan extends Model
     {
         return $this->hasMany('App\Models\SkillRelawan', 'id_relawan');
     }
+    public function skillUtama()
+    {
+        return $this->belongsTo('App\Models\Skill', 'skill_utama');
+    }
+    public function namaSkillUtama()
+    {
+        if($this->skill_utama){
+            return $this->skillUtama->nama_skill;
+        }else{
+            return '-';
+        }
+    }
     public function pelatihan()
     {
         return $this->hasMany('App\Models\RelawanPelatihan', 'id_relawan');

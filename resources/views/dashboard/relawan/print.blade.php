@@ -104,7 +104,13 @@
                         </ol>
                     </li>
 
-                    <li class="font-weight-bold mt-4">KECAKAPAN DALAM PENANGGULANGAN BENCANA
+                    <li class="font-weight-bold mt-4">KECAKAPAN UTAMA DALAM PENANGGULANGAN BENCANA
+                        <ol type="1" class="font-weight-normal">
+                            <li class="p-3">{{ $model->namaSkillUtama() }}</li>
+                        </ol>
+                    </li>
+
+                    <li class="font-weight-bold mt-4">KECAKAPAN PENDUKUNG DALAM PENANGGULANGAN BENCANA
                         <ol type="1" class="font-weight-normal">
                             @foreach($model->skills as $row)
                                 <li class="p-3">{{ $row->skill->nama_skill }}</li>
