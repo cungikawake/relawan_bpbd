@@ -84,8 +84,6 @@ class ListKegiatanController extends Controller
                 //     'results' => $results
                 // ]);
 
-                
-                
                 // $data->email_status = 1;
                 // $data->save();
 
