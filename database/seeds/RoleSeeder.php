@@ -21,6 +21,5 @@ class RoleSeeder extends Seeder
                 $i+=1;
             }
         }
-        $role->save();
     }
 }
