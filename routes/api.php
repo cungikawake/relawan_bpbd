@@ -83,4 +83,9 @@ Route::group(['middleware'=> ['auth:api']], function (){
 
     //data pribadi
     Route::post('relawan/verifikasi', 'Api\RelawanController@store');
+
+    //join bencana
+    Route::post('relawan/join/bencana', 'Api\BencanaController@join');
+    Route::post('relawan/gps/bencana', 'Api\BencanaController@storeGps');
+
 });
