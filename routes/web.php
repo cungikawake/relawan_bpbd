@@ -36,6 +36,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::get('list-kegiatan/{id}/detail', 'ListKegiatanController@detail')->name('list_kegiatan.detail');
         Route::post('list-kegiatan/{id}/update', 'ListKegiatanController@update')->name('list_kegiatan.update');
         Route::get('list-kegiatan/send-email', 'ListKegiatanController@sendEmail')->name('list_kegiatan.send_email');
+        Route::get('list-kegiatan/{id}/map', 'ListKegiatanController@map')->name('list_kegiatan.map');
     });
 });
 

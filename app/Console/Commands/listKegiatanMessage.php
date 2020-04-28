@@ -41,11 +41,11 @@ class listKegiatanMessage extends Command
         \Log::info([
             'kegiatan:message' => true
         ]);
+        $userkey = env('ZENVIVA_USERKEY');
+        $passkey = env('ZENVIVA_PASSKEY');
 
         $datas = RelawanBencana::where('email_status', 0)->where('status_join', '>', 0)->orderBy('tgl_join', 'asc')->get();
         foreach($datas as $data){
-            $userkey = "xxxxxx";
-            $passkey = "xxxxxx";
             $telepon = $data->relawan->tlp;
             $message = "";
 
@@ -65,33 +65,32 @@ class listKegiatanMessage extends Command
             }
 
             if($message != ""){
-                // $url = "https://reguler.zenziva.net/apps/smsapi.php";
-                // $curlHandle = curl_init();
-                // curl_setopt($curlHandle, CURLOPT_URL, $url);
-                // curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
-                // curl_setopt($curlHandle, CURLOPT_HEADER, 0);
-                // curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-                // curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-                // curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
-                // curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
-                // curl_setopt($curlHandle, CURLOPT_POST, 1);
-                // $results = curl_exec($curlHandle);
-                // curl_close($curlHandle);
+                $url = "https://reguler.zenziva.net/apps/smsapi.php";
+                $curlHandle = curl_init();
+                curl_setopt($curlHandle, CURLOPT_URL, $url);
+                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+                curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+                curl_setopt($curlHandle, CURLOPT_POST, 1);
+                $results = curl_exec($curlHandle);
+                curl_close($curlHandle);
 
-                // \Log::info([
-                //     'zenziva-smsapi' => true,
-                //     'results' => $results
-                // ]);
-
-                // $data->email_status = 1;
-                // $data->save();
-
-                // echo $message." ".$telepon."<br> <br>";
-                
                 \Log::info([
-                    'kegiatan:message' => true,
+                    'zenziva-smsapi' => true,
+                    'results' => $results,
                     'RelawanBencana ID' => $data->id
                 ]);
+
+                $data->email_status = 1;
+                $data->save();
+                
+                // \Log::info([
+                //     'kegiatan:message' => true,
+                //     'RelawanBencana ID' => $data->id
+                // ]);
             }
         }
 

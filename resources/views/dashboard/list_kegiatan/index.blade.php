@@ -62,7 +62,7 @@
                                                 <th>Sampai</th>
                                                 {{-- <th width="20%">Foto</th> --}}
                                                 <th>Relawan</th>
-                                                <th width="10%"></th>
+                                                <th width="20%"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -89,6 +89,7 @@
                                                         <td>{{count($data->allRelawan())}}</td>
                                                         <td>
                                                             <a href="{{route('dashboard.list_kegiatan.detail', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
+                                                            <a href="{{route('dashboard.list_kegiatan.map', $data->id)}}" class="btn btn-icon btn-primary btn-sm"><i class="la la-map"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

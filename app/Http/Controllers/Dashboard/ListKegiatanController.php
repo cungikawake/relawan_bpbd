@@ -41,31 +41,36 @@ class ListKegiatanController extends Controller
             return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $id])->with('message', 'Data tidak ditemukan.');
         }
     }
+    public function map(Request $request, $id)
+    {
+        $model = Bencana::findOrFail($id);
+
+        $results = array();
+        $i = 1;
+        foreach($model->joinRelawan() as $row){
+            $lokasi_terakhir = explode(',', $row->lokasi_terakhir);
+            array_push($results, [$row->relawan->nama_lengkap, (float)$lokasi_terakhir[0], (float)$lokasi_terakhir[1], $i++]);
+        }
+
+        return view('dashboard.list_kegiatan.map', compact('model', 'results'));
+    }
     public function sendEmail()
     {
-        $datas = RelawanBencana::where('email_status', 0)->where('status_join', '>', 0)->orderBy('tgl_join', 'asc')->get();
+        $today = date('Y-m-d', strtotime('tomorrow'));
+        $today = "2020-04-20";
+        $datas = Bencana::where('status_jenis', 1)
+                    ->where('tgl_mulai', '=', $today)
+                    ->get();
+
         foreach($datas as $data){
             $userkey = "xxxxxx";
             $passkey = "xxxxxx";
-            $telepon = $data->relawan->tlp;
-            $message = "";
 
-            if($data->status_join == 1){
-                $message .= "Halo ".$data->relawan->nama_lengkap.", Anda diterima untuk bergabung pada kegiatan penanganan bencana ".$data->bencana->judul_bencana.".";
+            foreach($data->joinRelawan() as $row){
+                $telepon = $row->relawan->tlp;
+            
+                $message = "Halo ".$row->relawan->nama_lengkap."./n Mengingat besok pada tanggal ".$data->tgl_mulai.", merupakan dimulainya kegiatan ".$data->judul_bencana."./n Terima Kasih /n BPBD BALI";
 
-
-            }else if($data->status_join == 2){
-                $message .= "Halo ".$data->relawan->nama_lengkap.", Anda belum diterima untuk bergabung pada kegiatan penanganan bencana ".$data->bencana->judul_bencana.".";
-                
-                if(count($data->relawan->bencanaDetail($data->bencana->tgl_mulai, $data->bencana->tgl_selesai))) {
-                    $message .= " Dikarenakan anda sudah bergabung dalam kegiatan ".$data->relawan->bencanaDetail($data->bencana->tgl_mulai, $data->bencana->tgl_selesai)->first()->judul_bencana.".";
-                }else{ 
-                    $message .= " Dikarenakan Jumlah peserta sudah melebihi quota kegiatan.";
-                }
-                
-            }
-
-            if($message != ""){
                 // $url = "https://reguler.zenziva.net/apps/smsapi.php";
                 // $curlHandle = curl_init();
                 // curl_setopt($curlHandle, CURLOPT_URL, $url);
