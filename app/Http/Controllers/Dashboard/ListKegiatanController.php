@@ -47,9 +47,11 @@ class ListKegiatanController extends Controller
 
         $results = array();
         $i = 1;
-        foreach($model->joinRelawan() as $row){
-            $lokasi_terakhir = explode(',', $row->lokasi_terakhir);
-            array_push($results, [$row->relawan->nama_lengkap, (float)$lokasi_terakhir[0], (float)$lokasi_terakhir[1], $i++]);
+        if(count($model->joinRelawan()) > 0){
+            foreach($model->joinRelawan() as $row){
+                $lokasi_terakhir = explode(',', $row->lokasi_terakhir);
+                array_push($results, [$row->relawan->nama_lengkap, (float)$lokasi_terakhir[0], (float)$lokasi_terakhir[1], $i++]);
+            }
         }
 
         return view('dashboard.list_kegiatan.map', compact('model', 'results'));
