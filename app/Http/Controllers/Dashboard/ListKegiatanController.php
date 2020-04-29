@@ -50,7 +50,14 @@ class ListKegiatanController extends Controller
         if(count($model->joinRelawan()) > 0){
             foreach($model->joinRelawan() as $row){
                 $lokasi_terakhir = explode(',', $row->lokasi_terakhir);
-                array_push($results, [$row->relawan->nama_lengkap, (float)$lokasi_terakhir[0], (float)$lokasi_terakhir[1], $i++]);
+                if(count($lokasi_terakhir) == 2){
+                    $lat = (float)$lokasi_terakhir[0];
+                    $lng = (float)$lokasi_terakhir[1];
+                }else{
+                    $lat = 0;
+                    $lng = 0;
+                }
+                array_push($results, [$row->relawanDisplay()->nama_lengkap, $lat, $lng, $i++]);
             }
         }
 
