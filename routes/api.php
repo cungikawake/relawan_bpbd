@@ -72,7 +72,7 @@ Route::middleware('auth:api')->post('logout', function (Request $request) {
 
 
 //bencana
-Route::get('list_bencana', 'Api\BencanaController@index');  
+Route::get('list_bencana', 'Api\BencanaController@index');  //where kategori
 Route::get('list_bencana/detail', 'Api\BencanaController@detail');  
 Route::get('kategori', 'Api\BencanaController@getKategori');  
 

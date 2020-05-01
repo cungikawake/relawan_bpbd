@@ -17,10 +17,23 @@ use DB;
 
 class BencanaController extends Controller
 {
-    public function index(){
-        $bencanas = Bencana::where('status_jenis', '1')
-                    ->Orderby('id', 'Desc')
+    public function index(Request $request){
+        if($request->has('id_kategori')){
+           $id_kategori = $request->id_kategori; 
+           $bencanas = Bencana::join('kategori_bencana', 'kategori_bencana.id', '=', 'bencana.id_kategori')
+                    ->select('*', 'bencana.id as id_bencana')
+                    ->where('bencana.status_jenis', '1')
+                    ->where('kategori_bencana.id', $id_kategori)
+                    ->Orderby('bencana.id', 'Desc')
                     ->paginate(6); 
+        }else{
+            $bencanas = Bencana::join('kategori_bencana', 'kategori_bencana.id', '=', 'bencana.id_kategori')
+                    ->select('*', 'bencana.id as id_bencana')
+                    ->where('bencana.status_jenis', '1')
+                    ->Orderby('bencana.id', 'Desc')
+                    ->paginate(6); 
+        }
+        
 
         return response()->json($bencanas, 200);
     }
