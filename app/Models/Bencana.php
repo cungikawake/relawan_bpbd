@@ -33,4 +33,5 @@ class Bencana extends Model
     {
         return $this->relawan->where('status_join', 2);
     }
+ 
 }

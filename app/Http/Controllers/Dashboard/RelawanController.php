@@ -365,7 +365,11 @@ class RelawanController extends Controller
         if($model->user){
             $user = $model->user;
             $user->status_verified = 1;
+            $user->role = 2;
             $user->save();
+
+            //send sms
+            $this->sendSms($user);
 
             return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil diverifikasi.');
 
@@ -395,5 +399,26 @@ class RelawanController extends Controller
                 $m->subject('E-Relawan');
             }
         );
+    }
+
+    public function sendSms($user){
+        $userkey = env('ZENVIVA_USERKEY');
+        $passkey = env('ZENVIVA_PASSKEY');
+        $telepon = $user->tlp;
+        $message = 'Halo '.$user->name.'/n Selamat, Kamu sudah diterima menjadi Relawan BPBD Bali. silahkan untuk login ulang./n Salam/n BPBD Bali';
+
+        $url = "https://reguler.zenziva.net/apps/smsapi.php";
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        $results = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        return true;
     }
 }
