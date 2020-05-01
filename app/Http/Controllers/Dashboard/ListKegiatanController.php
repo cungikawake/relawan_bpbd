@@ -44,7 +44,7 @@ class ListKegiatanController extends Controller
     public function map(Request $request, $id)
     {
         $model = Bencana::findOrFail($id);
-
+        
         $results = array();
         $i = 1;
         foreach($model->joinRelawan() as $row){
