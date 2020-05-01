@@ -9,6 +9,8 @@ use App\Models\Skill;
 use App\Models\Persyaratan;  
 use App\Models\Relawan;
 use App\Models\RelawanBencana;  
+use App\Models\Kategori;
+
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use DB;
@@ -226,5 +228,10 @@ class BencanaController extends Controller
                 return response()->json(['error'=>'Data Kordinat Tidak Valid'], 401);
             }
         }
+    }
+
+    public function getKategori(){
+        $data = Kategori::OrderBy('nama_kategori', 'asc')->get();
+        return response()->json(['success'=>$data], 200);
     }
 }
