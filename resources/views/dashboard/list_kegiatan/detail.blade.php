@@ -82,17 +82,25 @@
                                                             <th scope="row">
                                                                 {{ $i++ }}
                                                             </th>
-                                                            <td>{{$row->relawan->nama_lengkap}}</td>
+                                                            <td>{{$row->relawanDisplay()->nama_lengkap}}</td>
                                                             <td>{{date('d M Y', strtotime($row->tgl_join))}}</td>
                                                             <td>
-                                                                @if(count($row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)))
-                                                                    <span class="text-danger">Sudah bergabung dalam kegiatan {{$row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)->first()->judul_bencana}}.</span>
+                                                                @if($row->relawan)
+                                                                    @if(count($row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)))
+                                                                        <span class="text-danger">Sudah bergabung dalam kegiatan {{$row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)->first()->judul_bencana}}.</span>
+                                                                    @else 
+                                                                        <span class="text-success">Tersedia.</span>
+                                                                    @endif
                                                                 @else 
-                                                                    <span class="text-success">Tersedia.</span>
+                                                                    -
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                                @if($row->relawan)
+                                                                    <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                                @else 
+                                                                    <button type="button" class="btn btn-icon btn-primary btn-sm" disabled><i class="la la-user"></i></button>
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 <input class="form-check-input m-0 checkbox-relawan checkbox-join" type="checkbox" value="{{$row->id}}" name="join[]">
@@ -142,10 +150,14 @@
                                                         <th scope="row">
                                                             {{ $i++ }}
                                                         </th>
-                                                        <td>{{$row->relawan->nama_lengkap}}</td>
+                                                        <td>{{$row->relawanDisplay()->nama_lengkap}}</td>
                                                         <td>{{date('d M Y', strtotime($row->tgl_join))}}</td>
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                            @if($row->relawan)
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                            @else 
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm" disabled><i class="la la-user"></i></button>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -180,17 +192,25 @@
                                                         <th scope="row">
                                                             {{ $i++ }}
                                                         </th>
-                                                        <td>{{$row->relawan->nama_lengkap}}</td>
+                                                        <td>{{$row->relawanDisplay()->nama_lengkap}}</td>
                                                         <td>{{date('d M Y', strtotime($row->tgl_join))}}</td>
                                                         <td>
-                                                            @if(count($row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)))
-                                                                <span class="text-danger">Sudah bergabung dalam kegiatan {{$row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)->first()->judul_bencana}}.</span>
+                                                            @if($row->relawan)
+                                                                @if(count($row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)))
+                                                                    <span class="text-danger">Sudah bergabung dalam kegiatan {{$row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)->first()->judul_bencana}}.</span>
+                                                                @else 
+                                                                    <span class="text-danger">Melebihi quota kegiatan.</span>
+                                                                @endif
                                                             @else 
-                                                                <span class="text-danger">Melebihi quota kegiatan.</span>
+                                                                -
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                            @if($row->relawan)
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                            @else 
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm" disabled><i class="la la-user"></i></button>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
