@@ -14,6 +14,7 @@ use App\Models\RelawanPengalaman;
 use App\Models\IndukOrganisasi;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Models\Kota;
 
 class RelawanController extends Controller
 {
@@ -43,8 +44,10 @@ class RelawanController extends Controller
         
         $pelatihan[] = new RelawanPelatihan;
         $pengalaman[] = new RelawanPengalaman;
+        
+        $kota = Kota::orderBy('name', 'asc')->get();
 
-        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman'));
+        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'kota'));
     }
 
     /**
@@ -132,7 +135,6 @@ class RelawanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make( $request->all(), [
                 // 'id_user' => 'required',
                 'id_induk_relawan' => 'required',
@@ -150,6 +152,7 @@ class RelawanController extends Controller
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
+                'kota' => 'required',
 
                 'skill' => 'required'
             ]
@@ -175,9 +178,16 @@ class RelawanController extends Controller
             $data->alamat = $request->alamat;
             $data->tlp = $request->tlp;
             $data->jenis_relawan = $request->jenis_relawan;
-            // $data->nomor_relawan = $request->nomor_relawan;
             $data->skill_utama = $request->skill_utama;
+            $data->kota_id = $request->kota;
             $data->save();
+            
+            $data->nomor_relawan = $data->createNomor();
+            $data->save();
+
+            // $last_id = $model->();
+            // $nomor_relawan = "0000A0000000";
+            // dd($last_id);
             
             $image = $request->ktp_file;
             $imageName = 'ktp-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
@@ -235,8 +245,10 @@ class RelawanController extends Controller
 
         $pelatihan = $model->pelatihanEdit();
         $pengalaman = $model->pengalamanEdit();
+        
+        $kota = Kota::orderBy('name', 'asc')->get();
 
-        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman'));
+        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'kota'));
     }
 
     /**
@@ -265,6 +277,7 @@ class RelawanController extends Controller
                 'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
+                'kota' => 'required',
 
                 'skill' => 'required'
             ]
@@ -286,7 +299,13 @@ class RelawanController extends Controller
             $data->tlp = $request->tlp;
             $data->jenis_relawan = $request->jenis_relawan;
             $data->skill_utama = $request->skill_utama;
+            $data->kota_id = $request->kota;
             $data->save();
+
+            if(!$data->nomor_relawan){
+                $data->nomor_relawan = $data->createNomor();
+                $data->save();
+            }
             
             if ($request->has('ktp_file')) {
                 $path = 'uploads/relawan/'.$data->id.'/';

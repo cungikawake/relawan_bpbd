@@ -161,6 +161,17 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">
+                                                        <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kota">
+                                                                <option hidden>Pilih Kabupaten/Kota</option>
+                                                                @foreach($kota as $row)
+                                                                    <option value="{{$row->id}}" {{ old('kota', $model->kota_id) == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
                                                         <h5 class="mt-2">alamat <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <textarea class="form-control" name="alamat" rows="3">{{old('alamat', $model->alamat)}}</textarea>

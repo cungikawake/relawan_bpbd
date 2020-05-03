@@ -43,7 +43,7 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required|unique:skill,nama_skill',
+                'nama' => 'required|max:190|unique:skill,nama_skill',
                 'prioritas' => 'required'
             ]
         );
@@ -94,7 +94,7 @@ class SkillController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make( $request->all(), [
-                'nama' => 'required|unique:skill,nama_skill'.($id ? ",$id" : '').',id',
+                'nama' => 'required|max:190|unique:skill,nama_skill'.($id ? ",$id" : '').',id',
                 'prioritas' => 'required'
             ]
         );

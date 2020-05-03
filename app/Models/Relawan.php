@@ -67,6 +67,10 @@ class Relawan extends Model
     {
         return $this->hasMany('App\Models\SkillRelawan', 'id_relawan');
     }
+    public function kota()
+    {
+        return $this->belongsTo('App\Models\Kota', 'kota_id');
+    }
     public function skillUtama()
     {
         return $this->belongsTo('App\Models\Skill', 'skill_utama');
@@ -123,5 +127,14 @@ class Relawan extends Model
             ->get();
         
         return $datas;
+    }
+
+    public function createNomor()
+    {
+        $kota = $this->kota->code;
+        $nomor_urut = 'A'.sprintf("%05d", $this->id);
+        $kecakapan = sprintf("%02d", $this->skill_utama);
+        $nomor_relawan = $kota.'.'.$nomor_urut.'.'.$kecakapan;
+        return $nomor_relawan;
     }
 }
