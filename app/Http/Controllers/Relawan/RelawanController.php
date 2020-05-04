@@ -15,6 +15,7 @@ use App\Models\IndukOrganisasi;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kota;
 
 class RelawanController extends Controller
 {
@@ -41,8 +42,9 @@ class RelawanController extends Controller
         
         $pelatihan[] = new RelawanPelatihan;
         $pengalaman[] = new RelawanPengalaman;
-        
-        return view('relawan.register.verifikasi', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
+        $kota = Kota::orderBy('name', 'asc')->get();
+
+        return view('relawan.register.verifikasi', compact('kota','model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
     }
 
     public function store(Request $request)
@@ -64,6 +66,7 @@ class RelawanController extends Controller
                 //'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
+                'kota' => 'required',
 
                 'skill' => 'required'
             ]
@@ -88,7 +91,14 @@ class RelawanController extends Controller
             $data->jenis_relawan = $request->jenis_relawan;
             // $data->nomor_relawan = $request->nomor_relawan;
             $data->skill_utama = $request->skill_utama;
+            $data->kota_id = $request->kota;
             $data->save();
+
+            $user_data = Auth::user();
+            $user = User::findOrFail($user_data->id);
+            $user->tlp = $request->tlp;
+            $user->email = $request->email;
+            $user->save();
             
             $image = $request->ktp_file;
             $imageName = 'ktp-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();

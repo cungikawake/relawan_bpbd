@@ -205,7 +205,7 @@ class RelawanController extends Controller
             $this->createPelatihan($request, $data);
             $this->createPengalaman($request, $data);
             
-            \Mail::send(
+            /* \Mail::send(
                 'mail.relawan-konfirmasi',
                 compact('data','password'),
                 function ($m) use ($data) {
@@ -213,7 +213,7 @@ class RelawanController extends Controller
                     $m->to($data->email, $data->nama_lengkap);
                     $m->subject('E-Relawan');
                 }
-            );
+            ); */
 
             return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil disimpan.');
         }
@@ -387,6 +387,10 @@ class RelawanController extends Controller
             $user->role = 2;
             $user->save();
 
+            if(!$model->nomor_relawan){
+                $model->nomor_relawan = $model->createNomor();
+                $model->save();
+            }
             //send sms
             $this->sendSms($user);
 
@@ -424,7 +428,7 @@ class RelawanController extends Controller
         $userkey = 'a0c5d26c82df';
         $passkey = 'pqec7clpj2';
         $telepon = $user->tlp;
-        $message = 'Halo '.$user->name.'/n Selamat, Kamu sudah diterima menjadi Relawan BPBD Bali. silahkan untuk login ulang./n Salam/n BPBD Bali';
+        $message = 'Halo '.$user->name.', Kamu sudah diterima dan aktif menjadi Relawan BPBD Bali. silahkan untuk login ulang. Salam BPBD Bali';
 
         $url = "https://reguler.zenziva.net/apps/smsapi.php";
         $curlHandle = curl_init();

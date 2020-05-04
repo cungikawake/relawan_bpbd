@@ -73,7 +73,7 @@
                                                         <h5 class="mt-2">Organisasi Relawan <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <select  class="form-control" name="id_induk_relawan">
-                                                                <option hidden>Pikih Jenis Relawan</option>
+                                                                <option hidden>Pilih Jenis Relawan</option>
                                                                 @foreach($organisasi as $row)
                                                                     <option value="{{$row->id}}" {{ old('id_induk_relawan', $model->id_induk_relawan) == $row->id ? 'selected' : '' }}>{{$row->nama_organisasi}}</option>
                                                                 @endforeach
@@ -156,6 +156,17 @@
                                                         <h5 class="mt-2">Nomor Relawan</h5>
                                                         <fieldset class="form-group">
                                                             <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kota">
+                                                                <option hidden>Pilih Kabupaten/Kota</option>
+                                                                @foreach($kota as $row)
+                                                                    <option value="{{$row->id}}" {{ old('kota', $model->kota_id) == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">

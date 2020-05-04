@@ -196,7 +196,7 @@ class BencanaController extends Controller
         $userkey = 'a0c5d26c82df';
         $passkey = 'pqec7clpj2';
         $telepon = $user->tlp;
-        $message = 'Halo '.$user->name.'/n Selamat, Kamu sudah mengirim permintaan Relawan BPBD Bali. silahkan untuk menunggu konfirmasi./n Salam/n BPBD Bali';
+        $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan Relawan BPBD Bali. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
 
         $url = "https://reguler.zenziva.net/apps/smsapi.php";
         $curlHandle = curl_init();
