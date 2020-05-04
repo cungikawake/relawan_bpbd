@@ -42,6 +42,7 @@ class BencanaController extends Controller
     }
 
     public function join($id = null){
+        $user = Auth::user();
         $detail_bencana = Bencana::findOrFail($id);
         if(empty($detail_bencana)){
             return  redirect('/');
@@ -86,18 +87,21 @@ class BencanaController extends Controller
                                 $join->status_join = '0';
                                 $join->save();
 
+                                $this->sendSms($user);
+
                                 return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                             }else{
                                 //diterima
                                 $join->status_join = '1';
                                 $join->save();
 
-                                $data = array(
+                                /* $data = array(
                                     'email' => $user->email,
                                     'nama' => $user->name,
                                     'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
                                 );
-                                $this->sendMail($data);
+                                $this->sendMail($data); */
+                                $this->sendSms($user);
 
                                 return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                             } 
@@ -139,18 +143,22 @@ class BencanaController extends Controller
                             $join->status_join = '0';
                             $join->save();
 
+                            $this->sendSms($user);
+
                             return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                         }else{
                             //diterima
                             $join->status_join = '1';
                             $join->save();
 
-                            $data = array(
+                            /* $data = array(
                                 'email' => $user->email,
                                 'nama' => $user->name,
                                 'pesan' => 'Selamat, Sekarang anda sudah langsung diterima bergabung.'
                             );
-                            $this->sendMail($data);
+                            $this->sendMail($data); */
+
+                            $this->sendSms($user);
 
                             return redirect('bencana/detail/'.$id)->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                         } 
@@ -182,5 +190,26 @@ class BencanaController extends Controller
         }catch (Exception $e){
             return response (['status' => false,'errors' => $e->getMessage()]);
         }
+    }
+
+    public function sendSms($user){
+        $userkey = 'a0c5d26c82df';
+        $passkey = 'pqec7clpj2';
+        $telepon = $user->tlp;
+        $message = 'Halo '.$user->name.'/n Selamat, Kamu sudah mengirim permintaan Relawan BPBD Bali. silahkan untuk menunggu konfirmasi./n Salam/n BPBD Bali';
+
+        $url = "https://reguler.zenziva.net/apps/smsapi.php";
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        $results = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        return true;
     }
 }
