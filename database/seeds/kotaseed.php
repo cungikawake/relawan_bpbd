@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Kota;
 class kotaseed extends Seeder
 {
     /**
