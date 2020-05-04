@@ -108,7 +108,7 @@ class RelawanController extends Controller
             
             $password = '';
             
-            \Mail::send(
+            /* \Mail::send(
                 'mail.relawan-konfirmasi',
                 compact('data','password'),
                 function ($m) use ($data) {
@@ -116,7 +116,7 @@ class RelawanController extends Controller
                     $m->to($data->email, $data->nama_lengkap);
                     $m->subject('Konfirmasi E-Relawan');
                 }
-            ); 
+            );  */
 
             return redirect()->route('relawan.profile')->with('message', 'Terima kasih sudah mengirim data pribadi. Silahkan untuk menunggu, anda akan dihubungi oleh tim verifikasi via telp atau email.');
         }
