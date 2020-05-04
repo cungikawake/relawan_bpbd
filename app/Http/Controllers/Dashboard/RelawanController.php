@@ -421,8 +421,8 @@ class RelawanController extends Controller
     }
 
     public function sendSms($user){
-        $userkey = env('ZENVIVA_USERKEY');
-        $passkey = env('ZENVIVA_PASSKEY');
+        $userkey = 'a0c5d26c82df';
+        $passkey = 'pqec7clpj2';
         $telepon = $user->tlp;
         $message = 'Halo '.$user->name.'/n Selamat, Kamu sudah diterima menjadi Relawan BPBD Bali. silahkan untuk login ulang./n Salam/n BPBD Bali';
 
