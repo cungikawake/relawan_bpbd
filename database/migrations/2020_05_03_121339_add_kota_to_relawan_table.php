@@ -25,8 +25,6 @@ class AddKotaToRelawanTable extends Migration
      */
     public function down()
     {
-        Schema::table('relawan', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('relawan');
     }
 }
