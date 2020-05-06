@@ -25,7 +25,7 @@
                 <h3 class="text-center">
                     FORMULIR PENDATAAN <br> 
                     RELAWAN PENANGGULANGAN BENCANA INDONESIA <br>
-                    NO : ………………………………………………
+                    NO : {{ ($model->nomor_relawan)? $model->nomor_relawan : '………………………………………………' }}
                 </h3>
             </div>
             <div class="col-12 m-0 position-relative">
@@ -188,7 +188,7 @@
                                 <td  width="20%">&nbsp;</td>
                                 <td  width="40%">
                                     <p class="text-center">
-                                        ……………, ……/….……………../…………… <br>
+                                        ……………, ……/………………/…………… <br>
                                         &nbsp; <br>
                                         &nbsp; <br>
                                         ttd <br>
