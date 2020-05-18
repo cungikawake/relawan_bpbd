@@ -273,7 +273,7 @@ penanggulangan bencana
                   </span>
                 </div>
                 <span>
-                  <a href="{{url('bencana/detail/'.$bencana->id)}}" class="ready-btn">Ikut Membantu</a>
+                  <a href="{{url('bencana/detail/'.$bencana->id)}}" class="ready-btn">Detail</a>
                 </span>
               </div>
               <!-- Start single blog -->

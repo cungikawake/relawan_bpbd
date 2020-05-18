@@ -77,11 +77,12 @@
                                                 <option value="3" {{ old('role', $model->role) == '3' ? 'selected' : '' }}>Public</option>
                                             </select>
                                         </fieldset>
-
+                                        
+                                        <!-- 
                                         <fieldset class="form-group" style="margin-top: 2rem !important;">
                                             <input type="checkbox" class="form-check-input m-0" name="status_verified" value="1" {{ old('status_verified', $model->status_verified) == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label ml-2">Verifikasi</label>
-                                        </fieldset>
+                                        </fieldset> -->
                                     </div>
                                     <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                                         <div class="float-left">

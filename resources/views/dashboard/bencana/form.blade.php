@@ -69,13 +69,13 @@
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Jenis Bencana <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Keperluan Bencana <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    {{-- <input type="text" class="form-control" name="jenis_bencana" value="{{old('jenis_bencana', $model->jenis_bencana)}}" placeholder="Jenis Bencana"> --}}
+                                                     
                                                     <select class="form-control" name="jenis_bencana">
-                                                        <option hidden>Pilih Jenis Bencana</option>
-                                                        <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Internal</option>
-                                                        <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik</option>
+                                                        <option hidden>Pilih Keperluan Bencana</option>
+                                                        <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Private (Relawan Terverifikasi)</option>
+                                                        <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik (Semua Jenis Relawan)</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -88,12 +88,12 @@
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Status Jenis <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Bencana di Publikasikan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     {{-- <input type="text" class="form-control" name="status_jenis" value="{{old('status_jenis', $model->status_jenis)}}" placeholder="Status Jenis"> --}}
                                                     <select class="form-control" name="status_jenis">
                                                         <option hidden>Pilih Status Jenis</option>
-                                                        <option value="1" {{ old('status_jenis', $model->status_jenis) == '1' ? 'selected' : '' }}>Aktif</option>
+                                                        <option value="1" {{ old('status_jenis', $model->status_jenis) == '1' ? 'selected' : '' }}>Ya</option>
                                                         <option value="0" {{ old('status_jenis', $model->status_jenis) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
                                                     </select>
                                                 </fieldset>

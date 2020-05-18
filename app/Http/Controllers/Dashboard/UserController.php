@@ -59,7 +59,7 @@ class UserController extends Controller
             $data->email = $request->email;
             $data->password = Hash::make($request->password);
             $data->role = $request->role;
-            $data->status_verified = $request->status_verified ? $request->status_verified : 0;
+            //$data->status_verified = $request->status_verified ? $request->status_verified : 0;
             $data->save();
 
             return redirect()->route('dashboard.user.index')->with('message', 'Data berhasil disimpan.');
@@ -103,7 +103,7 @@ class UserController extends Controller
                 'name'       => 'required',
                 'email'      => 'required|email|unique:users,email'.($id ? ",$id" : '').',id',
                 'password'   => 'nullable|string|min:6|confirmed',
-                'role'       => 'required',
+                //'role'       => 'required',
             ]
         );
 
@@ -113,8 +113,8 @@ class UserController extends Controller
             $data = User::findOrFail($id);
             $data->name = $request->name;
             $data->email = $request->email;
-            $data->role = $request->role;
-            $data->status_verified = $request->status_verified ? $request->status_verified : 0;
+            //$data->role = $request->role;
+            //$data->status_verified = $request->status_verified ? $request->status_verified : 0;
             if($request->password){
                 $data->password = Hash::make($request->password);
             }

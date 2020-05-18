@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="alert alert-secondary">
-                                    <p>Kamu belum pernah ikut bergabung, Ayo kita kerja sama bantu teman, sahabat, keluarga kita.</p>
+                                    <p>Kamu belum pernah ikut bergabung, Ayo kita bekerja sama membantu teman, sahabat, keluarga kita.</p>
                                     <a href="{{ url('/bencana') }}">
                                         <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
                                     </a>
@@ -71,12 +71,12 @@
                             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                                 @if($bencana->status_join == 1)
                                     <span class="float-left">
-                                        <a onclick="return  myFunction();" href="{{ url('relawan/bencana/keluar?relawan_bencana='.$bencana->id_relawan_bencana) }}" class="card-link"><i class="la la-angle-left keluar_bencana"></i> Tinggalkan Bencana
+                                        <a onclick="return  myFunction();" href="{{ url('relawan/bencana/keluar?relawan_bencana='.$bencana->id_relawan_bencana) }}" class="card-link text-danger"><i class="la la-angle-left keluar_bencana"></i> Tinggalkan Bencana
                                         </a>
                                     </span>
                                 @endif
                                 <span class="float-right">
-                                    <a href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link">Lihat Detail
+                                    <a href="{{ url('bencana/detail/'.$bencana->id) }}" class="card-link"> Detail
                                         <i class="la la-angle-right"></i>
                                     </a>
                                 </span>
@@ -84,6 +84,20 @@
                         </div>
                     </div>
                     @endforeach
+                </div>
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="alert alert-secondary">
+                                    <p>Ayo kita bekerja sama membantu teman, sahabat, keluarga kita.</p>
+                                    <a href="{{ url('/bencana') }}">
+                                        <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <!-- Header footer section End -->

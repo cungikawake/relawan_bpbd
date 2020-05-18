@@ -86,9 +86,9 @@
                         //$diff=date_diff($date1,$date2);
                     ?>
                     @if($date1 <= $date2)
-                        <span>
-                            <a href="{{url('bencana/join/'.$bencana->id)}}" class="ready-btn right-btn page-scroll">Gabung Sekarang</a>
-                        </span>
+                      <span>
+                          <a href="{{url('bencana/join/'.$bencana->id)}}" class="ready-btn right-btn page-scroll">Gabung Sekarang</a>
+                      </span>
                     @else
                         <br>
                         <span class="alert alert-warning">
