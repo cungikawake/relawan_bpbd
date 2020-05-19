@@ -73,14 +73,14 @@
                                                             {{ ($datas->perPage() * ($datas->currentPage() - 1)) + ($key + 1) }}
                                                         </th>
                                                         <td>{{$data->judul_bencana}}</td> 
-                                                        {{-- <td>{{$data->instansi}}</td> --}}
-                                                        <td>
+                                                        <td>{{$data->instansi}}</td>
+                                                        <!-- <td>
                                                             @if($data->jenis_bencana == 2)
                                                                 Publik
                                                             @else
                                                                 Private
                                                             @endif
-                                                        </td>
+                                                        </td> -->
                                                         <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
                                                         <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
                                                         {{-- <td>
