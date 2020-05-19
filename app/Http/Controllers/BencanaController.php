@@ -58,9 +58,15 @@ class BencanaController extends Controller
             $relawan = Relawan::where('id_user', $user->id)->first();
 
             //pastikan user memiliki join 1 bencana yang aktif pada durasi yang sama
-            $bencanas = RelawanBencana::where('id_user', $user->id)
-                    //->where('status_join', '1') //disetujui
-                    ->get();
+            $today=date('Y-m-d');//hari ini
+            
+            $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                    ->where('relawan_bencana.id_user', $user->id) 
+                    ->where('relawan_bencana.status_join', '1')  
+                    ->where('bencana.tgl_selesai', '>=', $today) //disetujui
+                    ->orderBy('bencana.tgl_selesai', 'ASC')
+                    ->get(); 
+            
 
             //cek apakah ini bencana private ?
             if($detail_bencana->jenis_bencana == 1 && $relawan->nomor_relawan !=''){
@@ -69,12 +75,17 @@ class BencanaController extends Controller
                             
                     foreach($bencanas as $bencana){
                         $date1=date_create(date('Y-m-d'));//hari ini
-                        $date2=date_create($bencana->tgl_selesai);
+                        $date2=date_create($bencana->tgl_mulai);
+                        $date3=date_create($bencana->tgl_selesai);
 
                         //bencana yang sama atau sudah berakhir
-                        if($detail_bencana->id == $bencana->id_bencana || $date1 <= $date2){
+                        if($detail_bencana->id == $bencana->id_bencana){
                             
                             return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung disalah satu kegiatan yang waktunya berlangsung bersamaan.');
+
+                        }else if($date3 <= $date1){
+                             
+                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
 
                         }else{
                             $join = new RelawanBencana;
@@ -143,22 +154,23 @@ class BencanaController extends Controller
                  
             //bencana publik
             }else if($detail_bencana->jenis_bencana == 0){ 
-                //apakah sudah pernah join
+                //apakah sudah ada pernah join 
                 if(count($bencanas) > 0){
-                
+                    
                     foreach($bencanas as $bencana){
+                       
                         $date1=strtotime(date('Y-m-d'));//hari ini
                         $date2=strtotime($bencana->tgl_mulai);
                         $date3=strtotime($bencana->tgl_selesai);
                          
-
                         //bencana yang sama atau sudah berakhir
                         if($detail_bencana->id == $bencana->id_bencana){
                             
                             return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung pada kegiatan ini.');
 
-                        }else if($date2 <= $date1){
-                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Pendaftaran sudah berakhir.');
+                        }else if($date3 <= $date1){
+                             
+                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
 
                         }else{
                             $join = new RelawanBencana;
@@ -187,41 +199,36 @@ class BencanaController extends Controller
                     //tidak ada join bencana
                     $date1=strtotime(date('Y-m-d'));//hari ini
                     $date2=strtotime($detail_bencana->tgl_mulai);
+                    $date3=strtotime($detail_bencana->tgl_selesai);
 
-                    if($date2 <= $date1){  
-                        return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Pendaftaran sudah berakhir.');
-                        
-
-                    }else{
-                        
-                        $bencanas = RelawanBencana::where('id_user', $user->id)
+                    $bencanas = RelawanBencana::where('id_user', $user->id)
                             ->where('status_join', '0')
+                            ->orWhere('status_join', '1')
                             ->where('id_bencana', $detail_bencana->id)
                             ->get();
                         
-                        if(count($bencanas) > 0){
-                            return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
+                    if(count($bencanas) > 0){
+                        return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
 
-                        }else{
-                            
-                            $join = new RelawanBencana;
-                            if(!empty($relawan)){
-                                $join->id_relawan = $relawan->id;
-                            } 
-                            $join->id_user = $user->id;
-                            $join->id_bencana = $detail_bencana->id;
-                            $join->tgl_join = date('Y-m-d H:i:s');
-                            $join->durasi_join = '0';
-                            $join->lokasi_terakhir = '0';
+                    }else{
+                        
+                        $join = new RelawanBencana;
+                        if(!empty($relawan)){
+                            $join->id_relawan = $relawan->id;
+                        } 
+                        $join->id_user = $user->id;
+                        $join->id_bencana = $detail_bencana->id;
+                        $join->tgl_join = date('Y-m-d H:i:s');
+                        $join->durasi_join = '0';
+                        $join->lokasi_terakhir = '0';
 
-                            $join->status_join = '1';
-                            $join->save();
+                        $join->status_join = '1';
+                        $join->save();
 
-                            $this->sendSms($user);
+                        $this->sendSms($user);
 
-                            return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
-                            
-                        }
+                        return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                        
                     }
                 }
                 

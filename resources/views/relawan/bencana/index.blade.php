@@ -32,10 +32,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="alert alert-secondary">
-                                    <p>Kamu belum pernah ikut bergabung, Ayo kita bekerja sama membantu teman, sahabat, keluarga kita.</p>
-                                    <a href="{{ url('/bencana') }}">
-                                        <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
-                                    </a>
+                                    <p>Saat ini kamu belum pernah ikut bergabung di kegiatan bencana manapun.</p>
+                                     
                                 </div>
                             </div>
                         </div>
