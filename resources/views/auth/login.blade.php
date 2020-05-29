@@ -8,6 +8,9 @@
                 <div class="card-header">{{ __('Login eRelawan') }}</div>
 
                 <div class="card-body">
+                    <div class="alert alert-primary">
+                        <p>Jika anda belum mempunyai akun relawan, diharapkan untuk mendaftar e-Relawan dengan <a href="/register">klik disini</a>.</p>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

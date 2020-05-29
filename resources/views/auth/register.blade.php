@@ -11,6 +11,9 @@
                 <div class="card-header">{{ __('Register Jadi Relawan') }}</div>
 
                 <div class="card-body">
+                    <div class="alert alert-primary">
+                        <p>Jika anda punya akun relawan, diharapkan untuk login e-Relawan  dengan <a href="/login">klik disini</a>.</p>
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

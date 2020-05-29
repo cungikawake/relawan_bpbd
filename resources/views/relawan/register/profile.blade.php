@@ -90,7 +90,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
-                                            Akun anda belum terverifikasi
+                                           Data Pribadi sudah terkiri, Akun anda belum terverifikasi oleh tim.
                                         </div>
                                     @else
                                         <i class="ft-file white"> </i>{{$model->nomor_relawan}}
