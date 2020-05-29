@@ -46,12 +46,13 @@
                   <h4 class="sec-head">Tugas Relawan</h4>
                 </a>
                 <p>
-                    {{$bencana->detail_tugas}}
+                    Detail Informasi : {{$bencana->detail_tugas}}
                 </p>
                 <ul>
                   <li>
                     <div id="map"></div>
                   </li>
+                   
                   <li>
                     <i class="fa fa-map"></i> Lokasi : {{$bencana->lokasi_tugas}}
                   </li>
@@ -60,6 +61,11 @@
                   </li>
                   <li>
                     <i class="fa fa-blind"></i> Kebutuhan Relawan : {{$bencana->quota_relawan}}
+                      @if($bencana->jenis_bencana == 1)
+                        <span class="badge badge-pill badge-primary">Private</span>
+                      @else
+                      <span class="badge badge-pill badge-success">Publik</span>
+                      @endif
                   </li>
                   <li>
                     <i class="fa fa-home"></i> Instansi Pelaksana : {{$bencana->instansi}}
