@@ -75,12 +75,12 @@ Route::middleware('auth:api')->post('logout', function (Request $request) {
 Route::get('list_bencana', 'Api\BencanaController@index');  //where kategori
 Route::get('list_bencana/detail', 'Api\BencanaController@detail');  
 Route::get('kategori', 'Api\BencanaController@getKategori');  
-
+//master data
+Route::get('organisasi', 'Api\RelawanController@organisasi');
+Route::get('skill', 'Api\RelawanController@skill');
 //relawan
 Route::group(['middleware'=> ['auth:api']], function (){
-    //master data
-    Route::get('organisasi', 'Api\RelawanController@organisasi');
-    Route::get('skill', 'Api\RelawanController@skill');
+    
 
     //data pribadi
     Route::post('relawan/verifikasi', 'Api\RelawanController@store');

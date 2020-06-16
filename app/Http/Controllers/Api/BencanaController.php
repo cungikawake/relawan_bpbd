@@ -18,6 +18,7 @@ use DB;
 class BencanaController extends Controller
 {
     public function index(Request $request){
+        
         if($request->has('id_kategori')){
            $id_kategori = $request->id_kategori; 
            $bencanas = Bencana::join('kategori_bencana', 'kategori_bencana.id', '=', 'bencana.id_kategori')
