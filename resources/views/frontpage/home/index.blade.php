@@ -167,7 +167,7 @@ penanggulangan bencana.
         <div class="row text-center">
           <!-- Start Left services -->
           @foreach($kategoris as $kategori)
-          <div class="col-md-3 col-sm-4 col-xs-6">
+          <div class="col col-md-3 col-sm-4 col-xs-6">
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
