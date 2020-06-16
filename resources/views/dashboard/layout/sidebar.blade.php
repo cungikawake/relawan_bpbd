@@ -40,6 +40,9 @@
                     <li class="{{ (request()->is('dashboard/persyaratan*')) ? 'active' : '' }}">
                         <a class="menu-item" href="{{route('dashboard.persyaratan.index')}}">Persyaratan</a>
                     </li>
+                    <li class="{{ (request()->is('dashboard/kategori*')) ? 'active' : '' }}">
+                        <a class="menu-item" href="{{route('dashboard.kategori.index')}}">Kategori Bencana</a>
+                    </li>
                     <li class="{{ (request()->is('dashboard/bencana*')) ? 'active' : '' }}">
                         <a class="menu-item" href="{{route('dashboard.bencana.index')}}">Bencana</a>
                     </li>
