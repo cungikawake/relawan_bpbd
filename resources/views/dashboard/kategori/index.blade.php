@@ -43,7 +43,7 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body">
-                                <a href="{{ route('dashboard.kategori.create') }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
+                                 
                                 
                                 @if(Session::has('message'))
                                     <div class="alert with-close alert-info mt-2">
@@ -57,8 +57,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nama</th> 
-                                                <th>Gambar</th>
-                                                <th width="20%"></th>
+                                                <th>Gambar</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,14 +71,7 @@
                                                         <td>
                                                             <img src="{{$data->displayImage()}}" width="100" alt="">
                                                         </td>
-                                                        <td>
-                                                            <a href="{{route('dashboard.kategori.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
-                                                            <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
-                                                            <form action="{{route('dashboard.kategori.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                        </td>
+                                                        
                                                     </tr>
                                                 @endforeach
                                             @else 

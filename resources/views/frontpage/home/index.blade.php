@@ -160,63 +160,31 @@ penanggulangan bencana.
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline services-head text-center">
-              <h2>Kewajiban Relawan</h2>
+              <h2>Kategori Bencana</h2>
             </div>
           </div>
         </div>
         <div class="row text-center">
           <!-- Start Left services -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          @foreach($kategoris as $kategori)
+          <div class="col-md-3 col-sm-4 col-xs-6">
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
                   <a class="services-icon" href="#">
-                    <i class="fa fa-address-book"></i>
+                    <img src="{{$kategori->displayImage()}}" width="100" alt="erelawan">
                   </a>
                   <h4></h4>
                   <p>
-                  Mentaati peraturan dan prosedur kebencanaan yang berlaku
+                    {{ $kategori->nama_kategori }}
                   </p>
                 </div>
               </div>
               <!-- end about-details -->
             </div>
           </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" href="#">
-                    <i class="fa fa-american-sign-language-interpreting"></i>
-                  </a>
-                  <h4></h4>
-                  <p>
-                  Menjunjung tinggi asas, prinsip dan panca darma relawan
-penanggulangan bencana.
-                  </p>
-                </div>
-              </div>
-              <!-- end about-details -->
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <!-- end col-md-4 -->
-            <div class=" about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" href="#">
-                    <i class="fa fa-angle-double-up"></i>
-                  </a>
-                  <h4></h4>
-                  <p>
-                  Meningkatkan pengetahuan, keterampilan dan kemampuannya dalam
-penanggulangan bencana
-                  </p>
-                </div>
-              </div>
-              <!-- end about-details -->
-            </div>
-          </div>
+          @endforeach
+          <!-- Start Left services --> 
         </div>
       </div>
     </div><!-- End Services Section -->

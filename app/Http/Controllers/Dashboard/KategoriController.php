@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
-
+ 
 class KategoriController extends Controller
 {
      /**
@@ -16,6 +17,6 @@ class KategoriController extends Controller
     {
         $datas = Kategori::orderBy('created_at', 'asc')->paginate(10);
 
-        return view('dashboard.bencana.index', compact('datas'));
+        return view('dashboard.kategori.index', compact('datas'));
     }
 }

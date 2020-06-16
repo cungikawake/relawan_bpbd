@@ -10,6 +10,6 @@ class Kategori extends Model
 
     public function displayImage()
     {
-        return '/uploads/kategori/'.$this->gambar;
+        return '/images/bencana/'.$this->gambar;
     }
 }
