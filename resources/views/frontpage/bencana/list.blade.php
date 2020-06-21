@@ -5,16 +5,20 @@
     <!-- ======= Blog Section ======= -->
     <div id="blog" class="blog-area">
       <div class="blog-inner area-padding">
-        <div class="blog-overly"></div>
         <div class="container ">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="section-headline text-center">
-                <h2>Daftar Bencana Terkini</h2>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="section-headline text-center">
+                    <h3>Daftar Bencana {{ (isset($kategori->nama_kategori))? $kategori->nama_kategori : ''}}</h3>
+                    <p>Mari kita bekerja sama untuk dapat membantu di setiap bencana</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row" style="margin-top:20px;">
           @foreach($bencanas as $bencana)
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">

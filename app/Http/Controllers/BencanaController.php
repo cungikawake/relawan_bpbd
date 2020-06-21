@@ -8,17 +8,36 @@ use App\Models\Skill;
 use App\Models\Persyaratan;  
 use App\Models\Relawan;
 use App\Models\RelawanBencana;  
+use App\Models\Kategori;  
 use Illuminate\Support\Facades\Auth;
 use Mail;
 
 class BencanaController extends Controller
 {
     public function index(){
+        $today = date('Y-m-d');
         $bencanas = Bencana::where('status_jenis', '1')
+                    ->where('tgl_selesai', '>=', $today)
                     ->Orderby('id', 'Desc')
                     ->paginate(6); 
 
         return view('frontpage.bencana.list', compact('bencanas'));
+    }
+
+    
+    public function listKategori($id){  
+        $today = date('Y-m-d');
+
+        $bencanas = Bencana::where('status_jenis', '1')
+                    ->where('id_kategori', $id)
+                    ->where('tgl_selesai', '>=', $today)
+                    ->Orderby('id', 'Desc')
+                    ->paginate(9);
+
+        $kategori =  Kategori::findOrFail($id); 
+
+        return view('frontpage.bencana.list', compact('bencanas', 'kategori'));
+
     }
 
     public function detail($id)
@@ -259,6 +278,7 @@ class BencanaController extends Controller
         curl_close($curlHandle);
         return true;
     }
+
 
     public function sendMail($data){
         try{

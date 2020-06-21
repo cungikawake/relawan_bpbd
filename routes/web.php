@@ -59,7 +59,8 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
 
 Route::get('/', 'HomeController@index')->name('home'); 
 Route::get('/relawan/register', 'Relawan\RelawanController@index')->name('relawan.register'); 
-Route::get('/bencana', 'BencanaController@index')->name('bencana'); 
+Route::get('/bencana', 'BencanaController@index')->name('bencana');
+Route::get('/bencana/kategori/{id}', 'BencanaController@listKategori'); 
 Route::get('/bencana/detail/{id}', 'BencanaController@detail'); 
 Route::get('/bencana/join/{id}', 'BencanaController@join'); 
  

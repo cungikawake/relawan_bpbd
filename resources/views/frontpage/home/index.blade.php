@@ -160,24 +160,23 @@ penanggulangan bencana.
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline services-head text-center">
-              <h2>Kategori Bencana</h2>
+              <h2>Daftar Bencana</h2>
             </div>
           </div>
         </div>
         <div class="row text-center">
           <!-- Start Left services -->
           @foreach($kategoris as $kategori)
-          <div class="col col-md-3 col-sm-4 col-xs-6">
+          <div class="col-md-3 col-sm-6">
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" href="#">
+                  <a class="services-icon" href="{{ url('bencana/kategori/'.$kategori->id) }}">
                     <img src="{{$kategori->displayImage()}}" width="100" alt="erelawan">
+                    <p style="font-size:16px;">
+                      {{ $kategori->nama_kategori }}
+                    </p>
                   </a>
-                  <h4></h4>
-                  <p>
-                    {{ $kategori->nama_kategori }}
-                  </p>
                 </div>
               </div>
               <!-- end about-details -->
@@ -265,7 +264,7 @@ penanggulangan bencana.
           <h5>Kaji cepat terhadap cakupan wilayah yang terkena, jumlah korban dan
 kerusakan, kebutuhan sumber daya, ketersediaan sumber daya serta
 prediksi perkembangan situasi ke depan</h5>
-          <a href="{{ route('register') }}" class="ready-btn scrollto">Jadi Relawan</a>
+          <a href="{{ route('register') }}" class="ready-btn scrollto">Register Relawan</a>
         </div>
       </div>
     </div><!-- End Rviews Section -->
@@ -279,7 +278,7 @@ prediksi perkembangan situasi ke depan</h5>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
             <div class="suscribe-text text-center">
               <h3>Selamat Bergabung Menjadi Relawan BPBD BALI</h3>
-              <a class="sus-btn" href="{{ route('register') }}">Jadi Relawan</a>
+              <a class="sus-btn" href="{{ route('register') }}">Register Relawan</a>
             </div>
           </div>
         </div>

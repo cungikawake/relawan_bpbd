@@ -27,10 +27,12 @@ class HomeController extends Controller
     {
         $kategoris = Kategori::orderBy('created_at', 'asc')->get();
 
-        $bencanas = Bencana::where('status_jenis', '1')
+        $today = date('Y-m-d');
+
+        $bencanas = Bencana::where('status_jenis', '1') 
+                    ->where('tgl_selesai', '>=', $today)
                     ->Orderby('id', 'Desc')
-                    ->limit(3)
-                    ->get(); 
+                    ->paginate(6);
 
         
 
