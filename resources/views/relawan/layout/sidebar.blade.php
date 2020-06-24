@@ -12,7 +12,7 @@
           </li>   
           <li class="nav-item {{ (request()->is('relawan.profile')) ? 'active' : '' }}"><a href="{{route('relawan.profile')}}"><i class="ft-user"></i><span class="menu-title" data-i18n="">Profile</span></a>
           </li>
-          <li class="nav-item {{ (request()->is('relawan.bencana')) ? 'active' : '' }}"><a href="{{route('relawan.bencana')}}"><i class="ft-map-pin"></i><span class="menu-title" data-i18n="">Bencana</span></a>
+          <li class="nav-item {{ (request()->is('relawan.bencana')) ? 'active' : '' }}"><a href="{{route('relawan.bencana')}}"><i class="ft-map-pin"></i><span class="menu-title" data-i18n="">Kegiatan</span></a>
           </li>  
           <!-- <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="ft-file"></i><span class="menu-title" data-i18n="">Tugas</span></a>
           </li> -->

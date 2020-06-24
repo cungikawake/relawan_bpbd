@@ -1,6 +1,6 @@
 @extends('relawan.layout.app')
 
-@section('title', 'Daftar Bencana Yang Kami Ikuti - Relawan')
+@section('title', 'Daftar Kegiatan Yang Kami Ikuti - Relawan')
 
 @section('content')
 <!-- Main Content --> 
@@ -10,7 +10,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
             <div class="content-header-left col-md-4 col-12 mb-2">
-                <h3 class="content-header-title">Daftar Bencana Yang Kamu Ikuti</h3>
+                <h3 class="content-header-title">Daftar Kegiatan Yang Kamu Ikuti</h3>
             </div>
             <div class="content-header-right col-md-8 col-12">
                 <div class="breadcrumbs-top float-md-right">
@@ -18,7 +18,7 @@
                         <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('relawan.dashboard')}}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Bencana
+                        <li class="breadcrumb-item active">Kegiatan
                         </li>
                         </ol>
                     </div>
@@ -90,7 +90,7 @@
                                 <div class="alert alert-secondary">
                                     <p>Ayo kita bekerja sama membantu teman, sahabat, keluarga kita.</p>
                                     <a href="{{ url('/bencana') }}">
-                                        <button class="btn btn-success">Cari Bencana <i class="la la-angle-right"></i></button>
+                                        <button class="btn btn-success">Cari Kegiatan <i class="la la-angle-right"></i></button>
                                     </a>
                                 </div>
                             </div>

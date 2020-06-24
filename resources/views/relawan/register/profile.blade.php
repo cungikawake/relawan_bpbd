@@ -32,7 +32,11 @@
                                         <div class="media-body text-left  mt-1">
                                             <h3 class="font-large-1 white">{{$user->name}}</h3>
                                             <span class="font-medium-1 white">({{$user->email}})</span>
+                                            @if($user->status_verified == 1)
+                                            <span class="badge badge-pill badge-success">Relawan Terverifikasi</span>
+                                            @else
                                             <span class="badge badge-pill badge-danger">Relawan Umum</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +47,7 @@
                             <div class="card-body">
                                 <div class="alert alert-secondary">
                                     <p>Selamat Datang putu a, Sekarang anda adalah Relawan Umum</p>
-                                    <p>Apakah anda ingin menjadi Relawan Pro, Ajukan data diri  sekarang!</p>
+                                    <p>Apakah anda ingin menjadi Relawan Terverifikasi, Ajukan data diri  sekarang!</p>
                                     <a href="{{ route('relawan.verifikasi') }}">
                                         <button class="btn btn-success"><i class="la la-file"></i> Ya, Lanjutkan</button>
                                     </a>
