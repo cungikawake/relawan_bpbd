@@ -24,9 +24,10 @@ class UserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], 
+            'tlp' => ['required', 'number', 'min:10', 'max:15', 'unique:users'],
         ]);
     }
 
@@ -40,6 +41,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 3,
+            'tlp' => $request['tlp'],
             'api_token' => Str::random(16)
         ]); 
  

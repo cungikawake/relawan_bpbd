@@ -70,6 +70,8 @@ Route::middleware('auth:api')->post('logout', function (Request $request) {
     ], 401);
 });
 
+//bencana
+Route::get('berita', 'Api\BeritaController@index'); 
 
 //bencana
 Route::get('list_bencana', 'Api\BencanaController@index');  //where kategori
@@ -78,10 +80,10 @@ Route::get('kategori', 'Api\BencanaController@getKategori');
 //master data
 Route::get('organisasi', 'Api\RelawanController@organisasi');
 Route::get('skill', 'Api\RelawanController@skill');
+
 //relawan
 Route::group(['middleware'=> ['auth:api']], function (){
     
-
     //data pribadi
     Route::post('relawan/verifikasi', 'Api\RelawanController@store');
 
