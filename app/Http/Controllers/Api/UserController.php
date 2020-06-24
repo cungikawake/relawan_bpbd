@@ -27,15 +27,26 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], 
-            'tlp' => ['required', 'number', 'min:10', 'max:15', 'unique:users'],
+            'tlp' => ['required', 'string', 'min:10', 'max:15', 'unique:users'],
         ]);
     }
 
     public function register(Request $request)
     {
          
-        $this->validator($request->all())->validate();
- 
+        //$this->validator($request->all())->validate();
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'], 
+            'password_confirmation' => 'required|same:password',
+            'tlp' => ['required', 'string', 'min:10', 'max:15', 'unique:users'],
+        ]);
+            
+        if ($validator->fails()) { 
+            return response()->json(['error'=>$validator->errors()], 401);            
+        }
+
         $user =   User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -44,15 +55,9 @@ class UserController extends Controller
             'tlp' => $request['tlp'],
             'api_token' => Str::random(16)
         ]); 
- 
-        return $this->registered($request, $user)?: redirect($this->redirectPath());
-    }
-
-    protected function registered(Request $request, $user)
-    {
-       
+            
         return response()->json(['data' => $user->toArray()], 201);
+        
     }
  
-
 }
