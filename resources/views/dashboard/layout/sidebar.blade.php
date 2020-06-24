@@ -44,7 +44,7 @@
                         <a class="menu-item" href="{{route('dashboard.kategori.index')}}">Kategori Bencana</a>
                     </li>
                     <li class="{{ (request()->is('dashboard/bencana*')) ? 'active' : '' }}">
-                        <a class="menu-item" href="{{route('dashboard.bencana.index')}}">Bencana</a>
+                        <a class="menu-item" href="{{route('dashboard.bencana.index')}}">Kegiatan</a>
                     </li>
                 </ul>
             </li>
@@ -52,7 +52,7 @@
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-male"></i><span class="menu-title" data-i18n="">Relawan</span></a>
             </li>
             <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">Kegiatan</span></a>
+                <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
             </li> 
             <!-- <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>

@@ -28,7 +28,7 @@
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
+                  <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Register Relawan</a>
                   <a class="ready-btn page-scroll" href="#about">Download App</a>
                 </div>
               </div>
