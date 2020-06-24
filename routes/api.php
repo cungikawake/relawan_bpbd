@@ -29,10 +29,11 @@ Route::get('/', function () {
 
 /* User register */
 Route::post('register', 'Api\UserController@register');  
+
 //get user
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
 // Route::post('login', 'Auth\LoginController@ApiLogin');
 Route::post('login', function (Request $request) {
@@ -85,6 +86,9 @@ Route::get('skill', 'Api\RelawanController@skill');
 Route::group(['middleware'=> ['auth:api']], function (){
     
     //data pribadi
+    Route::get('/user', 'Api\RelawanController@profile');
+
+    //ajukan data pribadi
     Route::post('relawan/verifikasi', 'Api\RelawanController@store');
 
     //join bencana

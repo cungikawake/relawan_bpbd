@@ -32,34 +32,22 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4>Kantor Bpbd Bali</h4>
-                                <a href="tel:+620361123">
+                                <h4>Kantor Bpbd Provinsi Bali</h4>
+                                <a href="tel:+62361245395">
                                     <button class="btn btn-danger">
-                                        <i class="la la-phone"></i> 0361 123 123
+                                        <i class="la la-phone"></i> 0361 - 245395
                                     </button>
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4>Posko Bencana Bali</h4>
-                                <a href="tel:+620361123">
+                                <h4>Email</h4>
+                                <a href="main:bpbdprovbali@gmail.com">
                                     <button class="btn btn-danger">
-                                        <i class="la la-phone"></i> 0361 123 123
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Satgas Bencana Bali</h4>
-                                <a href="tel:+620361123">
-                                    <button class="btn btn-danger">
-                                        <i class="la la-phone"></i> 0361 123 123
+                                        <i class="la la-mail"></i> bpbdprovbali@gmail.com
                                     </button>
                                 </a>
                             </div>

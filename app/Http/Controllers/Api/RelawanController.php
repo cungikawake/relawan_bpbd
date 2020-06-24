@@ -156,4 +156,34 @@ class RelawanController extends Controller
         }
         
     }
+
+    public function profile(){
+        $user  = Auth::user();
+        $model = Relawan::leftJoin('users', 'users.id', '=', 'relawan.id_user')
+            ->where('users.id', $user->id)->first();
+        
+        $skills = Skill::orderBy('nama_skill', 'asc')->get();
+        $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
+
+        $model_skills = array();
+        $pelatihan = array();
+        $pengalaman = array();
+
+        if(!empty($model)){
+            $model_skills = SkillRelawan::join('skill', 'skill.id', '=', 'skill_relawan.id_skill')
+                ->where('skill_relawan.id_relawan', '=', $model->id)->get();
+            
+            $pelatihan = $model->pelatihanEdit();
+            $pengalaman = $model->pengalamanEdit();
+        }
+        
+        $response = array(
+            'data_pribadi' => $model,
+            'skill' => $model_skills,
+            'pelatihan' => $pelatihan,
+            'pengalaman' => $pengalaman
+        );
+
+        return response()->json(['data' => $response], 201);
+    }
 }

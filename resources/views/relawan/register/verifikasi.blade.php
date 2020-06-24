@@ -63,17 +63,17 @@
                                         <div class="tab-content" id="pills-tabContent">
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" style="display:none;">
                                                         <h5 class="mt-2">Id User <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <input type="text" class="form-control" name="id_user" value="{{old('id_user', $user->id)}}" placeholder="otomatis terisi" readonly>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12">
                                                         <h5 class="mt-2">Organisasi Relawan <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <select  class="form-control" name="id_induk_relawan">
-                                                                <option hidden>Pilih Jenis Relawan</option>
+                                                                <option hidden>Pilih Organisasi</option>
                                                                 @foreach($organisasi as $row)
                                                                     <option value="{{$row->id}}" {{ old('id_induk_relawan', $model->id_induk_relawan) == $row->id ? 'selected' : '' }}>{{$row->nama_organisasi}}</option>
                                                                 @endforeach
@@ -141,18 +141,18 @@
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">No Hp <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp)}}" placeholder="tlp">
+                                                            <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp)}}" placeholder="contoh 081999122323">
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" style="display:none;">
                                                         <h5 class="mt-2">Jenis Relawan <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <select  class="form-control" name="jenis_relawan">
-                                                                <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Private </option>
+                                                                <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Terverifikasi </option>
                                                             </select>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" style="display:none;">
                                                         <h5 class="mt-2">Nomor Relawan</h5>
                                                         <fieldset class="form-group">
                                                             <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
@@ -178,7 +178,7 @@
                                                     
                                                     <div class="col-md-12">
                                                         <div class="float-right">
-                                                            <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab">Selanjutnya</a>
+                                                            <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab" id="to-tab-2">Selanjutnya</a>
                                                         </div>
                                                         <div class="float-left">
                                                             <a href="{{ route('relawan.dashboard') }}">
@@ -236,15 +236,16 @@
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <h5 class="mt-0">Tempat</h5>
+                                                                <h5 class="mt-0">Tempat Pelatihan</h5>
                                                                 <fieldset class="form-group mb-1">
-                                                                    <input type="text" class="form-control" name="tempat_pelatihan[]" value="{{ $pelatihan[$i]->tempat }}" placeholder="Tempat">
+                                                                    <input type="text" class="form-control" name="tempat_pelatihan[]" value="{{ $pelatihan[$i]->tempat }}" placeholder="Tempat Pelatihan">
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <h5 class="mt-0">Detail Pengalaman</h5>
+                                                                <h5 class="mt-0">Detail Pelatihan</h5>
+                                                                
                                                                 <fieldset class="form-group mb-1">
-                                                                    <input type="text" class="form-control" name="detail_pelatihan[]" value="{{ $pelatihan[$i]->detail_pelatihan }}" placeholder="Detail Pengalaman">
+                                                                <textarea class="form-control" name="detail_pelatihan[]"  placeholder="Detail Pelatihan"> {{ $pelatihan[$i]->detail_pelatihan }} </textarea>     
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-6">
@@ -276,7 +277,7 @@
                                                 <div class="row mt-2">
                                                     <div class="col-md-12">
                                                         <div class="float-right">
-                                                            <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-contact-tab">Selanjutnya</a>
+                                                            <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-contact-tab" id="to-tab-3">Selanjutnya</a>
                                                         </div>
                                                         <div class="float-left">
                                                             <a href="{{ route('dashboard.bencana.index') }}">
@@ -341,7 +342,7 @@
                                                 <div class="row mt-2">
                                                     <div class="col-md-12">
                                                         <div class="float-right">
-                                                            <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Simpan</button>
+                                                            <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1" id="simpan">Simpan</button>
                                                         </div>
                                                         <div class="float-left">
                                                             <a href="{{ route('dashboard.bencana.index') }}">
@@ -386,15 +387,15 @@
                             '</fieldset>'+
                         '</div>'+
                         '<div class="col-md-6">'+
-                            '<h5 class="mt-0">Tempat</h5>'+
+                            '<h5 class="mt-0">Tempat Pelatihan</h5>'+
                             '<fieldset class="form-group mb-1">'+
-                                '<input type="text" class="form-control" name="tempat_pelatihan[]" value="" placeholder="Tempat">'+
+                                '<input type="text" class="form-control" name="tempat_pelatihan[]" value="" placeholder="Tempat Pelatihan">'+
                             '</fieldset>'+
                         '</div>'+
                         '<div class="col-md-12">'+
-                            '<h5 class="mt-0">Detail Pengalaman</h5>'+
+                            '<h5 class="mt-0">Detail Pelatihan</h5>'+
                             '<fieldset class="form-group mb-1">'+
-                                '<input type="text" class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pengalaman">'+
+                                '<textarea class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pelatihan"></textarea>'+
                             '</fieldset>'+
                         '</div>'+
                         '<div class="col-md-6">'+
@@ -470,5 +471,22 @@
             $(this).parents('.input-pengalaman').remove();
         }
     });
+
+    $(document).on('click', '#simpan', function(){
+        var data_lengkap = 1;
+        $('[required=required]').each(function(i, obj) {
+            if($(this).val().length == 0){
+                data_lengkap = 0;  
+                alert('Periksa kembali data yang masih kosong');
+                return false;
+
+            }
+        });
+
+        if(data_lengkap == 1){
+            return true;
+        }
+    });
+
 </script>
 @endpush

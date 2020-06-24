@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Selamat Datang {{ $user->name }}, Sekarang anda adalah Relawan Umum</h4>
-                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan bencana jenis umum</h6>
+                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan bencana bersifat umum</h6>
 
                                 <div class="row">
                                     <div class="col-6">
@@ -25,7 +25,7 @@
                                             <div class="card-body">
                                                 <h4 class="card-title">Relawan Umum</h4>
                                                 <div class="alert alert-secondary">
-                                                    <p> Relawan Umum adalah Relawan yang hanya bisa ikut membantu pada kegiatan bencana yang jenis umum</p>
+                                                    <p> Relawan Umum adalah Relawan yang hanya bisa ikut membantu pada kegiatan bencana yang bersifat umum</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +35,7 @@
                                             <div class="card-body">
                                                 <h4 class="card-title">Relawan Terverifikasi</h4>
                                                 <div class="alert alert-secondary">
-                                                    <p> Relawan Terverifikasi adalah Relawan yang  bisa mengikuti kegiatan bencana jenis umum dan private, dan memiliki Nomor Relawan</p>
+                                                    <p> Relawan Terverifikasi adalah Relawan yang  bisa mengikuti kegiatan bencana bersifat umum dan private, dan memiliki Nomor Relawan</p>
                                                     <p> Ajukan diri sekarang 
                                                         <a href="{{ route('relawan.verifikasi') }}">
                                                             <button class="btn btn-success"><i class="la la-file"></i> Ya</button>
