@@ -160,7 +160,7 @@ penanggulangan bencana.
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline services-head text-center">
-              <h2>Daftar Bencana</h2>
+              <h2>Kategori Bencana</h2>
             </div>
           </div>
         </div>

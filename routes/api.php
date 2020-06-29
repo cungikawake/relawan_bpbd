@@ -20,6 +20,11 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 
+//home view mobile
+Route::get('m/home', 'Api\HomeController@index'); 
+Route::get('m/bencana/kategori', 'Api\HomeController@kategori'); 
+Route::get('m/bencana/kategori/{id}', 'Api\HomeController@kategori_list'); 
+
 Route::get('/', function () {
     return [
         'app' => 'Api E-Relawan',
@@ -96,3 +101,4 @@ Route::group(['middleware'=> ['auth:api']], function (){
     Route::post('relawan/gps/bencana', 'Api\BencanaController@storeGps');
 
 });
+
