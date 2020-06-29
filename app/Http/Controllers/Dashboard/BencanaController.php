@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\Bencana;
 use App\Models\Skill;
 use App\Models\Persyaratan;
+use App\Models\Kategori;
 
 class BencanaController extends Controller
 {
@@ -36,8 +37,10 @@ class BencanaController extends Controller
         $model_skills = array();
         $persyaratan = Persyaratan::orderBy('nama', 'asc')->get();
         $model_persyaratan = array();
+        $kategoris = Kategori::orderBy('nama_kategori', 'asc')->get();
+        $model_kategori = array();
 
-        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan'));
+        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan', 'model_kategori', 'kategoris'));
     }
 
     /**
@@ -128,7 +131,9 @@ class BencanaController extends Controller
         $persyaratan = Persyaratan::orderBy('nama', 'asc')->get();
         $model_persyaratan = is_array(json_decode($model->mental_minimal)) ? json_decode($model->mental_minimal) : array();
 
-        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan'));
+        $kategoris = Kategori::orderBy('nama_kategori', 'asc')->get();
+         
+        return view('dashboard.bencana.form', compact('model', 'skills', 'model_skills', 'persyaratan', 'model_persyaratan', 'kategoris'));
     }
 
     /**

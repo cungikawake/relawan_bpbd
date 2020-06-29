@@ -25,8 +25,10 @@ class RelawanController extends Controller
      */
     public function index()
     {
-        $datas = Relawan::orderBy('created_at', 'asc')->paginate(10);
-
+        $datas = Relawan::select('*','relawan.id as id_relawan')
+                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                ->orderBy('users.created_at', 'asc')
+                ->paginate(10);
         return view('dashboard.relawan.index', compact('datas'));
     }
 
@@ -64,7 +66,7 @@ class RelawanController extends Controller
             //Private
             $role = 2;
         }else{
-            //Public
+            //umum
             $role = 3;
         }
 
@@ -404,7 +406,7 @@ class RelawanController extends Controller
     public function print($id)
     {
         $model = Relawan::findOrFail($id);
-
+        
         return view('dashboard.relawan.print', compact('model'));
     }
 

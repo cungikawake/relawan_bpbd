@@ -293,7 +293,7 @@ prediksi perkembangan situasi ke depan</h5>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="section-headline text-center">
-                <h2>Contact us</h2>
+                <h2>Hubungi Kami</h2>
               </div>
             </div>
           </div>

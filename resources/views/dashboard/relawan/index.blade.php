@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Relawan</h4>
+                            <h4 class="card-title">List Data Relawan</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body">
-                                <a href="{{ route('dashboard.relawan.create') }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
+                                <!-- <a href="{{ route('dashboard.relawan.create') }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a> -->
                                 
                                 @if(Session::has('message'))
                                     <div class="alert with-close alert-info mt-2">
@@ -67,6 +67,7 @@
                                                 <th>No Hp</th>
                                                 <th>Jenis</th> 
                                                 <th>Verifikasi</th>
+                                                <th>Nomor</th>
                                                 <th width="20%"></th>
                                             </tr>
                                         </thead>
@@ -74,33 +75,43 @@
                                             @if(count($datas) > 0)
                                                 @foreach($datas as $key => $data)
                                                     <tr>
-                                                        <th scope="row">
-                                                            {{ ($datas->perPage() * ($datas->currentPage() - 1)) + ($key + 1) }}
-                                                        </th>
-                                                        <td>{{$data->nama_lengkap}}</td>
-                                                        <td>{{$data->email}}</td>
-                                                        <td>{{$data->tlp}}</td>
-                                                        <td>{{($data->jenis_relawan == 1)? 'Private': 'Publik'}}</td>
-                                                        <td>{!! $data->userVerifyDisplay() !!}</td>
                                                         <td>
+                                                        @if($data->id_relawan)
+                                                        <a href="{{route('dashboard.relawan.edit', $data->id_relawan)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
 
-                                                            <a href="{{route('dashboard.relawan.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
-                                                            <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}" title="Hapus"><i class="la la-ban"></i></button>
-                                                            <form action="{{route('dashboard.relawan.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
+                                                            <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id_relawan}}" title="Hapus"><i class="la la-ban"></i></button>
+                                                            <form action="{{route('dashboard.relawan.destroy', $data->id_relawan)}}" id="delete-{{$data->id_relawan}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
 
-                                                            <a href="{{route('dashboard.relawan.print', $data->id)}}" target="_blank" class="btn btn-icon btn-primary btn-sm" title="Print" style="margin-top: 0.3rem !important;"><i class="la la-print"></i></a>
-                                                            @if(!$data->userVerifyCheck())
-                                                                <button type="button" class="btn btn-icon btn-success btn-sm verify" data-id="{{$data->id}}" title="Verify" style="margin-top: 0.3rem !important;"><i class="la la-check"></i></button>
-                                                                <form action="{{route('dashboard.relawan.verify', $data->id)}}" id="verify-{{$data->id}}" method="POST">
+                                                            <a href="{{route('dashboard.relawan.print', $data->id_relawan)}}" target="_blank" class="btn btn-icon btn-primary btn-sm" title="Print" style="margin-top: 0.3rem !important;"><i class="la la-print"></i></a>
+
+                                                            @if(!$data->userVerifyCheck() && $data->id_induk_relawan !='')
+                                                                <button type="button" class="btn btn-icon btn-success btn-sm verify" data-id="{{$data->id_relawan}}" title="Verify" style="margin-top: 0.3rem !important;"><i class="la la-check"></i></button>
+                                                                <form action="{{route('dashboard.relawan.verify', $data->id_relawan)}}" id="verify-{{$data->id_relawan}}" method="POST">
                                                                     @csrf
                                                                 </form>
                                                             @else 
                                                                 <br>
                                                             @endif
+                                                        @else
+                                                            Belum Kirim Data
+                                                        @endif
                                                         </td>
+                                                        <!-- <td scope="row">
+                                                            {{ ($datas->perPage() * ($datas->currentPage() - 1)) + ($key + 1) }}
+                                                        </td> -->
+                                                        <td>{{$data->name}}</td>
+                                                        <td>{{$data->email}}</td>
+                                                        <td>{{$data->tlp}}</td>
+                                                        <td>{{($data->jenis_relawan == 1 && $data->nomor_relawan !='')? 'Terverifikasi': 'Umum'}}</td>
+                                                        <td>{!! $data->userVerifyDisplay() !!}</td>
+                                                        <td>{{$data->nomor_relawan}}</td>
+                                                        <!-- <td>
+
+                                                            
+                                                        </td> -->
                                                     </tr>
                                                 @endforeach
                                             @else 

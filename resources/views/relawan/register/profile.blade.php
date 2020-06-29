@@ -46,8 +46,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="alert alert-secondary">
-                                    <p>Selamat Datang putu a, Sekarang anda adalah Relawan Umum</p>
-                                    <p>Apakah anda ingin menjadi Relawan Terverifikasi, Ajukan data diri  sekarang!</p>
+                                    <p>Selamat Datang {{$user->name}}. Sekarang anda adalah Relawan Umum</p>
+                                    <p>Apakah anda ingin menjadi Relawan Terverifikasi. Ajukan data diri  sekarang!</p>
                                     <a href="{{ route('relawan.verifikasi') }}">
                                         <button class="btn btn-success"><i class="la la-file"></i> Ya, Lanjutkan</button>
                                     </a>

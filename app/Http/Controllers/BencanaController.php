@@ -64,6 +64,7 @@ class BencanaController extends Controller
     public function join($id = null){
         $user = Auth::user();
         $detail_bencana = Bencana::findOrFail($id);
+        
         if(empty($detail_bencana)){
             return  redirect('/');
         }
@@ -75,7 +76,7 @@ class BencanaController extends Controller
         }else{
             
             $relawan = Relawan::where('id_user', $user->id)->first();
-
+             
             //pastikan user memiliki join 1 bencana yang aktif pada durasi yang sama
             $today=date('Y-m-d');//hari ini
             
@@ -86,6 +87,7 @@ class BencanaController extends Controller
                     ->orderBy('bencana.tgl_selesai', 'ASC')
                     ->get(); 
             
+             
 
             //cek apakah ini bencana private ?
             if($detail_bencana->jenis_bencana == 1 && $relawan->nomor_relawan !=''){
@@ -171,8 +173,9 @@ class BencanaController extends Controller
                     }
                 }
                  
-            //bencana publik
+            //bencana publik dan relawan null
             }else if($detail_bencana->jenis_bencana == 0){ 
+                 
                 //apakah sudah ada pernah join 
                 if(count($bencanas) > 0){
                     
@@ -215,17 +218,16 @@ class BencanaController extends Controller
                     
                 }else{
                 
-                    //tidak ada join bencana
+                    //tidak ada join bencana mana pun
                     $date1=strtotime(date('Y-m-d'));//hari ini
                     $date2=strtotime($detail_bencana->tgl_mulai);
                     $date3=strtotime($detail_bencana->tgl_selesai);
 
-                    $bencanas = RelawanBencana::where('id_user', $user->id)
-                            ->where('status_join', '0')
-                            ->orWhere('status_join', '1')
+                    $bencanas = RelawanBencana::where('id_user', $user->id) 
                             ->where('id_bencana', $detail_bencana->id)
                             ->get();
-                        
+                     
+
                     if(count($bencanas) > 0){
                         return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
 
@@ -251,8 +253,6 @@ class BencanaController extends Controller
                     }
                 }
                 
-            }else{
-                return redirect('login');
             } 
         }
     }

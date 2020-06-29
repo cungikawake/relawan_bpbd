@@ -10,7 +10,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">List Relawan</h3>
+            <h3 class="content-header-title">List Kegiatan Relawan</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
@@ -61,7 +61,7 @@
                                                 <tr>
                                                     <th class="align-middle">#</th>
                                                     <th class="align-middle">Nama</th> 
-                                                    <th class="align-middle">Tanggal Join</th>
+                                                    <th class="align-middle">Tanggal Setujui</th>
                                                     <th width="20%" class="align-middle">Status</th>
                                                     <th width="10%" class="align-middle">Detail</th>
                                                     <th width="10%" class="align-middle">
@@ -131,14 +131,14 @@
                                 </div>
                                 
                                 
-                                <h4 class="card-title mt-3">Relawan Join</h4>
+                                <h4 class="card-title mt-3">Relawan Di Setujui</h4>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nama</th> 
-                                                <th>Tanggal Join</th>
+                                                <th>Tanggal Setujui</th>
                                                 <th width="10%" class="align-middle">Detail</th>
                                             </tr>
                                         </thead>
@@ -179,7 +179,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nama</th> 
-                                                <th>Tanggal Join</th>
+                                                <th>Tanggal Setujui</th>
                                                 <th width="30%" class="align-middle">Status</th>
                                                 <th width="10%" class="align-middle">Detail</th>
                                             </tr>
