@@ -27,8 +27,8 @@ class RelawanController extends Controller
     {
         $datas = Relawan::select('*','relawan.id as id_relawan')
                 ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                ->where('users.role', '=', '1') 
-                ->orWhere('users.role', '=', '2') 
+                ->where('users.role', '=', '2') 
+                ->orWhere('users.role', '=', '3') 
                 ->orderBy('users.created_at', 'asc')
                 ->get();
         
