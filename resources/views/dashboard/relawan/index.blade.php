@@ -3,6 +3,8 @@
 @section('title', 'Relawan')
 
 @section('content')
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 <!-- Main Content -->
 <div class="app-content content">
     <div class="content-wrapper">
@@ -55,10 +57,30 @@
                                     <div class="alert with-close alert-warning mt-2">
                                         {{Session::get('message-warning')}}
                                     </div>
-                                @endif
+                                @endif  
+
+                                <div class="alert alert-success">
+                                    <form action="{{route('dashboard.relawan.search')}}" method="GET">
+                                        <h4>Filter Data</h4>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Jenis</label>
+                                                <select name="jenis_relawan" class="form-control">
+                                                    <option value="">All</option>
+                                                    <option value="1">Umum</option>
+                                                    <option value="2">Terverifikasi</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4"> 
+                                                <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter">Filter</button>
+                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak">Cetak</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table display" id="myTable">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>#</th>
@@ -67,8 +89,7 @@
                                                 <th>No Hp</th>
                                                 <th>Jenis</th> 
                                                 <th>Verifikasi</th>
-                                                <th>Nomor</th>
-                                                <th width="20%"></th>
+                                                <th>Nomor</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -99,9 +120,7 @@
                                                             Belum Kirim Data
                                                         @endif
                                                         </td>
-                                                        <!-- <td scope="row">
-                                                            {{ ($datas->perPage() * ($datas->currentPage() - 1)) + ($key + 1) }}
-                                                        </td> -->
+                                                         
                                                         <td>{{$data->name}}</td>
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->tlp}}</td>
@@ -121,7 +140,7 @@
                                             @endif
                                         </tbody>
                                     </table>
-                                    {{ $datas->links() }}
+                                      
                                 </div>
                             </div>
                         </div>
@@ -137,6 +156,8 @@
 @stop
 
 @push('script')
+
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.delete').click(function(){
@@ -152,6 +173,7 @@
                 $('form#verify-'+id).submit();
             }
         });
+        $('#myTable').DataTable();
     });
 </script>
 @endpush

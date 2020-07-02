@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\Bencana;
 use App\Models\RelawanBencana;
+use App\Models\LaporanHarian;
 
 class ListKegiatanController extends Controller
 {
     public function index(Request $request)
     {
-        $datas = Bencana::orderBy('created_at', 'asc')->paginate(10);
+        $datas = Bencana::orderBy('created_at', 'asc')->get();
 
         return view('dashboard.list_kegiatan.index', compact('datas'));
     }
@@ -142,5 +143,115 @@ class ListKegiatanController extends Controller
         // }
 
         // return 'sendEmail';
+    }
+
+    public function laporan_harian($id){
+        $bencana = Bencana::findOrFail($id);
+        $datas = LaporanHarian::join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+                ->where('bencana.id',$id)->get();
+
+        return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas'));
+    }
+
+    public function laporan_harian_create($id){
+        $bencana = Bencana::findOrFail($id); 
+        $model = new LaporanHarian();
+
+        return view('dashboard.list_kegiatan.laporan_harian_form', compact('bencana', 'model'));
+    }
+
+    public function laporan_harian_store(Request $request, $id){
+        $validator = Validator::make( $request->all(), [
+                'judul_laporan' => 'required',
+                'detail_laporan' => 'required',
+                'tgl_laporan' => 'required'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }else{
+            $data = new LaporanHarian();
+            $data->id_bencana = $id;
+            $data->tgl_laporan = $request->tgl_laporan;
+            $data->judul_laporan = $request->judul_laporan;
+            $data->detail_laporan = $request->detail_laporan;
+            
+            if ($request->has('foto1')) {
+            $image = $request->foto1;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_1'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto1 = $imageName;
+            }
+
+            if ($request->has('foto2')) {
+            $image = $request->foto2;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_2'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto2 = $imageName;
+            }
+
+            if ($request->has('foto3')) {
+            $image = $request->foto3;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_3'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto3 = $imageName;
+            }
+
+            $data->save(); 
+
+            return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Data berhasil disimpan.');
+        }
+    }
+
+    public function laporan_harian_edit($id){ 
+        $model = LaporanHarian::join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+        ->where('laporan_harian_bencana.id',$id)->first();
+
+        return view('dashboard.list_kegiatan.laporan_harian_form', compact('model'));
+    }
+
+    public function laporan_harian_update(Request $request, $id){
+        $validator = Validator::make( $request->all(), [
+            'judul_laporan' => 'required',
+            'detail_laporan' => 'required',
+            'tgl_laporan' => 'required'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }else{
+            $data = LaporanHarian::findOrFail($id);
+            $data->id_bencana = $id;
+            $data->tgl_laporan = $request->tgl_laporan;
+            $data->judul_laporan = $request->judul_laporan;
+            $data->detail_laporan = $request->detail_laporan;
+            
+            if ($request->has('foto1')) {
+            $image = $request->foto1;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_1'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto1 = $imageName;
+            }
+
+            if ($request->has('foto2')) {
+            $image = $request->foto2;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_2'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto2 = $imageName;
+            }
+
+            if ($request->has('foto3')) {
+            $image = $request->foto3;
+            $imageName = Str::slug(strtolower($request->judul_laporan.'_3'), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+            $upload = $image->move(public_path('uploads/laporan'), $imageName);
+            $data->foto3 = $imageName;
+            }
+
+            $data->save(); 
+
+            return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Data berhasil disimpan.');
+        }
     }
 }

@@ -32,12 +32,19 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::get('relawan-mail', 'RelawanController@mail');
         Route::post('relawan/{id}/verify', 'RelawanController@verify')->name('relawan.verify');
         Route::get('relawan/{id}/print', 'RelawanController@print')->name('relawan.print');
+        Route::get('relawan/search/data', 'RelawanController@search')->name('relawan.search');
         
         Route::get('list-kegiatan', 'ListKegiatanController@index')->name('list_kegiatan.index');
         Route::get('list-kegiatan/{id}/detail', 'ListKegiatanController@detail')->name('list_kegiatan.detail');
         Route::post('list-kegiatan/{id}/update', 'ListKegiatanController@update')->name('list_kegiatan.update');
         Route::get('list-kegiatan/send-email', 'ListKegiatanController@sendEmail')->name('list_kegiatan.send_email');
         Route::get('list-kegiatan/{id}/map', 'ListKegiatanController@map')->name('list_kegiatan.map');
+
+        Route::get('list-kegiatan/{id}/laporan_harian', 'ListKegiatanController@laporan_harian')->name('list_kegiatan.laporan_harian');
+        Route::get('list-kegiatan/{id}/laporan_harian/create', 'ListKegiatanController@laporan_harian_create')->name('list_kegiatan.laporan_harian_create');
+        Route::post('list-kegiatan/{id}/laporan_harian/store', 'ListKegiatanController@laporan_harian_store')->name('list_kegiatan.laporan_harian_store');
+        Route::get('list-kegiatan/{id}/laporan_harian/edit', 'ListKegiatanController@laporan_harian_edit')->name('list_kegiatan.laporan_harian_edit');
+        Route::put('list-kegiatan/{id}/laporan_harian/update', 'ListKegiatanController@laporan_harian_update')->name('list_kegiatan.laporan_harian_update');
     });
 });
 

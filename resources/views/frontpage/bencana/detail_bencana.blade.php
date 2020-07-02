@@ -135,6 +135,6 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJTIHh1GRN37zuOlt-4XWrsm-XY2LwzNc&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvYG6uS3dswdGzItrY8_akP79eOEQYskY&callback=initMap">
     </script>
 @endsection

@@ -27,9 +27,14 @@ class RelawanController extends Controller
     {
         $datas = Relawan::select('*','relawan.id as id_relawan')
                 ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                ->where('users.role', '=', '1') 
+                ->orWhere('users.role', '=', '2') 
                 ->orderBy('users.created_at', 'asc')
-                ->paginate(10);
-        return view('dashboard.relawan.index', compact('datas'));
+                ->get();
+        
+        $organisasi = IndukOrganisasi::get();
+
+        return view('dashboard.relawan.index', compact('datas', 'organisasi'));
     }
 
     /**
@@ -445,5 +450,70 @@ class RelawanController extends Controller
         $results = curl_exec($curlHandle);
         curl_close($curlHandle);
         return true;
+    }
+
+    public function search(Request $request)
+    {   
+        if($request->btn == 'cetak'){
+            if($request->jenis_relawan != 0){
+                if($request->jenis_relawan == 1){
+                    //relawan umum
+                    $datas = Relawan::select('*','relawan.id as id_relawan')
+                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                    ->where('users.role', '=', '3') 
+                    ->orderBy('users.created_at', 'asc')
+                    ->get(); 
+    
+                }else{
+                    $datas = Relawan::select('*','relawan.id as id_relawan')
+                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                    ->where('users.role', '=', '2') 
+                    ->orderBy('users.created_at', 'asc')
+                    ->get();
+                }
+                
+    
+            }else{
+                $datas = Relawan::select('*','relawan.id as id_relawan')
+                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                    ->orderBy('users.created_at', 'asc')
+                    ->where('users.role', '=', '2') 
+                    ->orWhere('users.role', '=', '3') 
+                    ->get();
+            }
+
+            return view('dashboard.relawan.print_tabel', compact('datas'));
+
+        }
+
+        if($request->jenis_relawan != 0){
+            if($request->jenis_relawan == 1){
+                //relawan umum
+                $datas = Relawan::select('*','relawan.id as id_relawan')
+                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                ->where('users.role', '=', '3') 
+                ->orderBy('users.created_at', 'asc')
+                ->get(); 
+
+            }else{
+                $datas = Relawan::select('*','relawan.id as id_relawan')
+                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                ->where('users.role', '=', '2') 
+                ->orderBy('users.created_at', 'asc')
+                ->get();
+            }
+            
+
+        }else{
+            $datas = Relawan::select('*','relawan.id as id_relawan')
+                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+                ->orderBy('users.created_at', 'asc')
+                ->where('users.role', '=', '2') 
+                ->orWhere('users.role', '=', '3') 
+                ->get();
+        }
+        
+         
+        return view('dashboard.relawan.index', compact('datas'));
     }
 }

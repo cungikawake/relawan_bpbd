@@ -14,7 +14,7 @@
     <script src="{{ asset('theme-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
-    <script src="{{ asset('theme-assets/vendors/js/charts/chartist.min.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('theme-assets/vendors/js/charts/chartist.min.js') }}" type="text/javascript"></script> -->
     <!-- END PAGE VENDOR JS-->
 
     <!-- BEGIN CHAMELEON  JS-->
@@ -23,7 +23,7 @@
     <!-- END CHAMELEON  JS-->
     
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="{{ asset('theme-assets/js/scripts/pages/dashboard-lite.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('theme-assets/js/scripts/pages/dashboard-lite.js') }}" type="text/javascript"></script> -->
     <!-- END PAGE LEVEL JS-->
 
     <!-- CUSTOM JS--> 

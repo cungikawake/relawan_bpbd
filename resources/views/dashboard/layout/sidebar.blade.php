@@ -57,7 +57,7 @@
             <!-- <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
             </li> -->
-            <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
+            <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? '' : '' }}">
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ft-power"></i> Logout</a>
                 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

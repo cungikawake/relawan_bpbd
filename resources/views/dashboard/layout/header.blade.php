@@ -30,6 +30,11 @@
         input[type='checkbox'] {
             margin-top: 0.24rem !important;
         }
+        .main-menu.menu-light .navigation > li.active > a {
+        font-weight: 700;
+        color: #2b345f;
+        background: #e28f12;
+        }
     </style>
     
     @stack('style')
