@@ -58,11 +58,11 @@
                                             <tr> 
                                                 <th>Judul</th> 
                                                 <th>Instansi</th>
-                                                {{-- <th>Jenis</th> --}}
+                                                <th>Jenis</th>
                                                 <th>Mulai</th>
-                                                <th>Sampai</th>
-                                                {{-- <th width="20%">Foto</th> --}}
-                                                <th>Relawan</th>
+                                                <th>Sampai</th> 
+                                                <th>Total Relawan</th>
+                                                <th>Status</th>
                                                 <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -73,19 +73,28 @@
                                                          
                                                         <td>{{$data->judul_bencana}}</td> 
                                                         <td>{{$data->instansi}}</td>
-                                                        <!-- <td>
+                                                        <td>
                                                             @if($data->jenis_bencana == 2)
                                                                 Publik
                                                             @else
                                                                 Private
                                                             @endif
-                                                        </td> -->
+                                                        </td>
                                                         <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
                                                         <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
                                                         {{-- <td>
                                                             <img src="{{$data->displayImage()}}" width="100" alt="">
                                                         </td> --}}
                                                         <td>{{count($data->allRelawan())}}</td>
+                                                        <td>
+                                                            @if($data->tgl_mulai > date('Y-m-d'))
+                                                                Akan Datang
+                                                            @elseif($data->tgl_selesai > date('Y-m-d'))
+                                                                Berlangsung
+                                                            @else
+                                                                Selesai
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <a title="Detail" href="{{route('dashboard.list_kegiatan.detail', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-users"></i></a>
                                                             <a title="Map"  href="{{route('dashboard.list_kegiatan.map', $data->id)}}" class="btn btn-icon btn-primary btn-sm"><i class="la la-map"></i></a>

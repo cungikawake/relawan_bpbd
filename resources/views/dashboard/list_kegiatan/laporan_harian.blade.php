@@ -45,7 +45,7 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body"> 
-
+                                
                                 <a href="{{ route('dashboard.list_kegiatan.laporan_harian_create', $bencana->id) }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
                                 
                                 @if(Session::has('message'))

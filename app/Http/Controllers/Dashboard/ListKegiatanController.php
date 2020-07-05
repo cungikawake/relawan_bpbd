@@ -171,11 +171,19 @@ class ListKegiatanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
+            //cek tgl sama
+            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)->count();
+            if($lap_count > 0){
+                return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Laporan pada tanggal '.$request->tgl_laporan.' sudah ada.');
+            }
+
             $data = new LaporanHarian();
             $data->id_bencana = $id;
             $data->tgl_laporan = $request->tgl_laporan;
             $data->judul_laporan = $request->judul_laporan;
             $data->detail_laporan = $request->detail_laporan;
+            $data->jml_relawan_umum = $request->jml_relawan_umum;
+            $data->jml_relawan_private = $request->jml_relawan_private;
             
             if ($request->has('foto1')) {
             $image = $request->foto1;
@@ -222,6 +230,12 @@ class ListKegiatanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
+            //cek tgl sama
+            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)->count();
+            if($lap_count > 0){
+                return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Laporan pada tanggal '.$request->tgl_laporan.' sudah ada.');
+            }
+
             $data = LaporanHarian::findOrFail($id);
             $data->id_bencana = $id;
             $data->tgl_laporan = $request->tgl_laporan;

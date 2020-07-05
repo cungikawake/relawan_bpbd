@@ -49,7 +49,7 @@
                                         
                                         <h5 class="mt-2">Tanggal Laporan <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
-                                            <input type="date" class="form-control" name="tgl_laporan" value="{{old('tgl_laporan', $model->tgl_laporan)}}" placeholder="Tanggal Laporan">
+                                            <input type="date" class="form-control" name="tgl_laporan" value="{{old('tgl_laporan', $model->tgl_laporan)}}" placeholder="Tanggal Laporan" max="{{date('Y-m-d')}}">
                                         </fieldset>
 
                                         <h5 class="mt-2">Judul <span class="danger">*</span></h5>
