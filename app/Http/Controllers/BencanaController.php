@@ -87,7 +87,7 @@ class BencanaController extends Controller
                     ->orderBy('bencana.tgl_selesai', 'ASC')
                     ->get(); 
             
-             
+            
 
             //cek apakah ini bencana private ?
             if($detail_bencana->jenis_bencana == 1 && $relawan->nomor_relawan !=''){
@@ -174,7 +174,7 @@ class BencanaController extends Controller
                 }
                  
             //bencana publik dan relawan null
-            }else if($detail_bencana->jenis_bencana == 0){ 
+            }else if($detail_bencana->jenis_bencana == 2){ 
                  
                 //apakah sudah ada pernah join 
                 if(count($bencanas) > 0){

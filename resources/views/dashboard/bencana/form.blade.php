@@ -70,11 +70,10 @@
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Kategori Bencana <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                     
                                                     <select class="form-control" name="id_kategori">
                                                         <option hidden>Pilih Kategori Bencana</option>
                                                         @foreach($kategoris as $kategori)
-                                                            <option value="1" {{ old('id_kategori', $model->id_kategori) == $kategori->id ? 'selected' : '' }}> {{$kategori->nama_kategori}}</option>
+                                                            <option value="{{$kategori->id}}" {{ old('id_kategori', $model->id_kategori) == $kategori->id ? 'selected' : '' }}> {{$kategori->nama_kategori}}</option>
                                                          @endforeach
                                                     </select>
                                                 </fieldset>
@@ -86,7 +85,7 @@
                                                     <select class="form-control" name="jenis_bencana">
                                                         <option hidden>Pilih Keperluan Bencana</option>
                                                         <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Private (Relawan Terverifikasi)</option>
-                                                        <option value="0" {{ old('jenis_bencana', $model->jenis_bencana) == '0' ? 'selected' : '' }}>Publik (Semua Jenis Relawan)</option>
+                                                        <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik (Semua Jenis Relawan)</option>
                                                     </select>
                                                 </fieldset>
                                             </div>

@@ -93,6 +93,7 @@ class BencanaController extends Controller
             $data->koordinat_tugas = $request->koordinat_tugas;
             $data->supervisi_tugas = $request->supervisi_tugas;
             $data->jaminan_perlindungan = $request->jaminan_perlindungan;
+            $data->id_kategori = $request->id_kategori;
             // $data->kordinator_relawan = $request->kordinator_relawan;
 
             $image = $request->foto_bencana;
@@ -187,6 +188,7 @@ class BencanaController extends Controller
             $data->koordinat_tugas = $request->koordinat_tugas;
             $data->supervisi_tugas = $request->supervisi_tugas;
             $data->jaminan_perlindungan = $request->jaminan_perlindungan;
+            $data->id_kategori = $request->id_kategori;
             // $data->kordinator_relawan = $request->kordinator_relawan;
 
             if ($request->has('foto_bencana')) {
