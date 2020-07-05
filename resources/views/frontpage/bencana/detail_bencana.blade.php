@@ -93,7 +93,7 @@
                     ?>
                     @if($date1 <= $date2)
                       <span>
-                          <a href="{{url('bencana/join/'.$bencana->id)}}" class="ready-btn right-btn page-scroll">Gabung Sekarang</a>
+                          <a href="{{url('bencana/join/'.$bencana->id)}}" class="btn btn-success">Gabung Sekarang</a>
                       </span>
                     @else
                         <br>
