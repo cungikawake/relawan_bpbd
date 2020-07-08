@@ -41,10 +41,16 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::get('list-kegiatan/{id}/map', 'ListKegiatanController@map')->name('list_kegiatan.map');
 
         Route::get('list-kegiatan/{id}/laporan_harian', 'ListKegiatanController@laporan_harian')->name('list_kegiatan.laporan_harian');
+        
         Route::get('list-kegiatan/{id}/laporan_harian/create', 'ListKegiatanController@laporan_harian_create')->name('list_kegiatan.laporan_harian_create');
+        
         Route::post('list-kegiatan/{id}/laporan_harian/store', 'ListKegiatanController@laporan_harian_store')->name('list_kegiatan.laporan_harian_store');
+        
         Route::get('list-kegiatan/{id}/laporan_harian/edit', 'ListKegiatanController@laporan_harian_edit')->name('list_kegiatan.laporan_harian_edit');
-        Route::put('list-kegiatan/{id}/laporan_harian/update', 'ListKegiatanController@laporan_harian_update')->name('list_kegiatan.laporan_harian_update');
+
+        Route::post('list-kegiatan/{id}/laporan_harian/update', 'ListKegiatanController@laporan_harian_update')->name('list_kegiatan.laporan_harian_update');
+
+        Route::get('list-kegiatan/{id}/laporan_harian/search', 'ListKegiatanController@laporan_harian_search')->name('list_kegiatan.laporan_harian_search');
     });
 });
 

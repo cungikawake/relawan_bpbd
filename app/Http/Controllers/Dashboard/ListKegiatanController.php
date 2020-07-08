@@ -147,16 +147,21 @@ class ListKegiatanController extends Controller
 
     public function laporan_harian($id){
         $bencana = Bencana::findOrFail($id);
-        $datas = LaporanHarian::join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+        $datas = LaporanHarian::select('*', 
+            'laporan_harian_bencana.id as id_laporan',
+            'bencana.id as id_bencana'
+            )
+                ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
                 ->where('bencana.id',$id)->get();
 
-        return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas'));
+        $from = $request->tgl_awal;
+        $to = $request->tgl_akhir;
+        return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas', 'from', 'to'));
     }
 
     public function laporan_harian_create($id){
         $bencana = Bencana::findOrFail($id); 
-        $model = new LaporanHarian();
-
+        $model = new LaporanHarian(); 
         return view('dashboard.list_kegiatan.laporan_harian_form', compact('bencana', 'model'));
     }
 
@@ -172,7 +177,10 @@ class ListKegiatanController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
             //cek tgl sama
-            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)->count();
+            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)
+            ->where('id_bencana', $id)
+            ->count();
+            
             if($lap_count > 0){
                 return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Laporan pada tanggal '.$request->tgl_laporan.' sudah ada.');
             }
@@ -213,7 +221,11 @@ class ListKegiatanController extends Controller
     }
 
     public function laporan_harian_edit($id){ 
-        $model = LaporanHarian::join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+        $model = LaporanHarian::select('*', 
+        'laporan_harian_bencana.id as id_laporan',
+        'bencana.id as id_bencana'
+        )
+        ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
         ->where('laporan_harian_bencana.id',$id)->first();
 
         return view('dashboard.list_kegiatan.laporan_harian_form', compact('model'));
@@ -230,17 +242,22 @@ class ListKegiatanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }else{
-            //cek tgl sama
-            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)->count();
+            /* //cek tgl sama
+            $lap_count = LaporanHarian::where('tgl_laporan', $request->tgl_laporan)
+                ->where('id_bencana', $id)
+                ->count();
+
             if($lap_count > 0){
                 return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Laporan pada tanggal '.$request->tgl_laporan.' sudah ada.');
-            }
+            } */
 
-            $data = LaporanHarian::findOrFail($id);
+            $data = LaporanHarian::findOrFail($request->id_laporan);
             $data->id_bencana = $id;
             $data->tgl_laporan = $request->tgl_laporan;
             $data->judul_laporan = $request->judul_laporan;
             $data->detail_laporan = $request->detail_laporan;
+            $data->jml_relawan_umum = $request->jml_relawan_umum;
+            $data->jml_relawan_private = $request->jml_relawan_private;
             
             if ($request->has('foto1')) {
             $image = $request->foto1;
@@ -267,5 +284,27 @@ class ListKegiatanController extends Controller
 
             return redirect()->route('dashboard.list_kegiatan.laporan_harian', $id)->with('message', 'Data berhasil disimpan.');
         }
+    }
+
+    public function laporan_harian_search(Request $request, $id){
+        $bencana = Bencana::findOrFail($id);
+
+        $from = $request->tgl_awal;
+        $to = $request->tgl_akhir;
+
+        $datas = LaporanHarian::select('*', 
+            'laporan_harian_bencana.id as id_laporan',
+            'bencana.id as id_bencana'
+            )
+            ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+            ->where('bencana.id',$id);
+
+        if($from !='' && $to !=''){
+            $datas = $datas->whereBetween('tgl_laporan', [$from, $to])->get();
+        }else{
+            $datas = $datas->get();
+        }
+
+        return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas', 'from', 'to'));
     }
 }

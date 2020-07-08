@@ -32,9 +32,9 @@
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="card">
                             
-                            <form action="@if($model->exists) {{ route('dashboard.list_kegiatan.laporan_harian_update', $model->id) }} @else {{ route('dashboard.list_kegiatan.laporan_harian_store', $bencana->id) }} @endif" method="POST" enctype="multipart/form-data">
+                            <form action="@if($model->exists) {{ route('dashboard.list_kegiatan.laporan_harian_update', $model->id_laporan) }} @else {{ route('dashboard.list_kegiatan.laporan_harian_store', $bencana->id) }} @endif" method="{{ ($model->exists) ? 'POST' : 'POST' }}" enctype="multipart/form-data">
                                 @csrf
-                                @method($model->exists ? 'PUT' : 'POST')
+                                @method($model->exists ? 'POST' : 'POST')
 
                                 <div class="card-block">
                                     <div class="card-body">
@@ -49,6 +49,8 @@
                                         
                                         <h5 class="mt-2">Tanggal Laporan <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
+                                            <input type="hidden" class="form-control" name="id_laporan" value="{{old('id_laporan', $model->id_laporan)}}">
+
                                             <input type="date" class="form-control" name="tgl_laporan" value="{{old('tgl_laporan', $model->tgl_laporan)}}" placeholder="Tanggal Laporan" max="{{date('Y-m-d')}}">
                                         </fieldset>
 
@@ -60,6 +62,16 @@
                                         <h5 class="mt-2">Detail Laporan <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
                                             <textarea class="form-control" row="5" name="detail_laporan">{{old('detail_laporan', $model->detail_laporan)}}</textarea>
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Total Relawan Umum<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="jml_relawan_umum" value="{{old('jml_relawan_umum', $model->jml_relawan_umum)}}" placeholder="0">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Total Relawan Terverifikasi<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="jml_relawan_private" value="{{old('jml_relawan_private', $model->jml_relawan_private)}}" placeholder="0">
                                         </fieldset>
 
                                         <h5 class="mt-2">Foto Dokumentasi </h5>

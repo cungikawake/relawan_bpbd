@@ -149,8 +149,8 @@
                                                         <fieldset class="form-group">
                                                             <select  class="form-control" name="jenis_relawan">
                                                                 <option hidden>Pikih Jenis Relawan</option>
-                                                                <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Private </option>
-                                                                <option value="0" {{ old('jenis_relawan', $model->jenis_relawan) == '0' ? 'selected' : '' }}>Public</option>
+                                                                <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Terverifikasi </option>
+                                                                <option value="2" {{ old('jenis_relawan', $model->jenis_relawan) == '2' ? 'selected' : '' }}>Umum</option>
                                                             </select>
                                                         </fieldset>
                                                     </div>

@@ -45,7 +45,25 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body"> 
-                                
+                                <div class="alert alert-success">
+                                    <form action="{{route('dashboard.list_kegiatan.laporan_harian_search', $bencana->id)}}" method="GET">
+                                        <h4>Filter Data</h4>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Tanggal Laporan</label>
+                                                    <input type="date" name="tgl_awal" class="form-control" require value="{{old('tgl_awal', $from)}}"> s/d
+                                                    <input type="date" name="tgl_akhir" class="form-control" require value="{{old('tgl_awal', $to)}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6"> 
+                                                <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter">Filter</button>
+                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak">Cetak</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
                                 <a href="{{ route('dashboard.list_kegiatan.laporan_harian_create', $bencana->id) }}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-plus"></i> Buat Baru </a>
                                 
                                 @if(Session::has('message'))
@@ -62,6 +80,7 @@
                                                 <th>Judul</th> 
                                                 <th>Laporan</th> 
                                                 <th>Tanggal</th> 
+                                                <th>Relawan</th> 
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -75,7 +94,11 @@
                                                         <td>{{$data->detail_laporan}}</td>
                                                         <td>{{date('d M Y', strtotime($data->tgl_laporan))}}</td> 
                                                         <td>
-                                                            <a title="Edit" href="{{route('dashboard.list_kegiatan.laporan_harian_edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-edit"></i></a>  
+                                                            <p>Umum : {{$data->jml_relawan_umum}}<p>
+                                                            <p>Terverifikasi : {{$data->jml_relawan_private}}<p>
+                                                        </td>
+                                                        <td>
+                                                            <a title="Edit" href="{{route('dashboard.list_kegiatan.laporan_harian_edit', $data->id_laporan)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-edit"></i></a>  
                                                              
                                                         </td>
                                                     </tr>

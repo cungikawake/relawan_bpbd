@@ -63,15 +63,38 @@
                                     <form action="{{route('dashboard.relawan.search')}}" method="GET">
                                         <h4>Filter Data</h4>
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <label>Jenis</label>
-                                                <select name="jenis_relawan" class="form-control">
-                                                    <option value="">All</option>
-                                                    <option value="1">Umum</option>
-                                                    <option value="2">Terverifikasi</option>
-                                                </select>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Jenis</label>
+                                                    <select name="jenis_relawan" class="form-control">
+                                                        <option value="">Semua Jenis</option>
+                                                        <option value="1" {{ ($filter['jenis_relawan'] == 1)? 'selected="selected"': ''}}>Terverifikasi</option>
+
+                                                        <option value="2" {{ old('jenis_relawan', $filter['jenis_relawan']) == '2' ? 'selected' : '' }}>Umum</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Organisasi</label>
+                                                    <select class="form-control" name="organisasi">
+                                                        <option value=""> Semua Data</option>
+                                                        @foreach($organisasi as $data)
+                                                            <option value="{{ $data->id }}" {{ old('organisasi', $filter['organisasi']) == $data->id ? 'selected' : '' }}>{{$data->nama_organisasi}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                
                                             </div>
-                                            <div class="col-md-4"> 
+                                            <div class="col-md-6"> 
+                                                <div class="form-group">
+                                                    <label>Keterampilan</label>
+                                                    <select class="form-control" name="skill">
+                                                        <option value=""> Semua Data</option>
+                                                        @foreach($skill as $val)
+                                                            <option value="{{ $val->id}}" {{ old('skill', $filter['skill']) == $val->id ? 'selected' : '' }}>{{$val->nama_skill}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                                 <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter">Filter</button>
                                                 <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak">Cetak</button>
                                             </div>
@@ -90,6 +113,8 @@
                                                 <th>Jenis</th> 
                                                 <th>Verifikasi</th>
                                                 <th>Nomor</th> 
+                                                <th>Organisasi</th> 
+                                                <th>Skill Utama</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -127,10 +152,8 @@
                                                         <td>{{($data->jenis_relawan == 1 && $data->nomor_relawan !='')? 'Terverifikasi': 'Umum'}}</td>
                                                         <td>{!! $data->userVerifyDisplay() !!}</td>
                                                         <td>{{$data->nomor_relawan}}</td>
-                                                        <!-- <td>
-
-                                                            
-                                                        </td> -->
+                                                        <td>{{$data->nama_organisasi}}</td>
+                                                        <td>{{$data->nama_skill}}</td>
                                                     </tr>
                                                 @endforeach
                                             @else 

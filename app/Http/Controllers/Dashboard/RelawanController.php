@@ -25,16 +25,31 @@ class RelawanController extends Controller
      */
     public function index()
     {
-        $datas = Relawan::select('*','relawan.id as id_relawan')
-                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                ->where('users.role', '=', '2') 
-                ->orWhere('users.role', '=', '3') 
-                ->orderBy('users.created_at', 'asc')
-                ->get();
+        $datas = Relawan::select(
+            'relawan.id as id_relawan', 
+            'users.name as name',
+            'users.email as email',
+            'users.tlp as tlp',
+            'relawan.jenis_relawan as jenis_relawan',
+            'relawan.nomor_relawan as nomor_relawan',
+            'induk_organisasi.nama_organisasi as nama_organisasi',
+            'skill.nama_skill as nama_skill'
+        )
+        ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+        ->leftJoin('induk_organisasi', 'induk_organisasi.id', '=', 'relawan.id_induk_relawan')
+        ->leftJoin('skill', 'skill.id', '=', 'relawan.skill_utama')
+        ->orderBy('users.name', 'asc')
+        ->get();
         
         $organisasi = IndukOrganisasi::get();
+        $skill = Skill::get();
+        $filter = [
+            'jenis_relawan' => '',
+            'organisasi' => '',
+            'skill' => ''
+        ];
 
-        return view('dashboard.relawan.index', compact('datas', 'organisasi'));
+        return view('dashboard.relawan.index', compact('datas', 'organisasi', 'skill','filter'));
     }
 
     /**
@@ -454,66 +469,55 @@ class RelawanController extends Controller
 
     public function search(Request $request)
     {   
-        if($request->btn == 'cetak'){
-            if($request->jenis_relawan != 0){
-                if($request->jenis_relawan == 1){
-                    //relawan umum
-                    $datas = Relawan::select('*','relawan.id as id_relawan')
-                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                    ->where('users.role', '=', '3') 
-                    ->orderBy('users.created_at', 'asc')
-                    ->get(); 
-    
-                }else{
-                    $datas = Relawan::select('*','relawan.id as id_relawan')
-                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                    ->where('users.role', '=', '2') 
-                    ->orderBy('users.created_at', 'asc')
-                    ->get();
-                }
-                
-    
-            }else{
-                $datas = Relawan::select('*','relawan.id as id_relawan')
-                    ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                    ->orderBy('users.created_at', 'asc')
-                    ->where('users.role', '=', '2') 
-                    ->orWhere('users.role', '=', '3') 
-                    ->get();
-            }
+        
+        //filter data
+        $datas = Relawan::select(
+            'relawan.id as id_relawan', 
+            'users.name as name',
+            'users.email as email',
+            'users.tlp as tlp',
+            'relawan.jenis_relawan as jenis_relawan',
+            'relawan.nomor_relawan as nomor_relawan',
+            'induk_organisasi.nama_organisasi as nama_organisasi',
+            'skill.nama_skill as nama_skill'
+        )
+        ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
+        ->leftJoin('induk_organisasi', 'induk_organisasi.id', '=', 'relawan.id_induk_relawan')
+        ->leftJoin('skill', 'skill.id', '=', 'relawan.skill_utama');
 
-            return view('dashboard.relawan.print_tabel', compact('datas'));
-
+        if($request->jenis_relawan == 2){
+            //relawan terverifikasi
+            $datas = $datas->where('relawan.nomor_relawan', '!=', ''); 
+        }elseif($request->jenis_relawan == 1){
+            //relawan umum
+            $datas = $datas->where('users.role', '=', '3');
         }
 
-        if($request->jenis_relawan != 0){
-            if($request->jenis_relawan == 1){
-                //relawan umum
-                $datas = Relawan::select('*','relawan.id as id_relawan')
-                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                ->where('users.role', '=', '3') 
-                ->orderBy('users.created_at', 'asc')
-                ->get(); 
+        if($request->organisasi !=''){
+            $datas = $datas->where('induk_organisasi.id', '=', $request->organisasi);
+        }
 
-            }else{
-                $datas = Relawan::select('*','relawan.id as id_relawan')
-                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                ->where('users.role', '=', '2') 
-                ->orderBy('users.created_at', 'asc')
-                ->get();
-            }
-            
+        if($request->skill !=''){
+            $datas = $datas->where('relawan.skill_utama', '=', $request->skill);
+        }
 
+        $datas = $datas->orderBy('users.name', 'asc')->get();
+         
+        $organisasi = IndukOrganisasi::get();
+        $skill = Skill::get();
+        $filter = [
+            'jenis_relawan' => $request->jenis_relawan,
+            'organisasi' => $request->organisasi,
+            'skill' => $request->skill
+        ]; 
+
+        
+        //cetak data
+        if($request->btn == 'cetak'){
+            return view('dashboard.relawan.print_tabel', compact('datas', 'organisasi', 'skill', 'filter'));
         }else{
-            $datas = Relawan::select('*','relawan.id as id_relawan')
-                ->rightJoin('users', 'users.id', '=', 'relawan.id_user')
-                ->orderBy('users.created_at', 'asc')
-                ->where('users.role', '=', '2') 
-                ->orWhere('users.role', '=', '3') 
-                ->get();
+            return view('dashboard.relawan.index', compact('datas', 'organisasi', 'skill', 'filter'));
         }
         
-         
-        return view('dashboard.relawan.index', compact('datas'));
     }
 }
