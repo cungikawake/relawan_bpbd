@@ -154,8 +154,8 @@ class ListKegiatanController extends Controller
                 ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
                 ->where('bencana.id',$id)->get();
 
-        $from = $request->tgl_awal;
-        $to = $request->tgl_akhir;
+        $from = date('Y-m-d', strtotime('-30 days'));
+        $to = date('Y-m-d');
         return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas', 'from', 'to'));
     }
 
