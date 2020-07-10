@@ -92,7 +92,7 @@ dalam melibatkan diri pada kegiatan-kegiatan penanggulangan bencana.</p>
   </footer><!-- End  Footer -->
 
   <a href="#" class="back-to-top" style="bottom: 100px;"><i class="fa fa-chevron-up"></i></a>
-  <div id="preloader"></div>
+  <div id="preloaderX"></div>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('frontpage/assets/vendor/jquery/jquery.min.js') }}"></script>

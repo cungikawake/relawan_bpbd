@@ -16,7 +16,7 @@ use Mail;
 class HomeController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
         $kategoris = Kategori::orderBy('created_at', 'asc')->get();
 
         $today = date('Y-m-d');
@@ -30,7 +30,7 @@ class HomeController extends Controller
         return view('mobile.home', compact('bencanas', 'kategoris'));
     }
 
-    public function kategori(){
+    public function kategori(Request $request){
         $kategoris = Kategori::orderBy('created_at', 'asc')->get();
         return view('mobile.kategori', compact('kategoris'));
     }
