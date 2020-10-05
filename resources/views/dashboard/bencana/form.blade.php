@@ -10,13 +10,13 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Bencana</h3>
+            <h3 class="content-header-title">Kegiatan</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
               <div class="breadcrumb-wrapper mr-1">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{ route('dashboard.bencana.index') }}">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="{{ route('dashboard.bencana.index') }}">Kegiatan</a></li>
                   <li class="breadcrumb-item active">Form</li>
                 </ol>
               </div>
@@ -48,23 +48,24 @@
 
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Judul <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Nama kegiatan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="judul_bencana" value="{{old('judul_bencana', $model->judul_bencana)}}" placeholder="Judul">
+                                                    <input type="text" class="form-control" name="judul_bencana" value="{{old('judul_bencana', $model->judul_bencana)}}" placeholder="nama kegiatan">
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Nama Pelaksana <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Nama Pelaksana / Kordinator<span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="nama_pelaksana" value="{{old('nama_pelaksana', $model->nama_pelaksana)}}" placeholder="Nama Pelaksana">
+                                                    <input type="text" class="form-control" name="nama_pelaksana" value="{{old('nama_pelaksana', $model->nama_pelaksana)}}" placeholder="Nama Pelaksana / Kordinator">
+                                                    <small>Pelaksana / Kordinator di lapangan</small>
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Instansi <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Nama Instansi <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="instansi" value="{{old('instansi', $model->instansi)}}" placeholder="Instansi">
+                                                    <input type="text" class="form-control" name="instansi" value="{{old('instansi', $model->instansi)}}" placeholder="contoh : Dinas Bpbd - Kota Denpasar">
                                                 </fieldset>
                                             </div> 
                                             <div class="col-md-6">
@@ -79,47 +80,37 @@
                                                 </fieldset>
                                             </div>
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Keperluan Bencana <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Jenis Kegiatan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                      
                                                     <select class="form-control" name="jenis_bencana">
-                                                        <option hidden>Pilih Keperluan Bencana</option>
+                                                        <option hidden>Pilih Jenis Kegiatan</option>
                                                         <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Private (Relawan Terverifikasi)</option>
                                                         <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik (Semua Jenis Relawan)</option>
                                                     </select>
+                                                    <small>Kegiatan ini boleh diikuti oleh jenis relawan private atau publik</small>
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Quota Relawan <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Quota Relawan (Orang)<span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="quota_relawan" value="{{old('quota_relawan', $model->quota_relawan)}}" placeholder="Quota Relawan">
+                                                    <input type="number" class="form-control" name="quota_relawan" value="{{old('quota_relawan', $model->quota_relawan)}}" placeholder="Quota Relawan" min="0">
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-6">
-                                                <h5 class="mt-2">Bencana di Publikasikan <span class="danger">*</span></h5>
-                                                <fieldset class="form-group">
-                                                    {{-- <input type="text" class="form-control" name="status_jenis" value="{{old('status_jenis', $model->status_jenis)}}" placeholder="Status Jenis"> --}}
-                                                    <select class="form-control" name="status_jenis">
-                                                        <option hidden>Pilih Status Jenis</option>
-                                                        <option value="1" {{ old('status_jenis', $model->status_jenis) == '1' ? 'selected' : '' }}>Ya</option>
-                                                        <option value="0" {{ old('status_jenis', $model->status_jenis) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
                                             
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Tanggal Mulai <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="date" class="form-control" name="tgl_mulai" value="{{old('tgl_mulai', $model->tgl_mulai)}}" placeholder="Tanggal Mulai">
+                                                    <input type="date" class="form-control" name="tgl_mulai" value="{{old('tgl_mulai', $model->tgl_mulai)}}" placeholder="Tanggal Mulai" min="{{ date('Y-m-d') }}">
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-6">
                                                 <h5 class="mt-2">Tanggal Selesai <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="date" class="form-control" name="tgl_selesai" value="{{old('tgl_selesai', $model->tgl_selesai)}}" placeholder="Tanggal Selesai">
+                                                    <input type="date" class="form-control" name="tgl_selesai" value="{{old('tgl_selesai', $model->tgl_selesai)}}" placeholder="Tanggal Selesai" min="{{ date('Y-m-d') }}">
                                                 </fieldset>
                                             </div>
                                             
@@ -199,37 +190,38 @@
                                             </div>
                                             
                                             <div class="col-md-12">
-                                                <h5 class="mt-2">Detail Tugas <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Detail Tugas Relawan<span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     <textarea class="form-control" name="detail_tugas" rows="3">{{old('detail_tugas', $model->detail_tugas)}}</textarea>
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" style="display:none">
                                                 <h5 class="mt-2">Durasi Tugas <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="durasi_tugas" value="{{old('durasi_tugas', $model->durasi_tugas)}}" placeholder="Durasi Tugas">
+                                                    <input type="text" class="form-control" name="durasi_tugas" value="1" placeholder="Durasi Tugas">
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-md-12">
-                                                <h5 class="mt-2">Lokasi Tugas <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Lokasi Kegiatan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     <input type="text" class="form-control" name="lokasi_tugas" value="{{old('lokasi_tugas', $model->lokasi_tugas)}}" placeholder="Lokasi Tugas" id="lokasi_tugas" onFocus="geolocate()">
+                                                    <small>Allow Location terlebih dahulu. Ketikan nama jalan / lokasi pos / lokasi kantor sesuai google map</small>
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <h5 class="mt-2">Koordinat Tugas <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="koordinat_tugas" value="{{old('koordinat_tugas', $model->koordinat_tugas)}}" placeholder="Koordinat Tugas" id="koordinat_tugas">
+                                                    <input type="text" class="form-control" name="koordinat_tugas" value="{{old('koordinat_tugas', $model->koordinat_tugas)}}" placeholder="Koordinat Tugas" id="koordinat_tugas" readonly>
                                                 </fieldset>
                                             </div>
                                             
-                                            <div class="col-md-6">
-                                                <h5 class="mt-2">Supervisi Tugas <span class="danger">*</span></h5>
+                                            <div class="col-md-6" style="display:none;">
+                                                <!-- <h5 class="mt-2">Supervisi Tugas <span class="danger">*</span></h5> -->
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="supervisi_tugas" value="{{old('supervisi_tugas', $model->supervisi_tugas)}}" placeholder="Supervisi Tugas">
+                                                    <input type="text" class="form-control" name="supervisi_tugas" value="xxx" placeholder="Supervisi Tugas">
                                                 </fieldset>
                                             </div>
                                             
@@ -244,7 +236,7 @@
                                             {{-- <div class="col-md-6">
                                                 <h5 class="mt-2">Kordinator Relawan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="kordinator_relawan" value="{{old('kordinator_relawan', $model->kordinator_relawan)}}" placeholder="Kordinator Relawan">
+                                                    <input type="text" class="form-control" name="kordinator_relawan" value="{{old('kordinator_relawan', $model->kordinator_relawan)}}" placeholder="Kordinator Relawan" readonly="readonly"> 
                                                 </fieldset>
                                             </div> --}}
                                             
@@ -252,8 +244,22 @@
                                                 <h5 class="mt-2">Foto Bencana <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                     <input type="file" class="form-control" name="foto_bencana" value="{{old('foto_bencana')}}" placeholder="Foto Bencana">
+                                                    <small>Jenis file .jpg, max size 2MB</small>
                                                 </fieldset>
                                             </div>
+
+                                            <div class="col-md-12">
+                                                <h5 class="mt-2">Status Kegiatan <span class="danger">*</span></h5>
+                                                <fieldset class="form-group">
+                                                    {{-- <input type="text" class="form-control" name="status_jenis" value="{{old('status_jenis', $model->status_jenis)}}" placeholder="Status Jenis"> --}}
+                                                    <select class="form-control" name="status_jenis">
+                                                        <option hidden>Pilih Status Jenis</option>
+                                                        <option value="1" {{ old('status_jenis', $model->status_jenis) == '1' ? 'selected' : '' }}>Aktif</option>
+                                                        <option value="0" {{ old('status_jenis', $model->status_jenis) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            
                                         </div>
                                         
                                     </div>
@@ -368,7 +374,6 @@
         }
     }
 </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initAutocomplete" async defer></script>
-{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJTIHh1GRN37zuOlt-4XWrsm-XY2LwzNc&libraries=places&callback=initAutocomplete" async defer></script> --}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvYG6uS3dswdGzItrY8_akP79eOEQYskY&libraries=places&callback=initAutocomplete" async defer></script>
+ 
 @endpush

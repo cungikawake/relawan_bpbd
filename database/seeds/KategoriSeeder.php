@@ -16,6 +16,7 @@ class KategoriSeeder extends Seeder
             foreach ($kategoris as $kategori) {
                 $data = new Kategori;
                 $data->nama_kategori = $kategori;
+                $data->gambar = '';
                 $data->save();
                 $i+=1;
             }

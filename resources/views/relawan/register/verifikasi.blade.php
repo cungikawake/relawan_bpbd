@@ -89,7 +89,7 @@
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">email <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="text" class="form-control" name="email" value="{{old('email', $user->email)}}" placeholder="email">
+                                                            <input type="text" class="form-control" name="email" value="{{old('email', $user->email)}}" placeholder="email" readonly>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6">
@@ -141,7 +141,7 @@
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">No Hp <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp)}}" placeholder="contoh 081999122323">
+                                                            <input type="number" class="form-control" name="tlp" value="{{old('tlp', $model->tlp)}}" placeholder="contoh 081999122323">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6" style="display:none;">

@@ -25,7 +25,7 @@
                 <a href="{{route('dashboard.bencana.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">Bencana</span></a>
             </li> --}}
 
-            <li class=" nav-item has-sub {{ (request()->is('dashboard/induk-organisasi*')) || (request()->is('dashboard/skill*')) || (request()->is('dashboard/persyaratan*')) || (request()->is('dashboard/bencana*')) ? 'open' : '' }}"><a href="#"><i class="la la-keyboard-o"></i><span class="menu-title" data-i18n="">Master Data</span></a>
+            <li class=" nav-item has-sub {{ (request()->is('dashboard/induk-organisasi*')) || (request()->is('dashboard/skill*')) || (request()->is('dashboard/persyaratan*'))   ? 'open' : '' }}"><a href="#"><i class="la la-keyboard-o"></i><span class="menu-title" data-i18n="">Master Data</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->is('dashboard/user*')) ? 'active' : '' }}">
                         <a href="{{route('dashboard.user.index')}}"><span class="menu-item" data-i18n="">User</span></a>
@@ -42,18 +42,23 @@
                     </li>
                     <li class="{{ (request()->is('dashboard/kategori*')) ? 'active' : '' }}">
                         <a class="menu-item" href="{{route('dashboard.kategori.index')}}">Kategori Bencana</a>
-                    </li>
+                    </li> 
+                </ul>
+            </li>
+            <li class=" nav-item has-sub {{ (request()->is('dashboard/bencana*')) || (request()->is('dashboard/list-kegiatan*'))  ? 'open' : '' }}"><a href="#"><i class="la la-support"></i><span class="menu-title" data-i18n="">Kegiatan</span></a>
+                <ul class="menu-content">
                     <li class="{{ (request()->is('dashboard/bencana*')) ? 'active' : '' }}">
-                        <a class="menu-item" href="{{route('dashboard.bencana.index')}}">Kegiatan</a>
+                        <a class="menu-item" href="{{route('dashboard.bencana.index')}}"><i class="la la-puzzle-piece"></i><span class="menu-title" data-i18n=""> Master Kegiatan</a>
                     </li>
+                    <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}">
+                        <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n=""> Pantau Kegiatan</span></a>
+                    </li> 
                 </ul>
             </li>
             <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-male"></i><span class="menu-title" data-i18n="">Relawan</span></a>
             </li>
-            <li class=" nav-item {{ (request()->is('dashboard/list-kegiatan*')) ? 'active' : '' }}">
-                <a href="{{route('dashboard.list_kegiatan.index')}}"><i class="la la-map"></i><span class="menu-title" data-i18n="">List Kegiatan</span></a>
-            </li> 
+            
             <!-- <li class=" nav-item {{ (request()->is('dashboard/relawan*')) ? 'active' : '' }}">
                 <a href="{{route('dashboard.relawan.index')}}"><i class="la la-compass"></i><span class="menu-title" data-i18n="">Evaluasi</span></a>
             </li> -->

@@ -10,14 +10,14 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Bencana</h3>
+            <h3 class="content-header-title">Master Kegiatan</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
               <div class="breadcrumb-wrapper mr-1">
                 <ol class="breadcrumb">
                   {{-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li> --}}
-                  <li class="breadcrumb-item active">Bencana</li>
+                  <li class="breadcrumb-item active">Kegiatan</li>
                 </ol>
               </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Bencana</h4>
+                            <h4 class="card-title">Data Kegiatan</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -88,7 +88,9 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{route('dashboard.bencana.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
+
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>
+                                                            
                                                             <form action="{{route('dashboard.bencana.destroy', $data->id)}}" id="delete-{{$data->id}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

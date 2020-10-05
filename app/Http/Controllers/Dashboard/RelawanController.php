@@ -354,7 +354,11 @@ class RelawanController extends Controller
             }
 
             $data->save();
-            
+
+            $user = User::findOrFail($data->id_user);
+            $user->status_verified = '1';
+            $user->save();
+
             $this->createSkill($request, $data);
             $this->createPelatihan($request, $data);
             $this->createPengalaman($request, $data);

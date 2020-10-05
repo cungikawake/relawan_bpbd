@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Relawan;
 use App\User;
 
 class UserController extends Controller
@@ -120,7 +121,10 @@ class UserController extends Controller
             }
             $data->save();
 
-            return redirect()->route('dashboard.user.index')->with('message', 'Data diupdate diubah.');
+            //relawan
+            $relawan = Relawan::where('id_user', $data->id)->first();
+
+            return redirect('dashboard/relawan/'.$relawan->id.'/edit')->with('message', 'Data diupdate diubah.');
         }
     }
 

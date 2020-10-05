@@ -12,14 +12,14 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">List Kegiatan</h3>
+            <h3 class="content-header-title">Pantau Kegiatan</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
               <div class="breadcrumb-wrapper mr-1">
                 <ol class="breadcrumb">
                   {{-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li> --}}
-                  <li class="breadcrumb-item active">Kegiatan</li>
+                  <li class="breadcrumb-item active">Pantau Kegiatan</li>
                 </ol>
               </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">List Kegiatan</h4>
+                            <h4 class="card-title">Pantau Kegiatan</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -97,8 +97,13 @@
                                                         </td>
                                                         <td>
                                                             <a title="Detail" href="{{route('dashboard.list_kegiatan.detail', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-users"></i></a>
+
                                                             <a title="Map"  href="{{route('dashboard.list_kegiatan.map', $data->id)}}" class="btn btn-icon btn-primary btn-sm"><i class="la la-map"></i></a>
-                                                            <a title="Laporan Harian" href="{{route('dashboard.list_kegiatan.laporan_harian', $data->id)}}" class="btn btn-info btn-icon btn-sm mr-1 mb-1"><i class="la la-file"></i> </a>
+                                                            
+                                                            @if($data->tgl_selesai > date('Y-m-d'))
+                                                                <a title="Laporan Harian" href="{{route('dashboard.list_kegiatan.laporan_harian', $data->id)}}" class="btn btn-icon btn-info btn-sm"><i class="la la-file"></i> </a>
+                                                            @endif
+                                                            
                                 
                                                         </td>
                                                     </tr>

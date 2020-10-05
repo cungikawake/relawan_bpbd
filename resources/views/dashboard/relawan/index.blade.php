@@ -123,7 +123,7 @@
                                                     <tr>
                                                         <td>
                                                         @if($data->id_relawan)
-                                                        <a href="{{route('dashboard.relawan.edit', $data->id_relawan)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
+                                                            <a href="{{route('dashboard.relawan.edit', $data->id_relawan)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
 
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id_relawan}}" title="Hapus"><i class="la la-ban"></i></button>
                                                             <form action="{{route('dashboard.relawan.destroy', $data->id_relawan)}}" id="delete-{{$data->id_relawan}}" method="POST">
@@ -142,15 +142,15 @@
                                                                 <br>
                                                             @endif
                                                         @else
-                                                            Belum Kirim Data
+                                                            Data Belum Lengkap
                                                         @endif
                                                         </td>
                                                          
                                                         <td>{{$data->name}}</td>
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->tlp}}</td>
-                                                        <td>{{($data->jenis_relawan == 1 && $data->nomor_relawan !='')? 'Terverifikasi': 'Umum'}}</td>
-                                                        <td>{!! $data->userVerifyDisplay() !!}</td>
+                                                        <td>{{($data->jenis_relawan == 1 && $data->nomor_relawan !='')? 'Private': 'Publik'}}</td>
+                                                        <td>{{($data->nomor_relawan != '' && $data->nomor_relawan !='')? 'Sudah': 'Belum'}}</td>
                                                         <td>{{$data->nomor_relawan}}</td>
                                                         <td>{{$data->nama_organisasi}}</td>
                                                         <td>{{$data->nama_skill}}</td>
