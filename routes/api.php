@@ -87,8 +87,7 @@ Route::get('list_bencana/detail', 'Api\BencanaController@detail');
 Route::get('kategori', 'Api\BencanaController@getKategori');  
 //master data
 Route::get('organisasi', 'Api\RelawanController@organisasi');
-Route::get('skill', 'Api\RelawanController@skill');
-
+Route::get('skill', 'Api\RelawanController@skill'); 
 //relawan
 Route::group(['middleware'=> ['auth:api']], function (){
      
