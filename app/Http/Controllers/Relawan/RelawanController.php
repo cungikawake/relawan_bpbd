@@ -60,14 +60,13 @@ class RelawanController extends Controller
                 'pekerjaan' => 'required',
                 'ktp' => 'required',
                 'ktp_file' => 'required|mimes:jpg,jpeg,png,bmp|max:5000',
-                'foto_file' => 'required|mimes:jpg,jpeg,png,bmp|max:5000',
+                'foto_file' => 'mimes:jpg,jpeg,png,bmp|max:5000',
                 'alamat' => 'required',
                 'tlp' => 'required',
                 //'jenis_relawan' => 'required',
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
-                'kota' => 'required',
-
+                'kota' => 'required', 
                 'skill' => 'required'
             ]
         );
@@ -76,6 +75,7 @@ class RelawanController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         }else{ 
+            //dd($request->all());
             $data = new Relawan();
             $data->id_user = $request->id_user;
             $data->id_induk_relawan = $request->id_induk_relawan;
@@ -100,15 +100,18 @@ class RelawanController extends Controller
             $user->email = $request->email;
             $user->save();
             
-            $image = $request->ktp_file;
+            $image = $request->ktp_file; 
             $imageName = 'ktp-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
             $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
             $data->ktp_file = $imageName;
             
             $image = $request->foto_file;
-            $imageName = 'foto-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
-            $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
-            $data->foto_file = $imageName;
+            if(!empty($image)){
+                $imageName = 'foto-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+                $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
+                $data->foto_file = $imageName;
+            }
+            
 
             $data->save();
             
@@ -147,8 +150,8 @@ class RelawanController extends Controller
     public function createPelatihan($request, $data)
     {
         $delete = RelawanPelatihan::where('id_relawan', '=', $data->id)->delete();
-
-        for($i=0; $i < count($request->id_pelatihan); $i++){
+         
+        for($i=0; $i < count($request->jenis_pelatihan); $i++){
 
             if($request->detail_pelatihan[$i] || $request->jenis_pelatihan[$i] || $request->tempat_pelatihan[$i] || $request->penyelenggara_pelatihan[$i] || $request->tahun_pelatihan[$i]){
                 $detail = new RelawanPelatihan();
@@ -168,7 +171,7 @@ class RelawanController extends Controller
     {
         $delete = RelawanPengalaman::where('id_relawan', '=', $data->id)->delete();
 
-        for($i=0; $i < count($request->id_pengalaman); $i++){
+        for($i=0; $i < count($request->jenis_bencana); $i++){
 
             if($request->detail_pengalaman[$i] || $request->jenis_bencana[$i] || $request->lokasi[$i] || $request->tahun[$i]){
                 $detail = new RelawanPengalaman();

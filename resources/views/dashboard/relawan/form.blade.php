@@ -69,6 +69,13 @@
                                                             <input type="text" class="form-control" name="id_user" value="{{old('id_user', $model->id_user)}}" placeholder="otomatis terisi" readonly>
                                                         </fieldset>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <h5 class="mt-2">Nomor Relawan</h5>
+                                                        <fieldset class="form-group">
+                                                            <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
+                                                        </fieldset>
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">Organisasi Relawan <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
@@ -128,15 +135,30 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">Upload Ktp / Sim <span class="danger">*</span></h5>
+                                                        @if(!empty($model->ktp_file))
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim">
+                                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" style="max-height:50px;">
                                                         </fieldset>
+                                                        @else
+                                                        <fieldset class="form-group">
+                                                            <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim">
+                                                            
+                                                        </fieldset>
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <h5 class="mt-2">Upload Pas Foto 4X6 <span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">Upload Pas Foto <span class="danger"></span></h5>
+                                                        @if(!empty($model->foto_file))
+                                                        <fieldset class="form-group">
+                                                            <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto 4x6">
+                                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" style="max-height:50px;">
+                                                        </fieldset>
+                                                        @else 
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto 4x6">
                                                         </fieldset>
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">No Hp <span class="danger">*</span></h5>
@@ -152,12 +174,6 @@
                                                                 <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Terverifikasi </option>
                                                                 <option value="2" {{ old('jenis_relawan', $model->jenis_relawan) == '2' ? 'selected' : '' }}>Umum</option>
                                                             </select>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h5 class="mt-2">Nomor Relawan</h5>
-                                                        <fieldset class="form-group">
-                                                            <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">
@@ -343,7 +359,10 @@
                                                 <div class="row mt-2">
                                                     <div class="col-md-12">
                                                         <div class="float-right">
-                                                            <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Simpan</button>
+                                                            <p>Apakah relawan ini sudah layak ?<p>
+                                                            <button type="submit" class="btn btn-danger btn-min-width mr-1 mb-1" value="0" name="approve">Tolak & Hapus</button>
+
+                                                            <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1" value="1" name="approve">Simpan & Verifikasi</button>
                                                         </div>
                                                         <div class="float-left">
                                                             <a href="{{ route('dashboard.bencana.index') }}">

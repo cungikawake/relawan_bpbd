@@ -61,12 +61,12 @@ class BencanaController extends Controller
         return view('frontpage.bencana.detail_bencana', compact('bencana', 'skill_minimal', 'syarat_minimal'));
     }
 
-    public function join($id = null){
+    public function join($id = null){ 
         $user = Auth::user();
         $detail_bencana = Bencana::findOrFail($id);
         
         if(empty($detail_bencana)){
-            return  redirect('/');
+            return  redirect()->back();
         }
 
         $user = Auth::user();
@@ -74,9 +74,9 @@ class BencanaController extends Controller
             return redirect('login');
 
         }else{
-            
+            //get relawan
             $relawan = Relawan::where('id_user', $user->id)->first();
-             
+            
             //pastikan user memiliki join 1 bencana yang aktif pada durasi yang sama
             $today=date('Y-m-d');//hari ini
             
@@ -87,9 +87,11 @@ class BencanaController extends Controller
                     ->orderBy('bencana.tgl_selesai', 'ASC')
                     ->get(); 
             
-            
+            if($detail_bencana->jenis_bencana == 1 && $relawan->nomor_relawan ==''){
+                return redirect()->back()->with('message', 'Maaf saat ini anda belum bisa mengikuti kegiatan '.$detail_bencana->judul_bencana.', Karena akun anda masih di tinjau.'); 
+            }
 
-            //cek apakah ini bencana private ?
+            //cek apakah ini bencana private dan relawan sudah di approve ?
             if($detail_bencana->jenis_bencana == 1 && $relawan->nomor_relawan !=''){
                 //apakah sudah pernah join
                 if(count($bencanas) > 0){
@@ -102,11 +104,11 @@ class BencanaController extends Controller
                         //bencana yang sama atau sudah berakhir
                         if($detail_bencana->id == $bencana->id_bencana){
                             
-                            return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung disalah satu kegiatan yang waktunya berlangsung bersamaan.');
+                            return redirect()->back()->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung disalah satu kegiatan yang waktunya berlangsung bersamaan.');
 
                         }else if($date3 <= $date1){
                              
-                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
+                            return redirect()->back()->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
 
                         }else{
                             $join = new RelawanBencana;
@@ -142,10 +144,9 @@ class BencanaController extends Controller
                             ->where('id_bencana', $detail_bencana->id)
                             ->get();
                         
-                        if(count($bencanas) > 0){
-
-                            return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
-
+                        if(count($bencanas) > 0 && $bencanas[0]->status_join == 1){
+                            return redirect()->back()->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
+    
                         }else{
                             
                             $join = new RelawanBencana;
@@ -169,7 +170,7 @@ class BencanaController extends Controller
 
                     }else{
 
-                        return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Kegiatan sudah berakhir.');
+                        return redirect()->back()->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Kegiatan sudah berakhir.');
                     }
                 }
                  
@@ -188,11 +189,11 @@ class BencanaController extends Controller
                         //bencana yang sama atau sudah berakhir
                         if($detail_bencana->id == $bencana->id_bencana){
                             
-                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung pada kegiatan ini.');
+                            return redirect()->back()->with('message', 'Maaf, anda tidak bisa bergabung sekarang. Karena saat ini sudah bergabung pada kegiatan ini.');
 
                         }else if($date3 <= $date1){
                              
-                            return redirect('/bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
+                            return redirect()->back()->with('message', 'Maaf, Hari ini anda tidak bisa bergabung sekarang. Anda sedang aktif di salah satu kegiatan lain.');
 
                         }else{
                             $join = new RelawanBencana;
@@ -225,11 +226,10 @@ class BencanaController extends Controller
 
                     $bencanas = RelawanBencana::where('id_user', $user->id) 
                             ->where('id_bencana', $detail_bencana->id)
-                            ->get();
-                     
+                            ->get();  
 
-                    if(count($bencanas) > 0){
-                        return redirect('bencana/detail/'.$detail_bencana->id)->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
+                    if(count($bencanas) > 0 && $bencanas[0]->status_join == 1){
+                        return redirect()->back()->with('message', 'Maaf, anda sudah mengirim permintaan berganbung pada kegiatan ini. ');
 
                     }else{
                         
@@ -253,6 +253,8 @@ class BencanaController extends Controller
                     }
                 }
                 
+            }else{
+                return redirect()->back()->with('message', 'Maaf saat ini anda belum bisa mengikuti kegiatan ini, harap untuk memilih kegiatan yang lain');
             } 
         }
     }

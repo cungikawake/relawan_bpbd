@@ -26,7 +26,7 @@
                                     <div class="media d-flex m-1 ">
                                         <div class="align-left p-1">
                                             <a href="#" class="profile-image">
-                                                <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Card image">
+                                                <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="profile image">
                                             </a>
                                         </div>
                                         <div class="media-body text-left  mt-1">
@@ -74,7 +74,12 @@
                         <div class="media d-flex m-1 ">
                             <div class="align-left p-1">
                                 <a href="#" class="profile-image">
-                                    <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
+                                    @if(empty($model->foto_file))
+                                        <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Card image">
+                                    @else
+                                        <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
+
+                                    @endif
                                 </a>
                             </div>
                             <div class="media-body text-left  mt-1">
@@ -94,7 +99,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
-                                           Data Pribadi sudah terkiri, Akun anda belum terverifikasi oleh tim.
+                                           Data Pribadi sudah terkirim, Permintaan anda belum terverifikasi oleh tim kami.
                                         </div>
                                     @else
                                         <i class="ft-file white"> </i>{{$model->nomor_relawan}}

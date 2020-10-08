@@ -30,6 +30,12 @@
         input[type='checkbox'] {
             margin-top: 0.24rem !important;
         }
+        body.vertical-layout[data-color=bg-chartbg] .navbar-container, body.vertical-layout[data-color=bg-chartbg] .content-wrapper-before{
+          background-color: #e28f12 !important;
+        }
+        .content-wrapper-before{
+          height: 180px !important;
+        }
     </style>
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">

@@ -282,6 +282,11 @@ class RelawanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //JIKA RELAWAN DI TOLAK
+        if($request->approve == 0){
+            $this->destroy($id);
+        }
+
         $validator = Validator::make( $request->all(), [
                 // 'id_user' => 'required',
                 'id_induk_relawan' => 'required',
@@ -304,6 +309,7 @@ class RelawanController extends Controller
                 'skill' => 'required'
             ]
         );
+
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
@@ -377,8 +383,7 @@ class RelawanController extends Controller
     {
         $model = Relawan::findOrFail($id);
         if($model->user){
-            $model->user->delete();
-
+            //$model->user->delete(); 
         }
         foreach($model->skills as $row){
             $row->delete();

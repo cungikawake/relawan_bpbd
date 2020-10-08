@@ -11,7 +11,7 @@
                 <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
                   <span class="avatar avatar-online"><img src="/images/user.jpg" alt="avatar"><i></i></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-right" style="min-width: 250px;">
                     <div class="arrow_box_right">
                       <a class="dropdown-item" href="#">
                         <span class="avatar avatar-online">

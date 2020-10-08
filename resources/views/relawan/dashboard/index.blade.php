@@ -17,9 +17,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Selamat Datang {{ $user->name }}, Sekarang anda adalah Relawan Umum</h4>
-                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan bencana bersifat umum</h6>
+                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan  jenis umum</h6>
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
 
-                                
+                                 -->
                                 <div class="alert alert-secondary">
                                     <p>Apakah anda ingin menjadi Relawan Terverifikasi, Ajukan data diri  sekarang!</p>
                                     <a href="{{ route('bencana') }}">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="alert alert-secondary">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
                 <!-- Chart -->
@@ -93,7 +93,7 @@
                 <div class="row">
                     @if($relawan->nomor_relawan == null)
                         <div class="alert with-close alert-info mt-2">
-                            Mohon, menunggu akun anda belum terverifikasi.
+                            Mohon, menunggu akun anda sedang proses di tinjau.
                         </div>
                     @endif 
                 </div>
@@ -101,39 +101,89 @@
 
                 <!-- Chart -->
                 <div class="row match-height">
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                          <a href="{{ url('/relawan/profile') }}">
                          <div class="card">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <img src="https://image.flaticon.com/icons/svg/2825/2825345.svg" style="max-height:100px;">
+                                <h3>Profile</h3>
                             </div>
                          </div>
                          </a>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <a href="{{ url('/relawan/bencana') }}">
                          <div class="card">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <img src="https://image.flaticon.com/icons/svg/1684/1684394.svg" style="max-height:100px;">
+                                <h3>Kegiatan</h3>
                             </div>
                          </div>
                          </a>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <a href="{{ url('/relawan/bantuan') }}">
                          <div class="card">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <img src="https://image.flaticon.com/icons/svg/544/544570.svg" style="max-height:100px;">
+                                <h3>Bantuan</h3>
                             </div>
                          </div>
                         </a>
-                    </div>
+                    </div> 
                 </div>
-                <!-- Chart -->
-
-                
+                <!-- Chart --> 
             </div>
         @endif
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card pull-up ecom-card-1 bg-white">
+                    <div class="card-content ecom-card2 height-180">
+                        <div class="card-header">
+                            <h5 class="text-muted success position-absolute p-1">Total Disetujui</h5>
+                            <div>
+                                <i class="la la-thumbs-up success font-large-1 float-right p-1"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h2 class="position-absolute p-1">{{ $bencana['aktif'] }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card pull-up ecom-card-1 bg-white">
+                    <div class="card-content ecom-card2 height-180">
+                        <div class="card-header">
+                            <h5 class="text-muted danger position-absolute p-1">Total Ditolak</h5>
+                            <div>
+                                <i class="la la-thumbs-down danger font-large-1 float-right p-1"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h2 class="position-absolute p-1">{{ $bencana['ditolak'] }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card pull-up ecom-card-1 bg-white">
+                    <div class="card-content ecom-card2 height-180">
+                        <div class="card-header">
+                            <h5 class="text-muted warning position-absolute p-1">Total Keluar</h5>
+                            <div>
+                                <i class="la la-user-times warning font-large-1 float-right p-1"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h2 class="position-absolute p-1">{{ $bencana['keluar'] }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>

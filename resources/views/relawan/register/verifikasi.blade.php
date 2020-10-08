@@ -33,6 +33,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Formulir Pendataan Relawan</h4>
                                 <p>Lengkapi form persyaratan pendaftaran dari form 1 s/d 3</p>
+                                <p class="badge badge-warning">Wajib isi bertanda bintang (*)</p>
                             </div>
                             <form action="@if($model->exists) {{ route('relawan.verifikasi.update', $model->id) }} @else {{ route('relawan.verifikasi.store') }} @endif" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -130,18 +131,20 @@
                                                         <h5 class="mt-2">Upload Ktp / Sim <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim" required>
+                                                            <small>Format JPG, Ukuran max 2MB</small>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <h5 class="mt-2">Upload Pas Foto 4X6 <span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">Upload Foto Wajah <span class="danger"></span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto 4x6" required>
+                                                            <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto">
+                                                            <small>Format JPG, Ukuran max 2MB</small>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">No Hp <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="number" class="form-control" name="tlp" value="{{old('tlp', $model->tlp)}}" placeholder="contoh 081999122323">
+                                                            <input type="number" class="form-control" name="tlp" value="{{old('tlp', $user->tlp)}}" placeholder="contoh 081999122323">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6" style="display:none;">
@@ -222,7 +225,7 @@
 
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">PELATIHAN PENANGGULANGAN BENCANA YANG PERNAH DIIKUTI <span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">PELATIHAN PENANGGULANGAN BENCANA YANG PERNAH DIIKUTI <span class="danger"></span></h5>
                                                     </div>
                                                 </div>
                                                 <div id="form-pelatihan">
@@ -231,7 +234,8 @@
                                                             <div class="col-md-6">
                                                                 <h5 class="mt-0">Jenis Pelatihan</h5>
                                                                 <fieldset class="form-group mb-1">
-                                                                <input type="hidden" class="form-control" name="id_pelatihan[]" value="{{ $pelatihan[$i]->id }}" placeholder="ID Pelatihan">
+                                                                    <input type="hidden" class="form-control" name="id_pelatihan[]" value="{{ $pelatihan[$i]->id }}" placeholder="ID Pelatihan">
+
                                                                     <input type="text" class="form-control" name="jenis_pelatihan[]" value="{{ $pelatihan[$i]->jenis_pelatihan }}" placeholder="Jenis Pelatihan">
                                                                 </fieldset>
                                                             </div>
@@ -292,7 +296,7 @@
                                                 
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">PENGALAMAN PENANGGULANGAN BENCANA YANG PERNAH DILAKUKAN <span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">PENGALAMAN PENANGGULANGAN BENCANA YANG PERNAH DILAKUKAN <span class="danger"></span></h5>
                                                     </div>
                                                 </div>
 
@@ -303,6 +307,7 @@
                                                                 <h5 class="mt-0">Jenis Bencana</h5>
                                                                 <fieldset class="form-group mb-1">
                                                                     <input type="hidden" class="form-control" name="id_pengalaman[]" value="{{ $pengalaman[$i]->id }}" placeholder="ID Bencana">
+                                                                    
                                                                     <input type="text" class="form-control" name="jenis_bencana[]" value="{{ $pengalaman[$i]->jenis_bencana }}" placeholder="Jenis Bencana">
                                                                 </fieldset>
                                                             </div>
@@ -474,6 +479,7 @@
 
     $(document).on('click', '#simpan', function(){
         var data_lengkap = 1;
+
         $('[required=required]').each(function(i, obj) {
             if($(this).val().length == 0){
                 data_lengkap = 0;  
