@@ -80,11 +80,11 @@
                                                 </fieldset>
                                             </div>
                                             <div class="col-md-6">
-                                                <h5 class="mt-2">Jenis Kegiatan <span class="danger">*</span></h5>
+                                                <h5 class="mt-2">Jenis Bergabung Kegiatan <span class="danger">*</span></h5>
                                                 <fieldset class="form-group">
                                                      
                                                     <select class="form-control" name="jenis_bencana">
-                                                        <option hidden>Pilih Jenis Kegiatan</option>
+                                                        <option hidden>Pilih Jenis Bergabung Kegiatan </option>
                                                         <option value="1" {{ old('jenis_bencana', $model->jenis_bencana) == '1' ? 'selected' : '' }}>Private (Relawan Terverifikasi)</option>
                                                         <option value="2" {{ old('jenis_bencana', $model->jenis_bencana) == '2' ? 'selected' : '' }}>Publik (Semua Jenis Relawan)</option>
                                                     </select>

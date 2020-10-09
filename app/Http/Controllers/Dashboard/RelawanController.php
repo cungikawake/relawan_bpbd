@@ -273,6 +273,8 @@ class RelawanController extends Controller
         return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'kota'));
     }
 
+     
+
     /**
      * Update the specified resource in storage.
      *
@@ -296,7 +298,7 @@ class RelawanController extends Controller
                 'jenis_kelamin' => 'required',
                 'pendidikan' => 'required',
                 'pekerjaan' => 'required',
-                'ktp' => 'required',
+                //'ktp' => 'required',
                 // 'ktp_file' => 'required',
                 // 'foto_file' => 'required',
                 'alamat' => 'required',
@@ -363,6 +365,7 @@ class RelawanController extends Controller
 
             $user = User::findOrFail($data->id_user);
             $user->status_verified = '1';
+            $user->role = '2'; //private
             $user->save();
 
             $this->createSkill($request, $data);
@@ -382,8 +385,10 @@ class RelawanController extends Controller
     public function destroy($id)
     {
         $model = Relawan::findOrFail($id);
-        if($model->user){
-            //$model->user->delete(); 
+        if($model->user){ 
+            $model->user->role = '3';
+            $model->user->status_verified = '';
+            $model->user->save();
         }
         foreach($model->skills as $row){
             $row->delete();
@@ -404,7 +409,11 @@ class RelawanController extends Controller
         if (file_exists(public_path($path.$model->foto_file)) && !is_null($model->foto_file) && $model->foto_file != '') {
             $del_image = unlink(public_path($path.$model->foto_file));
         }
-        $model->delete();
+        $model->id_induk_relawan = 0;
+        $model->nomor_relawan = '';
+        $model->ktp_file = '';
+        $model->foto_file = '';
+        $model->save();
 
         return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil dihapus.');
     }

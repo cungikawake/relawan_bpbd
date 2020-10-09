@@ -29,7 +29,7 @@
                 </h3>
             </div>
             <div class="col-12 m-0 position-relative">
-                <img src="{{ $model->displayFoto() }}" width="200" style="position: absolute; right: 10px; top: 50px; z-index: 10;">
+                <img src="{{ $model->displayKtp() }}" width="200" style="position: absolute; right: 10px; top: 50px; z-index: 10;" alt="Foto Ktp Tidak Ada">
             </div>
             <div class="col-12 mt-4">
                 <ol type="I">
@@ -77,7 +77,7 @@
                     </li>
 
                     <li class="font-weight-bold mt-4">ORGANISASI INDUK RELAWAN PB
-                        
+                        @if(isset($model->induk_organisasi->nama_organisasi))
                         <ol type="a" class="font-weight-normal">
                             <table class="table borderless">
                                 <tr>
@@ -102,6 +102,32 @@
                                 </tr>
                             </table>
                         </ol>
+                        @else
+                        <ol type="a" class="font-weight-normal">
+                            <table class="table borderless">
+                                <tr>
+                                    <td width="20%"><li>Nama Organisasi</li></td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td><li>Alamat Organisasi:</li></td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td><li>No. Telp.</li></td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td><li>E-mail</li></td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td><li>Nama Pimpinan</li></td>
+                                    <td>: </td>
+                                </tr>
+                            </table>
+                        </ol>
+                        @endif
                     </li>
 
                     <li class="font-weight-bold mt-4">KECAKAPAN UTAMA DALAM PENANGGULANGAN BENCANA

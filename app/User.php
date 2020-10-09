@@ -48,7 +48,7 @@ class User extends Authenticatable
             return 'private';
 
         }else if($this->role == 3){
-            return 'public';
+            return 'umum';
 
         }else {
             return 'default';
@@ -67,7 +67,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Role','role');
     }
- 
+    
+    public function relawan()
+    {
+        return $this->belongsTo('App\Models\Relawan', 'id_relawan');
+    }
+
+     
+
     public function hasRole($role)
     {
         $this->have_role = $this->getUserRole();

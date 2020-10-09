@@ -33,7 +33,7 @@ class ListKegiatanController extends Controller
             return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $id])->with('message', 'Data berhasil disimpan.');
 
         }else if($request->action == 'reject'){
-            if($request->has('reject')){
+            if($request->has('reject')){ 
                 RelawanBencana::whereIn('id', $request->reject)->update(array('status_join' => 2, 'email_status' => 0, 'email_message' => 'xxx'));
             }
             return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $id])->with('message', 'Data berhasil disimpan.');
@@ -42,6 +42,20 @@ class ListKegiatanController extends Controller
             return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $id])->with('message', 'Data tidak ditemukan.');
         }
     }
+
+    public function reject($RelawanBencanaId, $bencana)
+    {   
+        
+        $reject = RelawanBencana::where('id', $RelawanBencanaId)->first();
+        $reject->status_join = 2;
+        $reject->tgl_keluar = date('Y-m-d H:i:s');
+        $reject->user_action = 2;
+        $reject->save();
+         
+ 
+        return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $bencana])->with('message', 'Relawan berhasil dikeluarkan.'); 
+    }
+
     public function map(Request $request, $id)
     {
         $model = Bencana::findOrFail($id);
@@ -297,6 +311,7 @@ class ListKegiatanController extends Controller
             'bencana.id as id_bencana'
             )
             ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+            ->orderBy('laporan_harian_bencana.tgl_laporan', 'asc')
             ->where('bencana.id',$id);
 
         if($from !='' && $to !=''){
@@ -305,6 +320,28 @@ class ListKegiatanController extends Controller
             $datas = $datas->get();
         }
 
-        return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas', 'from', 'to'));
+        if($request->btn =='print'){
+            return view('dashboard.list_kegiatan.laporan_harian_print', compact('bencana','datas', 'from', 'to'));
+        }else{
+            return view('dashboard.list_kegiatan.laporan_harian', compact('bencana','datas', 'from', 'to'));
+        }
+        
+    }
+
+    public function laporan_harian_print_one(Request $request, $id = false)
+    {
+        
+        $datas = LaporanHarian::select('*', 
+            'laporan_harian_bencana.id as id_laporan',
+            'bencana.id as id_bencana'
+            )
+            ->join('bencana', 'bencana.id', '=', 'laporan_harian_bencana.id_bencana')
+            ->where('laporan_harian_bencana.id',$id)
+            ->first();
+        
+        $bencana = Bencana::findOrFail($datas->id_bencana);
+ 
+        
+        return view('dashboard.list_kegiatan.laporan_harian_print_one', compact('bencana','datas'));
     }
 }

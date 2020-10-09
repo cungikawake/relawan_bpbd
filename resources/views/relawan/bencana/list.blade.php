@@ -43,7 +43,7 @@
                                 @if($bencana->jenis_bencana == 1)
                                     <span class="badge badge-pill badge-success">Private</span>
                                 @else
-                                    <span class="badge badge-pill badge-info">Umum</span>
+                                    <span class="badge badge-pill badge-info">Publik</span>
                                 @endif
 
                             </div>

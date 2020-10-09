@@ -149,7 +149,7 @@
                                                         <td>{{$data->name}}</td>
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->tlp}}</td>
-                                                        <td>{{($data->jenis_relawan == 1 && $data->nomor_relawan !='')? 'Private': 'Publik'}}</td>
+                                                        <td>{{($data->nomor_relawan !='' )? 'Private': 'Publik'}}</td>
                                                         <td>{{($data->nomor_relawan != '' && $data->nomor_relawan !='')? 'Sudah': 'Belum'}}</td>
                                                         <td>{{$data->nomor_relawan}}</td>
                                                         <td>{{$data->nama_organisasi}}</td>

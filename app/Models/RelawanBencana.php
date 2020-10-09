@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Relawan;
+use App\Models\Relawan; 
 
 class RelawanBencana extends Model
 {
@@ -13,6 +13,7 @@ class RelawanBencana extends Model
     {
         return $this->belongsTo('App\Models\Relawan', 'id_relawan');
     }
+
     public function relawanDisplay()
     {
         if($this->relawan){
@@ -28,4 +29,11 @@ class RelawanBencana extends Model
     {
         return $this->belongsTo('App\Models\Bencana', 'id_bencana');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id_user');
+    }
+
+     
 }

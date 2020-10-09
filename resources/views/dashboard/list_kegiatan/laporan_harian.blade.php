@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="col-md-6"> 
                                                 <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter">Filter</button>
-                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak">Cetak</button>
+                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="print">Cetak</button>
                                             </div>
                                         </div>
                                     </form>
@@ -79,8 +79,9 @@
                                                 <th>Kegiatan</th> 
                                                 <th>Judul</th> 
                                                 <th>Laporan</th> 
-                                                <th>Tanggal</th> 
+                                                <th>Tanggal Laporan</th> 
                                                 <th>Relawan</th> 
+                                                <th>File</th> 
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -98,8 +99,14 @@
                                                             <p>Terverifikasi : {{$data->jml_relawan_private}}<p>
                                                         </td>
                                                         <td>
-                                                            <a title="Edit" href="{{route('dashboard.list_kegiatan.laporan_harian_edit', $data->id_laporan)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-edit"></i></a>  
-                                                             
+                                                            <a href="{{ url('uploads/laporan/'.$data->foto1) }}" target="_blank">{{ $data->foto1 }}</a>
+                                                            <a href="{{ url('uploads/laporan/'.$data->foto2) }}" target="_blank">{{ $data->foto2 }}</a>
+                                                            <a href="{{ url('uploads/laporan/'.$data->foto3) }}" target="_blank">{{ $data->foto3 }}</a>
+                                                        </td>
+                                                        <td>
+                                                            <a title="Edit" href="{{route('dashboard.list_kegiatan.laporan_harian_edit', $data->id_laporan)}}" class="btn btn-icon btn-warning btn-sm"><i class="la la-edit"></i></a>
+
+                                                            <a target="_blank" title="Print" href="{{route('dashboard.list_kegiatan.laporan_harian_print_one', $data->id_laporan)}}" class="btn btn-icon btn-success btn-sm"><i class="la la-print"></i></a>  
                                                         </td>
                                                     </tr>
                                                 @endforeach

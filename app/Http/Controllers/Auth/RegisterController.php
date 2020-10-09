@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Relawan;
 use Redirect;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; 
 
 class RegisterController extends Controller
 {
@@ -69,7 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return  User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -77,6 +77,16 @@ class RegisterController extends Controller
             'tlp' => $data['tlp'],
             'api_token' => Str::random(16)
         ]); 
+
+        $relawan = New Relawan;
+        $relawan->id_user = $user->id;
+        $relawan->email = $user->email;
+        $relawan->nama_lengkap = $user->name;
+        $relawan->tlp = $user->tlp;
+        $relawan->jenis_relawan = 1;
+        $relawan->save();
+
+        return $user;
          
     }
 

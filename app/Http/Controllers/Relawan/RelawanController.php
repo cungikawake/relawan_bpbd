@@ -30,12 +30,12 @@ class RelawanController extends Controller
     public function create() 
     {
         $user = Auth::user();
-        $relawan = Relawan::where('id_user', $user->id)->first(); 
-        if(!empty($relawan) > 0){
+        $model = Relawan::where('id_user', $user->id)->first(); 
+        /* if(!empty($model->id_induk_relawan) > 0){
             return redirect()->route('relawan.profile');
-        }
+        } */
 
-        $model = new Relawan();
+        //$model = new Relawan();
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
         $model_skills = array();
         $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
@@ -76,7 +76,7 @@ class RelawanController extends Controller
 
         }else{ 
             //dd($request->all());
-            $data = new Relawan();
+            $data = Relawan::findOrFail($request->id_relawan);
             $data->id_user = $request->id_user;
             $data->id_induk_relawan = $request->id_induk_relawan;
             $data->nama_lengkap = $request->nama_lengkap;
@@ -97,7 +97,7 @@ class RelawanController extends Controller
             $user_data = Auth::user();
             $user = User::findOrFail($user_data->id);
             $user->tlp = $request->tlp;
-            $user->email = $request->email;
+            //$user->email = $request->email;
             $user->save();
             
             $image = $request->ktp_file; 

@@ -9,7 +9,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row"></div>
         
-        @if(empty($model)) 
+        @if(empty($model->id_induk_relawan) || $model->id_induk_relawan == 0) 
             <div class="content-body">
                 <!-- Chart -->
                 <div class="row match-height">
@@ -73,13 +73,15 @@
                     <div class="col-sm-12 col-xl-8">
                         <div class="media d-flex m-1 ">
                             <div class="align-left p-1">
-                                <a href="#" class="profile-image">
+                                <a href="{{ route('relawan.verifikasi') }}" class="profile-image">
                                     @if(empty($model->foto_file))
                                         <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Card image">
                                     @else
-                                        <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
+                                        <img src="{{ asset('uploads/relawan/'.$model->id_relawan.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
 
                                     @endif
+                                    <br>
+                                    <button class="btn btn-primary">Edit Profil</button>
                                 </a>
                             </div>
                             <div class="media-body text-left  mt-1">
@@ -142,6 +144,13 @@
                                         </li>
                                         <li>
                                             Tgl Lahir : {{$model->tgl_lahir}}
+                                        </li>
+                                        <li>
+                                        @if(empty($model->ktp_file))
+                                            Ktp belum di upload
+                                        @else
+                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" class="img-border height-100" alt="Card image"> 
+                                        @endif
                                         </li>
                                     </ul>
                                 </div>

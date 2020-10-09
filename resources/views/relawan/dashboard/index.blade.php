@@ -9,7 +9,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row"></div>
 
-        @if(empty($relawan))
+        @if(empty($user->status_verified) || $relawan->id_induk_relawan == 0)
             <div class="content-body">
                 <!-- Chart -->
                 <div class="row match-height">
@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Selamat Datang {{ $user->name }}, Sekarang anda adalah Relawan Umum</h4>
-                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan  jenis umum</h6>
+                                <h6 class="card-subtitle text-muted">Anda hanya bisa mengikuti kegiatan  jenis publik</h6>
 
                                 <!-- <div class="row">
                                     <div class="col-6">

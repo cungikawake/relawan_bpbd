@@ -51,6 +51,7 @@
                                 @endif
                                 
                                 <h4 class="card-title">Relawan Pending</h4>
+                                <p class="alert alert-primary">Pilih beberapa relawan sekaligus dan klik Terima atau Tolak </p>
                                 <div class="table-responsive">
                                     <form action="{{route('dashboard.list_kegiatan.update', ['id' => $model->id])}}" method="POST" id="form-relawan">
                                         @csrf
@@ -113,10 +114,10 @@
                                                     <tr>
                                                         <td colspan="5"></td>
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-warning btn-sm" id="submit-join"><i class="la la-user-plus"></i></button>
+                                                            <button type="button" class="btn btn-icon btn-warning btn-sm" id="submit-join"><i class="la la-user-plus"></i> Terima</button>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-danger btn-sm" id="submit-reject"><i class="la la-user-times"></i></button>
+                                                            <button type="button" class="btn btn-icon btn-danger btn-sm" id="submit-reject"><i class="la la-user-times"></i> Tolak</button>
                                                         </td>
                                                     </tr>
                                                 @else 
@@ -146,15 +147,27 @@
                                             @if(count($model->joinRelawan()) > 0)
                                                 @php $i=1; @endphp
                                                 @foreach($model->joinRelawan() as $key => $row)
+                                                     
                                                     <tr>
                                                         <th scope="row">
                                                             {{ $i++ }}
                                                         </th>
-                                                        <td>{{$row->relawanDisplay()->nama_lengkap}}</td>
+                                                        <td>
+                                                        {{$row->relawanDisplay()->nama_lengkap}}
+                                                        </td>
                                                         <td>{{date('d M Y', strtotime($row->tgl_join))}}</td>
                                                         <td>
                                                             @if($row->relawan)
-                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i> Detail</button>
+
+                                                                 
+                                                                <button type="button" class="btn btn-icon btn-danger btn-sm button-detail delete" data-id="{{$row->id}}"><i class="la la-close"></i> Hapus</button>
+
+                                                                <form action="{{url('dashboard/list-kegiatan/'.$row->id.'/'.$row->id_bencana.'/reject')}}" id="delete-{{$row->id}}" method="POST">
+                                                                    @csrf
+                                                                    @method('POST')
+                                                                </form>
+
                                                             @else 
                                                                 <button type="button" class="btn btn-icon btn-primary btn-sm" disabled><i class="la la-user"></i></button>
                                                             @endif
@@ -180,7 +193,7 @@
                                                 <th>#</th>
                                                 <th>Nama</th> 
                                                 <th>Tanggal Setujui</th>
-                                                <th width="30%" class="align-middle">Status</th>
+                                                <th width="30%" class="align-middle">Tanggal Ditolak</th>
                                                 <th width="10%" class="align-middle">Detail</th>
                                             </tr>
                                         </thead>
@@ -195,19 +208,12 @@
                                                         <td>{{$row->relawanDisplay()->nama_lengkap}}</td>
                                                         <td>{{date('d M Y', strtotime($row->tgl_join))}}</td>
                                                         <td>
-                                                            @if($row->relawan)
-                                                                @if(count($row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)))
-                                                                    <span class="text-danger">Sudah bergabung dalam kegiatan {{$row->relawan->bencanaDetail($row->bencana->tgl_mulai, $row->bencana->tgl_selesai)->first()->judul_bencana}}.</span>
-                                                                @else 
-                                                                    <span class="text-danger">Melebihi quota kegiatan.</span>
-                                                                @endif
-                                                            @else 
-                                                                -
-                                                            @endif
+                                                        {{date('d M Y', strtotime($row->tgl_keluar))}}
                                                         </td>
                                                         <td>
                                                             @if($row->relawan)
-                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-primary btn-sm button-detail" onclick="detail({{$row->relawan}})"><i class="la la-user"></i> Detail</button>
+
                                                             @else 
                                                                 <button type="button" class="btn btn-icon btn-primary btn-sm" disabled><i class="la la-user"></i></button>
                                                             @endif
@@ -252,6 +258,8 @@
                 <p class="mb-01">Ktp : <span id="modal-ktp"></span></p>
                 <p class="mb-01">Alamat : <span id="modal-alamat"></span></p>
                 <p class="mb-01">Telepon : <span id="modal-tlp"></span></p>
+                <br>
+                 
             </div>
         </div>
     </div>
@@ -275,7 +283,7 @@
 @push('script')
 <script>
     function detail(data){
-        // console.log(data);
+        console.log(data);
         $('#modal-nama').html(data.nama_lengkap);
         $('#modal-email').html(data.email);
         $('#modal-jenis_kelamin').html(data.jenis_kelamin);
@@ -283,7 +291,7 @@
         $('#modal-pekerjaan').html(data.pekerjaan);
         $('#modal-ktp').html(data.ktp);
         $('#modal-alamat').html(data.alamat);
-        $('#modal-tlp').html(data.tlp);
+        $('#modal-tlp').html(data.tlp); 
         $('#modalDetail').modal('show');
     }
 
@@ -320,5 +328,13 @@
 
         }
     });
+
+    $('.delete').click(function(){
+        if(window.confirm('Yakin untuk menghapus relawan ?')){
+            var id = $(this).attr('data-id');
+            $('form#delete-'+id).submit();
+        }
+    }); 
+        
 </script>
 @endpush

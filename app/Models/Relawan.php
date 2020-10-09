@@ -35,6 +35,10 @@ class Relawan extends Model
     {
         return '/uploads/relawan/'.$this->id.'/'.$this->foto_file;
     }
+    public function displayFotoKtp()
+    {
+        return '/uploads/relawan/'.$this->id.'/'.$this->ktp_file;
+    }
     public function user()
     {
         return $this->belongsTo('App\User', 'id_user');

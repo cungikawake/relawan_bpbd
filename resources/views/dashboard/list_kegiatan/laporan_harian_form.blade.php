@@ -75,6 +75,7 @@
                                         </fieldset>
 
                                         <h5 class="mt-2">Foto Dokumentasi </h5>
+                                        <small>Semua file jenis .doc,.pdf,.jpg, size max 5MB</small>
                                         <fieldset class="form-group">
                                             <input type="file" class="form-control" name="foto1" value="{{old('foto1', $model->foto1)}}" placeholder="Foto 1">
                                             <input type="file" class="form-control" name="foto2" value="{{old('foto2', $model->foto2)}}" placeholder="Foto 2">

@@ -35,7 +35,7 @@
                                 <p>Lengkapi form persyaratan pendaftaran dari form 1 s/d 3</p>
                                 <p class="badge badge-warning">Wajib isi bertanda bintang (*)</p>
                             </div>
-                            <form action="@if($model->exists) {{ route('relawan.verifikasi.update', $model->id) }} @else {{ route('relawan.verifikasi.store') }} @endif" method="POST" enctype="multipart/form-data">
+                            <form action="@if($model->id) {{ route('relawan.verifikasi.update', $model->id) }} @else {{ route('relawan.verifikasi.store') }} @endif" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method($model->exists ? 'PUT' : 'POST')
 
@@ -68,6 +68,7 @@
                                                         <h5 class="mt-2">Id User <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <input type="text" class="form-control" name="id_user" value="{{old('id_user', $user->id)}}" placeholder="otomatis terisi" readonly>
+                                                            <input type="text" class="form-control" name="id_relawan" value="{{old('id_relawan', $model->id)}}" placeholder="otomatis terisi" readonly>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">
