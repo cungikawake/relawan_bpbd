@@ -54,7 +54,7 @@ class RelawanController extends Controller
                 'id_induk_relawan' => 'required',
                 'nama_lengkap' => 'required',
                 'email' => 'required',
-                'tgl_lahir' => 'required',
+                'tgl_lahir' => 'required|before:13 years ago',
                 'jenis_kelamin' => 'required',
                 'pendidikan' => 'required',
                 'pekerjaan' => 'required',

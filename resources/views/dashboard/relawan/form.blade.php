@@ -3,6 +3,13 @@
 @section('title', 'Relawan')
 
 @section('content')
+<style> 
+.zoom:hover {
+  transform: scale(5.5);
+  z-index:10; 
+}
+</style>
+
 <!-- Main Content -->
 <div class="app-content content">
     <div class="content-wrapper">
@@ -138,7 +145,7 @@
                                                         @if(!empty($model->ktp_file))
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim">
-                                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" style="max-height:50px;">
+                                                            <img class="zoom" src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" style="max-height:50px;">
                                                         </fieldset>
                                                         @else
                                                         <fieldset class="form-group">
@@ -152,7 +159,7 @@
                                                         @if(!empty($model->foto_file))
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto 4x6">
-                                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" style="max-height:50px;">
+                                                            <img  class="zoom" src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" style="max-height:50px;">
                                                         </fieldset>
                                                         @else 
                                                         <fieldset class="form-group">

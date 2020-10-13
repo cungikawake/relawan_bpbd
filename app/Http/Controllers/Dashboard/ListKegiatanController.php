@@ -47,13 +47,51 @@ class ListKegiatanController extends Controller
     {   
         
         $reject = RelawanBencana::where('id', $RelawanBencanaId)->first();
+
         $reject->status_join = 2;
         $reject->tgl_keluar = date('Y-m-d H:i:s');
         $reject->user_action = 2;
         $reject->save();
+
+        $user = User::join('relawan', 'relawan.id_user', '=', 'users.id')
+        ->where('relawan.id_relawan', $reject->id_relawan)
+        ->first();
+
+        $detail_bencana = Bencana::where('id', $reject->id_bencana)->first();
          
- 
+        $this->sendSms($user, $detail_bencana, 0);
+
         return redirect()->route('dashboard.list_kegiatan.detail', ['id' => $bencana])->with('message', 'Relawan berhasil dikeluarkan.'); 
+    }
+
+    public function sendSms($user, $detail_bencana, $status_gabung){
+        $userkey = 'a0c5d26c82df';
+        $passkey = 'pqec7clpj2';
+        $telepon = $user->tlp;
+
+        if($status_gabung == 2){
+            $message = 'Halo '.$user->name.', Kamu di keluarkan oleh tim admin dari kegiatan '.$detail_bencana->judul_bencana.'.  Salam BPBD Bali';
+
+        }else if($status_gabung == 1 ){
+            $message = 'Halo '.$user->name.', Kamu sudah berhasil bergabung dan di terima di '.$detail_bencana->judul_bencana.'.  Salam BPBD Bali';
+
+        }else{
+            $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan bergabung di '.$detail_bencana->judul_bencana.'. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
+        }
+
+        $url = "https://reguler.zenziva.net/apps/smsapi.php";
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        $results = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        return true;
     }
 
     public function map(Request $request, $id)

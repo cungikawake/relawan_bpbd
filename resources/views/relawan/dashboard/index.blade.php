@@ -50,7 +50,7 @@
                                  -->
                                 <div class="alert alert-secondary">
                                     <p>Apakah anda ingin menjadi Relawan Terverifikasi, Ajukan data diri  sekarang!</p>
-                                    <a href="{{ route('bencana') }}">
+                                    <a href="{{ route('relawan.bencana') }}">
                                         <button class="btn btn-danger"><i class="la la-cros"></i> Nanti Saja</button>
                                     </a>
                                     <a href="{{ route('relawan.verifikasi') }}">

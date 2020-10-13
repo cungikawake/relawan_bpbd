@@ -75,7 +75,7 @@
                     <div class="card pull-up ecom-card-1 bg-white">
                         <div class="card-content ecom-card2">
                             <div class="card-header">
-                                <h5 class="text-muted primary position-absolute p-1">5 Kegiatan Terbaru</h5>
+                                <h5 class="text-muted primary position-absolute p-1">Kegiatan Terupdate</h5>
                                 <div>
                                     <i class="ft-map primary font-large-1 float-right p-1"></i>
                                 </div>
@@ -116,7 +116,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12">
                     <div class="card  bg-white">
                         <div class="card-header">
-                            <h5 class="text-muted primary position-absolute p-1">5 Relawan Terbaru</h5>
+                            <h5 class="text-muted primary position-absolute p-1">Relawan Terupdate</h5>
                             <div>
                                 <i class="ft-users primary font-large-1 float-right p-1"></i>
                             </div>
@@ -125,6 +125,56 @@
                             <div id="recent-buyers" class="media-list">
                                 @foreach($relawans as $model)
                                     <a href="#" class="media border-0">
+                                        <div class="media-left pr-1">
+                                            <span class="avatar avatar-md avatar-online"> 
+                                                @if(empty($model->foto_file))
+                                                    <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="media-object rounded-circle" alt="Card image">
+                                                @else
+                                                    <img src="{{ asset('uploads/relawan/'.$model->id_relawan.'/'.$model->foto_file) }}" class="media-object rounded-circle" alt="Card image"> 
+                                                @endif
+                                                <i></i>
+                                            </span>
+                                        </div>
+                                        <div class="media-body w-100">
+                                            <span class="list-group-item-heading">
+                                                {{ $model->name }} 
+                                            </span>
+                                            <ul class="list-unstyled users-list m-0 float-right">
+                                                
+                                                @if(empty($model->ktp_file))
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="KTP" class="avatar avatar-sm pull-up"> 
+
+                                                    </li>
+                                                @else
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="KTP File" class="avatar avatar-sm pull-up">
+                                                        <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="{{ asset('uploads/relawan/'.$model->id_relawan.'/'.$model->ktp_file) }}" alt="Avatar">
+                                                    </li> 
+                                                @endif
+                                                
+                                                 
+                                            </ul>
+                                            <p class="list-group-item-text mb-0">
+                                                <span class="blue-grey lighten-2 font-small-3"> @if($model->nomor_relawan !='')#{{ $model->nomor_relawan }} (Terverifikasi) @else Umum @endif </span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                @endforeach 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                    <div class="card  bg-white">
+                        <div class="card-header">
+                            <h5 class="text-muted primary position-absolute p-1">Relawan Menunggu Verifikasi</h5>
+                            <div>
+                                <i class="ft-users primary font-large-1 float-right p-1"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div id="recent-buyers" class="media-list">
+                                @foreach($relawans_pending as $model)
+                                    <a href="{{ route('dashboard.relawan.edit', $model->id_relawan) }}" class="media border-0">
                                         <div class="media-left pr-1">
                                             <span class="avatar avatar-md avatar-online"> 
                                                 @if(empty($model->foto_file))

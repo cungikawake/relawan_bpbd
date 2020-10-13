@@ -8,6 +8,8 @@ use App\Models\Relawan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RelawanBencana; 
 use App\Models\Bencana;
+use App\Models\Skill;
+use App\Models\Persyaratan;
 
 class RelawanBencanaController extends Controller
 {
@@ -31,6 +33,8 @@ class RelawanBencanaController extends Controller
             $bencana = RelawanBencana::where('id', $request->relawan_bencana)
             ->where('id_user', $user->id)
             ->first(); 
+
+            $detail_bencana = Bencana::findOrFail($bencana->id_bencana);
              
             if($bencana != null){
                 $bencana = RelawanBencana::findOrFail($request->relawan_bencana);
@@ -40,6 +44,7 @@ class RelawanBencanaController extends Controller
                 $bencana->save();
 
                 //notif
+                $this->sendSms($user, $detail_bencana, 2);
             }
 
             return redirect('relawan/bencana');
@@ -50,14 +55,38 @@ class RelawanBencanaController extends Controller
     }
 
     public function search(){
+        $user = Auth::user();
+        $relawan = Relawan::where('id_user', $user->id)->first();
+
         $today = date('Y-m-d');
         $bencanas = Bencana::where('status_jenis', '1')
-                    ->where('tgl_selesai', '>=', $today)
+                    ->where('tgl_selesai', '>=', $today) 
                     ->Orderby('id', 'Desc')
                     ->paginate(6); 
+        
+        if($relawan->nomor_relawan == '' || $relawan->jenis_relawan == 1){
+            $bencanas = Bencana::where('tgl_selesai', '>=', $today) 
+                    ->where('jenis_bencana', 2)
+                    ->Orderby('id', 'Desc')
+                    ->paginate(6); 
+        }
 
+        $skill_minimal = array(); 
+        foreach($bencanas as $bencana){
+            foreach(json_decode($bencana->skill_minimal) as $id){
+                $skill_minimal[$bencana->id][] = Skill::where('id', $id)->first();
+            }
+        }
+        
+
+        $syarat_minimal = array();
+        foreach($bencanas as $bencana){
+            foreach(json_decode($bencana->mental_minimal) as $id){
+                $syarat_minimal[$bencana->id][] = Persyaratan::where('id', $id)->first();
+            }
+        }
          
-        return view('relawan.bencana.list', compact('bencanas'));
+        return view('relawan.bencana.list', compact('bencanas' , 'skill_minimal', 'syarat_minimal'));
     }
 
     public function join($id = null){ 
@@ -124,7 +153,7 @@ class RelawanBencanaController extends Controller
                             $join->status_join = '0';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 0);
 
                             return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                         } 
@@ -161,7 +190,7 @@ class RelawanBencanaController extends Controller
                             $join->status_join = '0';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 0);
 
                             return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                             
@@ -209,7 +238,7 @@ class RelawanBencanaController extends Controller
                             $join->status_join = '1';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 1);
 
                             return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                         } 
@@ -246,7 +275,7 @@ class RelawanBencanaController extends Controller
                         $join->status_join = '1';
                         $join->save();
 
-                        $this->sendSms($user);
+                        $this->sendSms($user, $detail_bencana, 1);
 
                         return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                         
@@ -259,11 +288,20 @@ class RelawanBencanaController extends Controller
         }
     }
 
-    public function sendSms($user){
+    public function sendSms($user, $detail_bencana, $status_gabung){
         $userkey = 'a0c5d26c82df';
         $passkey = 'pqec7clpj2';
         $telepon = $user->tlp;
-        $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan Relawan BPBD Bali. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
+
+        if($status_gabung == 2){
+            $message = 'Halo '.$user->name.', Kamu keluar mandiri dari kegiatan '.$detail_bencana->judul_bencana.'.  Salam BPBD Bali';
+
+        }else if($status_gabung == 1 ){
+            $message = 'Halo '.$user->name.', Kamu sudah berhasil bergabung dan di terima di '.$detail_bencana->judul_bencana.'.  Salam BPBD Bali';
+
+        }else{
+            $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan bergabung di '.$detail_bencana->judul_bencana.'. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
+        }
 
         $url = "https://reguler.zenziva.net/apps/smsapi.php";
         $curlHandle = curl_init();

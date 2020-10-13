@@ -84,7 +84,23 @@
 
                                     <p  ><i class="la la-calendar-check-o"></i> Tanggal  {{ date('d M Y', strtotime($bencana->tgl_mulai)) }} s/d {{ date('d M Y', strtotime($bencana->tgl_selesai)) }} </p>
                                      
-                                    <p  ><i class="la la-user"></i>Max {{$bencana->quota_relawan}} Orang </p>
+                                    <p  ><i class="la la-user"></i> Max {{$bencana->quota_relawan}} Orang </p>
+                                    <p><i class="la la-user"></i> Pelaksana / Koordinator  : {{ $bencana->nama_pelaksana }}</p> 
+                                    <hr>
+                                    <p>Kemampuan Minimal : 
+                                        <ul>
+                                        @foreach($skill_minimal[$bencana->id] as $skill)
+                                            <li>{{ $skill->nama_skill }}</li>
+                                        @endforeach
+                                        </ul>
+                                    </p>
+                                    <p>Ketentuan : 
+                                        <ul>
+                                        @foreach($syarat_minimal[$bencana->id] as $syarat)
+                                            <li>{{ $syarat->nama }}</li>
+                                        @endforeach
+                                        </ul>
+                                    </p>
                                 </div>
                             </div>
                         </div>

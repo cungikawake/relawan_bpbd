@@ -125,9 +125,9 @@ class BencanaController extends Controller
                             $join->status_join = '0';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 0);
 
-                            return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                            return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung di '.$detail_bencana->judul_bencana.'. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                         } 
                         
                     }
@@ -162,9 +162,9 @@ class BencanaController extends Controller
                             $join->status_join = '0';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 0);
 
-                            return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                            return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung di .'.$detail_bencana->judul_bencana.'  Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                             
                         }
 
@@ -210,9 +210,9 @@ class BencanaController extends Controller
                             $join->status_join = '1';
                             $join->save();
 
-                            $this->sendSms($user);
+                            $this->sendSms($user, $detail_bencana, 1);
 
-                            return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                            return redirect('relawan/bencana')->with('Sekarang anda sudah langsung diterima bergabung di kegiatan '.$detail_bencana->judul_bencana);
                         } 
                         
                     }
@@ -246,25 +246,31 @@ class BencanaController extends Controller
                         $join->status_join = '1';
                         $join->save();
 
-                        $this->sendSms($user);
+                        $this->sendSms($user, $detail_bencana, 1);
 
-                        return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                        return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung di kegiatan '.$detail_bencana->judul_bencana);
                         
                     }
                 }
                 
             }else{
-                return redirect()->back()->with('message', 'Maaf saat ini anda belum bisa mengikuti kegiatan ini, harap untuk memilih kegiatan yang lain');
+                return redirect()->back()->with('message', 'Maaf saat ini anda belum bisa mengikuti kegiatan ini, harap untuk memilih kegiatan yang lainnya');
             } 
         }
     }
  
 
-    public function sendSms($user){
+    public function sendSms($user, $detail_bencana, $status_gabung){
         $userkey = 'a0c5d26c82df';
         $passkey = 'pqec7clpj2';
         $telepon = $user->tlp;
-        $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan Relawan BPBD Bali. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
+
+        if($status_gabung == 1 ){
+            $message = 'Halo '.$user->name.', Kamu sudah berhasil bergabung dan di terima di '.$detail_bencana->judul_bencana.'.  Salam BPBD Bali';
+
+        }else{
+            $message = 'Halo '.$user->name.', Kamu sudah mengirim permintaan bergabung di '.$detail_bencana->judul_bencana.'. silahkan untuk menunggu informasi selanjutnya. Salam BPBD Bali';
+        }
 
         $url = "https://reguler.zenziva.net/apps/smsapi.php";
         $curlHandle = curl_init();

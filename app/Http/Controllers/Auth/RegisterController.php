@@ -85,9 +85,33 @@ class RegisterController extends Controller
         $relawan->tlp = $user->tlp;
         $relawan->jenis_relawan = 1;
         $relawan->save();
-
+        
+        if($relawan){
+            $this->sendSms($user, $data);
+        }
         return $user;
          
+    }
+
+    public function sendSms($user, $data){
+        $userkey = 'a0c5d26c82df';
+        $passkey = 'pqec7clpj2';
+        $telepon = $user->tlp;
+        $message = 'Halo '.$user->name.', Kamu sudah berhasil punya akun E-relawan BPBD Provinsi Bali. Username: '.$user->email.' dan Password : '.$data['password'].' .Sekarang kamu adalah relawan umum.';
+
+        $url = "https://reguler.zenziva.net/apps/smsapi.php";
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        $results = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        return true;
     }
 
     

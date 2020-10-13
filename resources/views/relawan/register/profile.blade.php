@@ -75,9 +75,9 @@
                             <div class="align-left p-1">
                                 <a href="{{ route('relawan.verifikasi') }}" class="profile-image">
                                     @if(empty($model->foto_file))
-                                        <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Card image">
+                                        <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Foto Kosong">
                                     @else
-                                        <img src="{{ asset('uploads/relawan/'.$model->id_relawan.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
+                                        <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" class="rounded-circle img-border height-100" alt="Card image">
 
                                     @endif
                                     <br>
@@ -149,9 +149,10 @@
                                         @if(empty($model->ktp_file))
                                             Ktp belum di upload
                                         @else
-                                            <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" class="img-border height-100" alt="Card image"> 
+                                            Ktp : <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" class="img-border height-100" alt="Kosong"> 
                                         @endif
                                         </li>
+                                        <li>Nomor Relawan : {{$model->nomor_relawan}}</li>
                                     </ul>
                                 </div>
                             </div>

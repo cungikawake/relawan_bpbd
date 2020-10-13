@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-12 mt-4">
                 <h3 class="text-center">
-                    DATA PENDATAAN<br> 
+                    PENDATAAN<br> 
                     RELAWAN PENANGGULANGAN BENCANA <br>
                     BPBD PROVINSI BALI
                 </h3>

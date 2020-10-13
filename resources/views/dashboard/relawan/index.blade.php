@@ -60,7 +60,7 @@
                                 @endif  
 
                                 <div class="alert alert-success">
-                                    <form action="{{route('dashboard.relawan.search')}}" method="GET">
+                                    <form action="{{route('dashboard.relawan.search')}}" method="GET"  id="form_filter">
                                         <h4>Filter Data</h4>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -68,9 +68,9 @@
                                                     <label>Jenis</label>
                                                     <select name="jenis_relawan" class="form-control">
                                                         <option value="">Semua Jenis</option>
-                                                        <option value="1" {{ ($filter['jenis_relawan'] == 1)? 'selected="selected"': ''}}>Terverifikasi</option>
+                                                        <option value="1" {{ ($filter['jenis_relawan'] == 1)? 'selected="selected"': ''}}>Umum</option>
 
-                                                        <option value="2" {{ old('jenis_relawan', $filter['jenis_relawan']) == '2' ? 'selected' : '' }}>Umum</option>
+                                                        <option value="2" {{ old('jenis_relawan', $filter['jenis_relawan']) == '2' ? 'selected' : '' }}>Terverifikasi</option>
                                                         
                                                     </select>
                                                 </div>
@@ -95,8 +95,8 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter">Filter</button>
-                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak">Cetak</button>
+                                                <button name="btn" class="btn btn-primary" style="margin-top:25px;" value="filter" id="filter">Filter</button>
+                                                <button name="btn" class="btn btn-danger" style="margin-top:25px;" value="cetak" id="cetak">Cetak</button>
                                             </div>
                                         </div>
                                     </form>
@@ -149,7 +149,7 @@
                                                         <td>{{$data->name}}</td>
                                                         <td>{{$data->email}}</td>
                                                         <td>{{$data->tlp}}</td>
-                                                        <td>{{($data->nomor_relawan !='' )? 'Private': 'Publik'}}</td>
+                                                        <td>{{($data->nomor_relawan !='' )? 'Terverifikasi': 'Umum'}}</td>
                                                         <td>{{($data->nomor_relawan != '' && $data->nomor_relawan !='')? 'Sudah': 'Belum'}}</td>
                                                         <td>{{$data->nomor_relawan}}</td>
                                                         <td>{{$data->nama_organisasi}}</td>
@@ -197,6 +197,13 @@
             }
         });
         $('#myTable').DataTable();
+
+        $('#cetak').click(function(){
+            $('#form_filter').attr('target', '_blank');
+        });
+        $('#filter').click(function(){
+            $('#form_filter').attr('target', '');
+        });
     });
 </script>
 @endpush
