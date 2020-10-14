@@ -205,12 +205,12 @@ penanggulangan bencana.
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
-                <h4>
-                    <a href="{{url('bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
+                <h4 style="min-height:60px;">
+                    <a href="{{url('bencana/detail/'.$bencana->id)}}">{{  substr($bencana->judul_bencana, 0, 100) }}</a>
                 </h4>
                 <div class="single-blog-img">
                   <a href="{{url('bencana/detail/'.$bencana->id)}}">
-                    <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
+                    <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="{{ $bencana->judul_bencana }}" style="min-height:200px; max-height:300px;">
                   </a>
                 </div>
                 <div class="blog-text"> 
