@@ -122,24 +122,27 @@
                                                             <input type="text" class="form-control" name="pekerjaan" value="{{old('pekerjaan', $model->pekerjaan)}}" placeholder="pekerjaan">
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <h5 class="mt-2">NIK Ktp / SIM <span class="danger">*</span></h5>
-                                                        <fieldset class="form-group">
-                                                            <input type="text" class="form-control" name="ktp" value="{{old('ktp', $model->ktp)}}" placeholder="ktp / sim">
-                                                        </fieldset>
-                                                    </div>
+                                                    
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">Upload Ktp / Sim <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim" required>
-                                                            <small>Format JPG, Ukuran max 2MB</small>
+                                                            <input type="file" class="form-control" name="ktp_file" value="{{old('ktp_file')}}" placeholder="upload ktp / sim">
+                                                            <small>Format JPG, Ukuran max 2MB</small> 
                                                         </fieldset>
+                                                        <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->ktp_file) }}" style="height:100px;">    
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">Upload Foto Wajah <span class="danger"></span></h5>
                                                         <fieldset class="form-group">
                                                             <input type="file" class="form-control" name="foto_file" value="{{old('foto_file')}}" placeholder="upload pas foto">
                                                             <small>Format JPG, Ukuran max 2MB</small>
+                                                        </fieldset>
+                                                        <img src="{{ asset('uploads/relawan/'.$model->id.'/'.$model->foto_file) }}" style="height:100px;">  
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h5 class="mt-2">NIK Ktp / SIM <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <input type="text" class="form-control" name="ktp" value="{{old('ktp', $model->ktp)}}" placeholder="ktp / sim">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6">
@@ -162,7 +165,7 @@
                                                             <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-4">
                                                         <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <select  class="form-control" name="kota">
@@ -173,8 +176,30 @@
                                                             </select>
                                                         </fieldset>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Kecamatan <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kecamatan">
+                                                                <option hidden>Pilih Kecamatan</option>
+                                                                @foreach($kecamatan as $row)
+                                                                    <option value="{{$row->kecamatan_id}}" {{ old('kecamatan', $model->kecamatan_id) == $row->kecamatan_id ? 'selected' : '' }}>{{$row->kecamatan_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Desa <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="desa">
+                                                                <option hidden>Pilih Desa</option>
+                                                                @foreach($desa as $row)
+                                                                    <option value="{{$row->desakel_id}}" {{ old('desa', $model->desakel_id) == $row->desakel_id ? 'selected' : '' }}>{{$row->desakel_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">alamat <span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">Alamat Domisili Bali<span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <textarea class="form-control" name="alamat" rows="3">{{old('alamat', $model->alamat)}}</textarea>
                                                         </fieldset>

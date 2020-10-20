@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kota;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 
 class RelawanController extends Controller
 {
@@ -43,8 +45,10 @@ class RelawanController extends Controller
         $pelatihan[] = new RelawanPelatihan;
         $pengalaman[] = new RelawanPengalaman;
         $kota = Kota::orderBy('name', 'asc')->get();
+        $kecamatan = Kecamatan::orderBy('kecamatan_nama', 'asc')->get();
+        $desa = Desa::orderBy('desakel_nama', 'asc')->get();
 
-        return view('relawan.register.verifikasi', compact('kota','model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
+        return view('relawan.register.verifikasi', compact('desa','kecamatan','kota','model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
     }
 
     public function store(Request $request)
@@ -59,7 +63,7 @@ class RelawanController extends Controller
                 'pendidikan' => 'required',
                 'pekerjaan' => 'required',
                 'ktp' => 'required',
-                'ktp_file' => 'required|mimes:jpg,jpeg,png,bmp|max:5000',
+                'ktp_file' => 'mimes:jpg,jpeg,png,bmp|max:5000',
                 'foto_file' => 'mimes:jpg,jpeg,png,bmp|max:5000',
                 'alamat' => 'required',
                 'tlp' => 'required',
@@ -67,7 +71,9 @@ class RelawanController extends Controller
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
                 'kota' => 'required', 
-                'skill' => 'required'
+                'skill' => 'required',
+                'kecamatan' => 'required',
+                'desa' => 'required'
             ]
         );
 
@@ -92,6 +98,8 @@ class RelawanController extends Controller
             // $data->nomor_relawan = $request->nomor_relawan;
             $data->skill_utama = $request->skill_utama;
             $data->kota_id = $request->kota;
+            $data->kecamatan_id = $request->kecamatan;
+            $data->desakel_id = $request->desa;
             $data->save();
 
             $user_data = Auth::user();
@@ -101,9 +109,11 @@ class RelawanController extends Controller
             $user->save();
             
             $image = $request->ktp_file; 
+            if(!empty($image)){
             $imageName = 'ktp-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
             $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
             $data->ktp_file = $imageName;
+            }
             
             $image = $request->foto_file;
             if(!empty($image)){

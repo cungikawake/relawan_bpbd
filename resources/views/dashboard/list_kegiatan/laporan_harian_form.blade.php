@@ -61,7 +61,7 @@
                                         
                                         <h5 class="mt-2">Detail Laporan <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
-                                            <textarea class="form-control" row="5" name="detail_laporan">{{old('detail_laporan', $model->detail_laporan)}}</textarea>
+                                            <textarea class="form-control" row="5" name="detail_laporan" style="height:300px;">{{old('detail_laporan', $model->detail_laporan)}}</textarea>
                                         </fieldset>
 
                                         <h5 class="mt-2">Total Relawan Umum<span class="danger">*</span></h5>

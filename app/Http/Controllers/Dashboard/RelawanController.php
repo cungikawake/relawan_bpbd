@@ -15,6 +15,8 @@ use App\Models\IndukOrganisasi;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Models\Kota;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 
 class RelawanController extends Controller
 {
@@ -269,8 +271,10 @@ class RelawanController extends Controller
         $pengalaman = $model->pengalamanEdit();
         
         $kota = Kota::orderBy('name', 'asc')->get();
+        $kecamatan = Kecamatan::orderBy('kecamatan_nama', 'asc')->get();
+        $desa = Desa::orderBy('desakel_nama', 'asc')->get();
 
-        return view('dashboard.relawan.form', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'kota'));
+        return view('dashboard.relawan.form', compact('kecamatan','desa','model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'kota'));
     }
 
      
@@ -307,6 +311,8 @@ class RelawanController extends Controller
                 // 'nomor_relawan' => 'required',
                 'skill_utama' => 'required',
                 'kota' => 'required',
+                'kecamatan' => 'required',
+                'desa' => 'required',
 
                 'skill' => 'required'
             ]
@@ -330,6 +336,8 @@ class RelawanController extends Controller
             $data->jenis_relawan = $request->jenis_relawan;
             $data->skill_utama = $request->skill_utama;
             $data->kota_id = $request->kota;
+            $data->kecamatan_id = $request->kecamatan;
+            $data->desakel_id = $request->desa;
             $data->save();
 
             if(!$data->nomor_relawan){

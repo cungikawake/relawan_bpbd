@@ -23,41 +23,20 @@
         <div class="row">
             <div class="col-12 mt-4">
                 <h3 class="text-center">
-                    LAPORAN HARIAN<br> 
-                    RELAWAN PENANGGULANGAN BENCANA <br>
+                    LAPORAN <br>
+                    <span style="text-transform: uppercase;">
+                    {{ $datas->judul_bencana }}</span><br>
                     BPBD PROVINSI BALI
                 </h3>
                 <hr>
             </div>
             <div class="col-md-12 mt-4">
-                <h3>Periode : {{ $datas->tgl_laporan }}</h3>
-                <table class="table display" id="myTable">
-                    <thead class="thead-dark">
-                        <tr> 
-                            <th>No</th>
-                            <th>Kegiatan</th> 
-                            <th>Judul</th> 
-                            <th>Laporan</th> 
-                            <th>Tanggal Laporan</th> 
-                            <th>Relawan</th>  
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1; ?>
-                            <tr>
-                            <td>{{ $no++ }}</td>    
-                            <td>{{$datas->judul_bencana}}</td> 
-                            <td>{{$datas->judul_laporan}}</td> 
-                            <td>{{$datas->detail_laporan}}</td>
-                            <td>{{date('d M Y', strtotime($datas->tgl_laporan))}}</td> 
-                            <td>
-                                <p>Umum : {{$datas->jml_relawan_umum}}<p>
-                                <p>Terverifikasi : {{$datas->jml_relawan_private}}<p>
-                            </td>
-                                
-                        </tr>
-                    </tbody>
-                </table>
+                <h5>Periode : {{ $datas->tgl_laporan }}</h5>
+                <h5>Judul : {{$datas->judul_laporan}}</h5> 
+                <h5>Relawan : {{$datas->jml_relawan_umum}} Umum, {{$datas->jml_relawan_private}} Terverifikasi</h5>
+                <h5>Detail : </h5> 
+                <p>{{$datas->detail_laporan}}</p>
+                 
             </div>
         </div>
     </div>
