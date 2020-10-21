@@ -107,9 +107,9 @@ penanggulangan bencana</h1>
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" href="{{ url('bencana/kategori/'.$kategori->id) }}">
-                    <img src="{{$kategori->displayImage()}}"  alt="erelawan" class="img">
-                    <p style="font-size:1rem;">
+                  <a class="services-icon" href="{{ url('api/m/bencana/kategori/'.$kategori->id) }}">
+                    <img src="{{$kategori->displayImage()}}"  alt="erelawan" class="img" style="width:60px;">
+                    <p style="font-size:12px;">
                       {{ $kategori->nama_kategori }}
                     </p>
                   </a>
@@ -142,7 +142,7 @@ penanggulangan bencana</h1>
             <!-- Start Left Blog -->
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
-                <h4>
+                <h4 style="font-size:14px;">
                     <a href="{{url('bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
                 </h4>
                 <div class="single-blog-img">

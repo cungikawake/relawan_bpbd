@@ -23,9 +23,9 @@
           <div class="row" style="margin-top:20px;">
           @foreach($bencanas as $bencana)
             <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-6 col-md-4 col-lg-4 ">
               <div class="single-blog">
-                <h4>
+                <h4 style="font-size:14px;">
                     <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
                 </h4>
                 <div class="single-blog-img">
@@ -37,7 +37,7 @@
                   <div class="blog-meta">
                     <span class="comments-type">
                       <i class="fa fa-user"></i>
-                      <a href="#">{{ $bencana->quota_relawan }} Orang</a>
+                      <a href="#" style="font-size:12px;">{{ $bencana->quota_relawan }} Orang</a>
                       @if($bencana->jenis_bencana == 1)
                         <span class="badge badge-pill badge-primary">Private</span>
                       @else
@@ -45,10 +45,10 @@
                       @endif
                     </span>
                   </div>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($bencana->tgl_mulai)) }} s/d {{ date('d M Y', strtotime($bencana->tgl_selesai)) }} 
+                  <span class="date-type" style="font-size:12px;">
+                    <i class="fa fa-calendar" style="font-size:12px;"></i> {{ date('d M Y', strtotime($bencana->tgl_mulai)) }} s/d {{ date('d M Y', strtotime($bencana->tgl_selesai)) }} 
                   </span>
-                  <p>
+                  <p style="font-size:12px;">
                   {{  substr($bencana->detail_tugas, 0, 100) }}... 
                   </p>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="blog-meta">
                   <span class="comments-type">
                     <i class="fa fa-map"></i>
-                    <small>{{ $bencana->lokasi_tugas }}</small>
+                    <small style="font-size:12px;">{{ $bencana->lokasi_tugas }}</small>
                   </span>
                 </div>
                 <span>

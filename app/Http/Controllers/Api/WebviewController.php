@@ -51,7 +51,7 @@ class WebviewController extends Controller
         }
         return null;
     }
-
+ 
     public function index(Request $request){
         //cek login 
         $token = $this->getBearerToken();
@@ -59,7 +59,7 @@ class WebviewController extends Controller
             $token = $token;
             $user = User::where('api_token', $token)->first();
         }else{
-            return response()->json(['login'=>'false'], 200);
+            //return response()->json(['login'=>'false'], 200);
         }
         
 
@@ -98,7 +98,7 @@ class WebviewController extends Controller
             $token = $token;
             $user = User::where('api_token', $token)->first();
         }else{
-            return response()->json(['login'=>'false'], 200);
+            //return response()->json(['login'=>'false'], 200);
         }
         
 
@@ -123,7 +123,7 @@ class WebviewController extends Controller
             $token = $token;
             $user = User::where('api_token', $token)->first();
         }else{
-            return response()->json(['login'=>'false'], 200);
+            //return response()->json(['login'=>'false'], 200);
         }
 
         $bencana = Bencana::where('status_jenis', '1') //aktif
@@ -152,7 +152,7 @@ class WebviewController extends Controller
          if(!empty($token)){ 
              $user = User::where('api_token', $token)->first();
          }else{
-             return response()->json(['login'=>'false'], 200);
+            return redirect()->route('login');
          }
 
         $detail_bencana = Bencana::findOrFail($id);
@@ -163,7 +163,7 @@ class WebviewController extends Controller
         
         //join
         if($user == null){
-            return response()->json(['login'=>'false'], 200);
+            return redirect()->route('login');
 
         }else{
            

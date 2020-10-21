@@ -20,12 +20,7 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 
-//home view mobile
-Route::get('m/home', 'Api\WebviewController@index'); 
-Route::get('m/bencana/kategori', 'Api\WebviewController@kategori'); 
-Route::get('m/bencana/kategori/{id}', 'Api\WebviewController@kategori_list'); 
-Route::get('m/bencana/detail/{id}', 'Api\WebviewController@bencana_detail'); 
-Route::get('m/bencana/join/{id}', 'Api\WebviewController@bencana_join'); 
+
 
 Route::get('/', function () {
     return [
@@ -102,4 +97,12 @@ Route::group(['middleware'=> ['auth:api']], function (){
     Route::post('relawan/gps/bencana', 'Api\BencanaController@storeGps');
 
 });
+
+//home view mobile
+Route::get('m/home', 'Api\WebviewController@index'); 
+Route::get('m/bencana/kategori', 'Api\WebviewController@kategori'); 
+Route::get('m/bencana/kategori/{id}', 'Api\WebviewController@kategori_list'); 
+Route::get('m/bencana/detail/{id}', 'Api\WebviewController@bencana_detail'); 
+Route::get('m/bencana/join/{id}', 'Api\WebviewController@bencana_join'); 
+
 
