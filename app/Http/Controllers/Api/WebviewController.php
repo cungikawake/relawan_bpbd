@@ -129,13 +129,17 @@ class WebviewController extends Controller
          //cek login 
         $token = $this->getBearerToken();
         $user = User::where('api_token', $token)->first();
- 
+         
+        if($token == ''){
+            return   response()->json(['error'=>'User tidak ditemukan'], 401);
+        }
+        
         //get relawan
         $relawan = Relawan::where('id_user', $user->id)->first();
             
         //pastikan user memiliki join 1 bencana yang aktif pada durasi yang sama
         $today=date('Y-m-d');//hari ini
-        
+        $detail_bencana = Bencana::findOrFail($id);
         $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
                 ->where('relawan_bencana.id_user', $user->id) 
                 ->where('relawan_bencana.status_join', '1')  
@@ -146,7 +150,7 @@ class WebviewController extends Controller
         if($detail_bencana->jenis_bencana == 1 && isset($relawan->nomor_relawan) && $relawan->nomor_relawan ==''){
             return redirect()->back()->with('message', 'Maaf saat ini anda belum bisa mengikuti kegiatan '.$detail_bencana->judul_bencana.', Karena akun anda masih di tinjau.'); 
         }
-
+         
         //cek apakah ini bencana private dan relawan sudah di approve ?
         if($detail_bencana->jenis_bencana == 1 && isset($relawan->nomor_relawan) && $relawan->nomor_relawan !=''){
             //apakah sudah pernah join
@@ -183,7 +187,7 @@ class WebviewController extends Controller
 
                         $this->sendSms($user, $detail_bencana, 0);
 
-                        return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                        return redirect()->back()->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                     } 
                     
                 }
@@ -220,7 +224,7 @@ class WebviewController extends Controller
 
                         $this->sendSms($user, $detail_bencana, 0);
 
-                        return redirect('relawan/bencana')->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
+                        return redirect()->back()->with('message', 'Selamat, Anda berhasil mengirim permintaan bergabung. Silahkan menunggu  untuk konfirmasi dari Tim kami.');
                         
                     }
 
@@ -268,7 +272,7 @@ class WebviewController extends Controller
 
                         $this->sendSms($user, $detail_bencana, 1);
 
-                        return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                        return redirect()->back()->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                     } 
                     
                 }
@@ -305,7 +309,7 @@ class WebviewController extends Controller
 
                     $this->sendSms($user, $detail_bencana, 1);
 
-                    return redirect('relawan/bencana')->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
+                    return redirect()->back()->with('message', 'Selamat, Sekarang anda sudah langsung diterima bergabung.');
                     
                 }
             }
