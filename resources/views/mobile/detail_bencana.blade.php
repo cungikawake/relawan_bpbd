@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2 style="font-size:14px;">{{$bencana->judul_bencana}}</h2>
+              <h3>Detail Informasi Kegiatan</h3>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="well-middle">
               <div class="single-well">
                 <a href="#">
-                  <h4 class="sec-head">Tugas Relawan</h4>
+                  <h4 class="sec-head">{{$bencana->judul_bencana}}</h4>
                 </a>
                 <p>
                     Detail Informasi : {{$bencana->detail_tugas}}

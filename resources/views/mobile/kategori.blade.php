@@ -23,7 +23,7 @@
                 <div class="single-services">
                   <a class="services-icon" href="{{ url('api/m/bencana/kategori/'.$kategori->id) }}">
                     <img src="{{$kategori->displayImage()}}"  alt="erelawan" class="img">
-                    <p style="font-size:1rem;">
+                    <p style="font-size:14px;">
                       {{ $kategori->nama_kategori }}
                     </p>
                   </a>

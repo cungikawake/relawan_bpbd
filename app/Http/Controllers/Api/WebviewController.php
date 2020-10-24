@@ -12,7 +12,7 @@ use App\Models\RelawanBencana;
 use App\Models\Kategori; 
 use App\User;  
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Mail; 
 use Concerns\InteractsWithInput;
 
 class WebviewController extends Controller
@@ -52,12 +52,14 @@ class WebviewController extends Controller
         return null;
     }
  
-    public function index(Request $request){
+    public function index(Request $request, $token){
         //cek login 
         $token = $this->getBearerToken();
+        dd($oken);
         if(!empty($token)){
             $token = $token;
             $user = User::where('api_token', $token)->first();
+            
         }else{
             //return response()->json(['login'=>'false'], 200);
         }
@@ -146,7 +148,7 @@ class WebviewController extends Controller
 
     public function bencana_join($id){
          //cek login 
-         $token = $this->getBearerToken();
+         /* $token = $this->getBearerToken();
          $user = '';
 
          if(!empty($token)){ 
@@ -154,6 +156,8 @@ class WebviewController extends Controller
          }else{
             return redirect()->route('login');
          }
+         */
+         dd(Auth::user());
 
         $detail_bencana = Bencana::findOrFail($id);
         

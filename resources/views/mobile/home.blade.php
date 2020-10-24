@@ -29,7 +29,7 @@
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
                   <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Register Relawan</a>
-                  <a class="ready-btn page-scroll" href="#about">Download App</a>
+                  
                 </div>
               </div>
             </div>
@@ -55,7 +55,7 @@ penanggulangan bencana</h1>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
                   <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
-                  <a class="ready-btn page-scroll" href="#about">Download App</a>
+                  
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@ penanggulangan bencana</h1>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
                   <a class="ready-btn right-btn page-scroll" href="{{route('register')}}">Jadi Relawan</a>
-                  <a class="ready-btn page-scroll" href="#about">Download App</a>
+                  
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ penanggulangan bencana</h1>
                 <div class="single-services">
                   <a class="services-icon" href="{{ url('api/m/bencana/kategori/'.$kategori->id) }}">
                     <img src="{{$kategori->displayImage()}}"  alt="erelawan" class="img" style="width:60px;">
-                    <p style="font-size:12px;">
+                    <p style="font-size:14px;">
                       {{ $kategori->nama_kategori }}
                     </p>
                   </a>
@@ -143,10 +143,10 @@ penanggulangan bencana</h1>
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="single-blog">
                 <h4 style="font-size:14px;">
-                    <a href="{{url('bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
+                    <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
                 </h4>
                 <div class="single-blog-img">
-                  <a href="{{url('bencana/detail/'.$bencana->id)}}">
+                  <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}">
                     <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
                   </a>
                 </div>
@@ -177,7 +177,7 @@ penanggulangan bencana</h1>
                   </span>
                 </div>
                 <span>
-                  <a href="{{url('bencana/detail/'.$bencana->id)}}" class="ready-btn">Detail</a>
+                  <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}" class="ready-btn">Detail</a>
                 </span>
               </div>
               <!-- Start single blog -->
