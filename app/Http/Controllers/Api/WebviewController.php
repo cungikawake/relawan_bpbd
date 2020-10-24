@@ -55,7 +55,7 @@ class WebviewController extends Controller
     public function index(Request $request){
         //cek login 
         $token = $this->getBearerToken();
-        dd($oken);
+        dd($token);
         if(!empty($token)){
             $token = $token;
             $user = User::where('api_token', $token)->first();
