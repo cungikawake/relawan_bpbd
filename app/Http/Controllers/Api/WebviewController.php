@@ -13,6 +13,7 @@ use App\Models\Kategori;
 use App\User;  
 use Illuminate\Support\Facades\Auth;
 use Mail; 
+use Session;
 use Concerns\InteractsWithInput;
 
 class WebviewController extends Controller
@@ -55,6 +56,10 @@ class WebviewController extends Controller
     public function index(Request $request){
         //cek login 
         $token = $this->getBearerToken();
+        session([
+            'token' => $token
+        ]);
+        
         $user = User::where('api_token', $token)->first();
          
         
@@ -75,6 +80,9 @@ class WebviewController extends Controller
     public function kategori(Request $request){
         //cek login 
         $token = $this->getBearerToken();
+        session([
+            'token' => $token
+        ]);
         $user = User::where('api_token', $token)->first();
         
 
@@ -103,7 +111,7 @@ class WebviewController extends Controller
 
     public function bencana_detail(Request $request, $id){
          
-        //cek login 
+        //cek login  
         $token = $this->getBearerToken();
         $user = User::where('api_token', $token)->first();
 
@@ -127,13 +135,15 @@ class WebviewController extends Controller
 
     public function bencana_join($id){
          //cek login 
+        $token = session('token');
+         
         $token = $this->getBearerToken();
         $user = User::where('api_token', $token)->first();
          
         if($token == ''){
             return   response()->json(['error'=>'User tidak ditemukan'], 401);
         }
-        
+
         //get relawan
         $relawan = Relawan::where('id_user', $user->id)->first();
             
