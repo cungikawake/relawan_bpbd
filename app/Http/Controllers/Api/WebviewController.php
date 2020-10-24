@@ -55,10 +55,10 @@ class WebviewController extends Controller
     public function index(Request $request){
         //cek login 
         $token = $this->getBearerToken();
-        dd($token);
+        $user = User::where('api_token', $token)->first();
+        dd($user);
         if(!empty($token)){
             $token = $token;
-            $user = User::where('api_token', $token)->first();
             
         }else{
             //return response()->json(['login'=>'false'], 200);
