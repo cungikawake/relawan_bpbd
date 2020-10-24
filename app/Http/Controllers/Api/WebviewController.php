@@ -52,7 +52,7 @@ class WebviewController extends Controller
         return null;
     }
  
-    public function index(Request $request, $token){
+    public function index(Request $request){
         //cek login 
         $token = $this->getBearerToken();
         dd($oken);
