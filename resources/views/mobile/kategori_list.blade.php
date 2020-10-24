@@ -26,10 +26,10 @@
             <div class="col-6 col-md-4 col-lg-4 ">
               <div class="single-blog">
                 <h4 style="font-size:14px;">
-                    <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}">{{ $bencana->judul_bencana }}</a>
+                    <a href="{{url('api/m/bencana/detail/'.$bencana->id.'/'.$token)}}">{{ $bencana->judul_bencana }}</a>
                 </h4>
                 <div class="single-blog-img">
-                  <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}">
+                  <a href="{{url('api/m/bencana/detail/'.$bencana->id.'/'.$token)}}">
                     <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="">
                   </a>
                 </div>
@@ -60,7 +60,7 @@
                   </span>
                 </div>
                 <span>
-                  <a href="{{url('api/m/bencana/detail/'.$bencana->id)}}" class="ready-btn">Detail</a>
+                  <a href="{{url('api/m/bencana/detail/'.$bencana->id.'/'.$token)}}" class="ready-btn">Detail</a>
                 </span>
               </div>
               <!-- Start single blog -->

@@ -74,7 +74,7 @@ class WebviewController extends Controller
                     ->paginate(6);
 
         
-        return view('mobile.home', compact('bencanas', 'kategoris'));
+        return view('mobile.home', compact('bencanas', 'kategoris', 'token'));
     }
 
     public function kategori(Request $request){
@@ -87,10 +87,10 @@ class WebviewController extends Controller
         
 
         $kategoris = Kategori::orderBy('created_at', 'asc')->get();
-        return view('mobile.kategori', compact('kategoris'));
+        return view('mobile.kategori', compact('kategoris', 'token'));
     }
 
-    public function kategori_list($id){
+    public function kategori_list($id, $token){
         //cek login 
         $token = $this->getBearerToken();
         $user = User::where('api_token', $token)->first();
@@ -106,10 +106,10 @@ class WebviewController extends Controller
 
         $kategori =  Kategori::findOrFail($id); 
 
-        return view('mobile.kategori_list', compact('bencanas', 'kategori'));
+        return view('mobile.kategori_list', compact('bencanas', 'kategori', 'token'));
     }
 
-    public function bencana_detail(Request $request, $id){
+    public function bencana_detail(Request $request, $id, $token){
          
         //cek login  
         $token = $this->getBearerToken();
@@ -130,12 +130,11 @@ class WebviewController extends Controller
             $syarat_minimal[] = Persyaratan::where('id', $id)->first();
         }
          
-        return view('mobile.detail_bencana', compact('bencana', 'skill_minimal', 'syarat_minimal'));
+        return view('mobile.detail_bencana', compact('bencana', 'skill_minimal', 'syarat_minimal', 'token'));
     }
 
-    public function bencana_join($id){
+    public function bencana_join($id, $token){
          //cek login 
-        $token = session('token');
          
         $token = $this->getBearerToken();
         $user = User::where('api_token', $token)->first();

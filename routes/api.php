@@ -103,8 +103,8 @@ Route::group(['middleware'=> ['auth:api']], function (){
 //home view mobile
 Route::get('m/home/', 'Api\WebviewController@index'); 
 Route::get('m/bencana/kategori/', 'Api\WebviewController@kategori'); 
-Route::get('m/bencana/kategori/{id}', 'Api\WebviewController@kategori_list'); 
-Route::get('m/bencana/detail/{id}', 'Api\WebviewController@bencana_detail'); 
-Route::get('m/bencana/join/{id}', 'Api\WebviewController@bencana_join'); 
+Route::get('m/bencana/kategori/{id}/{token}', 'Api\WebviewController@kategori_list'); 
+Route::get('m/bencana/detail/{id}{token}', 'Api\WebviewController@bencana_detail'); 
+Route::get('m/bencana/join/{id}{token}', 'Api\WebviewController@bencana_join'); 
 
 

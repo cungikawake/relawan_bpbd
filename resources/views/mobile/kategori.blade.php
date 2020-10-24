@@ -21,7 +21,7 @@
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" href="{{ url('api/m/bencana/kategori/'.$kategori->id) }}">
+                  <a class="services-icon" href="{{ url('api/m/bencana/kategori/'.$kategori->id.'/'.$token) }}">
                     <img src="{{$kategori->displayImage()}}"  alt="erelawan" class="img">
                     <p style="font-size:14px;">
                       {{ $kategori->nama_kategori }}
