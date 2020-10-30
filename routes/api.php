@@ -89,7 +89,7 @@ Route::group(['middleware'=> ['auth:api']], function (){
     Route::get('m/home/', 'Api\WebviewController@index'); 
 
     //data pribadi
-    Route::get('/user', 'Api\RelawanController@profile');
+    Route::get('/m/user', 'Api\RelawanController@profile');
 
     //ajukan data pribadi
     Route::post('relawan/verifikasi', 'Api\RelawanController@store');
@@ -106,5 +106,10 @@ Route::get('m/bencana/kategori/', 'Api\WebviewController@kategori');
 Route::get('m/bencana/kategori/{id}/{token}', 'Api\WebviewController@kategori_list'); 
 Route::get('m/bencana/detail/{id}/{token}', 'Api\WebviewController@bencana_detail'); 
 Route::get('m/bencana/join/{id}/{token}', 'Api\WebviewController@bencana_join'); 
+Route::get('m/berita', 'Api\WebviewController@berita');
+Route::get('m/dashboard', 'Api\WebviewController@dashboard');
+Route::get('m/user_profile', 'Api\WebviewController@user_profile');
+Route::get('m/kegiatan', 'Api\WebviewController@kegiatan');
+ 
 
 

@@ -348,4 +348,20 @@ class WebviewController extends Controller
         curl_close($curlHandle);
         return true;
     }
+
+    public function berita(){
+        return "ini berita";
+    }
+    public function dashboard(){
+        return "ini dahsboar";
+    }
+    public function user_profile(){
+        return "ini profile";
+    }
+    public function kegiatan(){
+        return "ini kegiatan";
+    }
+    public function bantuan(){
+        return "ini bantuan";
+    }
 }
