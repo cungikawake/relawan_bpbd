@@ -30,7 +30,7 @@
                                             </a>
                                         </div>
                                         <div class="media-body text-left  mt-1">
-                                            <h3 class="font-large-1 white">{{$user->name}}</h3>
+                                            <p class="font-large-1 white">{{$user->name}}</p>
                                             <span class="font-medium-1 white">({{$user->email}})</span>
                                             @if($user->status_verified == 1)
                                             <span class="badge badge-pill badge-success">Relawan Terverifikasi</span>
@@ -85,9 +85,9 @@
                                 </a>
                             </div>
                             <div class="media-body text-left  mt-1">
-                                <h3 class="font-large-1 white">{{$model->nama_lengkap}}
+                                <p class="font-large-1 white">{{$model->nama_lengkap}}
                                     <span class="font-medium-1 white">({{$model->email}})</span>
-                                </h3>
+                                </p>
                                 <p class="white">
                                     <i class="ft-map-pin white"> </i>{{$model->alamat}} </p>
                                 <p class="white">
