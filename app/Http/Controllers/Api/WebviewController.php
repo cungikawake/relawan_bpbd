@@ -389,7 +389,31 @@ class WebviewController extends Controller
     }
 
     public function user_profile(){
-        return "ini profile";
+        //cek login 
+        $token = $this->getBearerToken();
+        session([
+            'token' => $token
+        ]); 
+         
+        $user = User::where('api_token', $token)->first();
+        $model = Relawan::where('id_user', $user->id)->first();
+        
+        $skills = Skill::orderBy('nama_skill', 'asc')->get();
+        $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
+
+        $model_skills = array();
+        $pelatihan = array();
+        $pengalaman = array();
+
+        if(!empty($model)){
+            $model_skills = SkillRelawan::join('skill', 'skill.id', '=', 'skill_relawan.id_skill')
+                ->where('skill_relawan.id_relawan', '=', $model->id)->get();
+            
+            $pelatihan = $model->pelatihanEdit();
+            $pengalaman = $model->pengalamanEdit();
+        }
+         
+        return view('mobile.relawan.profile.index', compact('model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
     }
     public function kegiatan(){
         //cek login 
