@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-xl-8">
                         <div class="media d-flex m-1 ">
-                            <div class="align-left p-1">
+                            <div class="align-left p-1 text-center">
                                 <a href="{{ route('relawan.verifikasi') }}" class="profile-image">
                                     @if(empty($model->foto_file))
                                         <img src="https://cdn.iseated.com/assets/img/nopicture.jpg" class="rounded-circle img-border height-100" alt="Foto Kosong">
@@ -83,7 +83,11 @@
                                     <br>
                                     <button class="btn btn-primary">Edit Profil</button>
                                 </a>
-                            </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-dm-12">
+                        <div class="media d-flex m-1 ">
                             <div class="media-body text-left  mt-1">
                                 <p class="font-large-1 white">{{$model->nama_lengkap}}
                                     <span class="font-medium-1 white">({{$model->email}})</span>
