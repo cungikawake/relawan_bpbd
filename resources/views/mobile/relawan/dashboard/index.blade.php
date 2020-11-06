@@ -101,7 +101,7 @@
 
                 <!-- Chart -->
                 <div class="row match-height">
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                          <a href="{{ url('/relawan/profile') }}">
                          <div class="card">
                             <div class="card-body text-center">
@@ -130,7 +130,7 @@
                             </div>
                          </div>
                         </a>
-                    </div> 
+                    </div>  -->
                 </div>
                 <!-- Chart --> 
             </div>
