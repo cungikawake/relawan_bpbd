@@ -40,7 +40,7 @@
             <section id="header-footer">
                 <div class="row match-height">
                     @foreach($bencanas as $bencana)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">{{$bencana->judul_bencana}}</h4>
