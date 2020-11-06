@@ -9,7 +9,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
             <div class="content-header-left col-md-4 col-12 mb-2">
-                <h3 class="content-header-title">Daftar Kegiatan Yang Kamu Ikuti</h3>
+                <h5 class="content-header-title">Daftar Kegiatan Yang Kamu Ikuti</h5>
             </div>
              
         </div>
@@ -43,13 +43,15 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$bencana->judul_bencana}}</h4>
+                                <p class="card-title">{{$bencana->judul_bencana}}</p>
                                 @if($bencana->status_join == 1)
-                                    <span class="badge badge-pill badge-success">Di Setujui {{ $bencana->tgl_join }}</span>
+                                    <span class="badge badge-pill badge-success">Di Setujui <span>
+                                    <span class="badge badge-pill badge-success">{{ $bencana->tgl_join }}</span>
                                 @elseif($bencana->status_join == 2)
                                     <span class="badge badge-pill badge-danger">Di Tolak</span>
                                 @elseif($bencana->status_join == 3)
-                                    <span class="badge badge-pill badge-danger">Anda Keluar {{ $bencana->tgl_keluar }} </span>
+                                    <span class="badge badge-pill badge-danger">Anda Keluar </span>
+                                    <span class="badge badge-pill badge-danger">{{ $bencana->tgl_keluar }} </span>
                                 @else
                                     <span class="badge badge-pill badge-info">Menunggu Konfirmasi</span>
                                 @endif
