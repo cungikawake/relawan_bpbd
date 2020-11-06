@@ -125,20 +125,7 @@
                 
                 {{ $bencanas->links() }} <br>
 
-                <div class="row match-height">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="alert alert-secondary">
-                                    <p>Ayo kita bekerja sama membantu teman, sahabat, keluarga kita.</p>
-                                    <a href="{{ url('relawan/bencana/search') }}">
-                                        <button class="btn btn-success">Cari Kegiatan <i class="la la-angle-right"></i></button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                 
             </section>
             <!-- Header footer section End -->
         </div>
