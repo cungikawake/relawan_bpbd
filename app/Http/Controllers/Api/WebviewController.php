@@ -352,9 +352,42 @@ class WebviewController extends Controller
     public function berita(){
         return "ini berita";
     }
+     
     public function dashboard(){
-        return "ini dahsboar";
+        //cek login 
+        $token = $this->getBearerToken();
+        session([
+            'token' => $token
+        ]);
+        
+        $user = User::where('api_token', $token)->first();
+         
+         
+        $relawan = Relawan::join('users', 'users.id', '=', 'relawan.id_user')
+                ->where('relawan.id_user', $user->id)
+                ->first();
+
+        $bencana['aktif'] = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->select('*','relawan_bencana.id as id_relawan_bencana')
+                ->where('relawan_bencana.id_user', $user->id)  
+                ->where('relawan_bencana.status_join', '1')  
+                ->count(); 
+        
+        $bencana['ditolak'] = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->select('*','relawan_bencana.id as id_relawan_bencana')
+                ->where('relawan_bencana.id_user', $user->id)  
+                ->where('relawan_bencana.status_join', '2')  
+                ->count();
+        
+        $bencana['keluar'] = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->select('*','relawan_bencana.id as id_relawan_bencana')
+                ->where('relawan_bencana.id_user', $user->id)  
+                ->where('relawan_bencana.status_join', '3')  
+                ->count();
+        
+        return view('mobile.relawan.dashboard.index', compact('relawan', 'user', 'bencana'));
     }
+
     public function user_profile(){
         return "ini profile";
     }
