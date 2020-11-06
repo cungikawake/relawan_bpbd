@@ -86,49 +86,14 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="col-dm-12">
-                        <div class="media d-flex m-1 ">
-                            <div class="media-body text-left  mt-1">
-                                <p class="font-large-1 white">{{$model->nama_lengkap}}
-                                    <span class="font-medium-1 white">({{$model->email}})</span>
-                                </p>
-                                <p class="white">
-                                    <i class="ft-map-pin white"> </i>{{$model->alamat}} </p>
-                                <p class="white">
-                                    <i class="ft-phone white"> </i>{{$model->tlp}} </p>
-                                <p class="white text-bold-300 d-none d-sm-block">
-                                    @if($model->nomor_relawan == null)
-                                        <div class="alert round bg-warning alert-icon-right alert-dismissible mb-2" role="alert">
-                                            <span class="alert-icon">
-                                                <i class="ft-watch"></i>
-                                            </span>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                           Data Pribadi sudah terkirim, Permintaan anda belum terverifikasi oleh tim kami.
-                                        </div>
-                                    @else
-                                        <i class="ft-file white"> </i>{{$model->nomor_relawan}}
-                                    @endif
-                                </p>
-                                <!-- <ul class="list-inline">
-                                    <li class="pr-1 line-height-1">
-                                        <a href="#" class="font-medium-4 white ">
-                                            <span class="ft-edit"></span> Edit Profile 
-                                        </a>
-                                    </li> 
-                                </ul>  -->
-                            </div>
-                        </div>
-                    </div>
+                     
                 </div>
                 <div class="row">
                     <div class="col-xl-3 col-lg-5 col-md-12">
                         <div class="card">
-                            <div class="card-header pb-0">
+                            <div class="card-header">
                                 <div class="card-title-wrap bar-primary">
-                                    <div class="card-title">Data Pribadi</div>
-                                    <hr>
+                                <div class="card-title">Data Pribadi</div>
                                 </div>
                             </div>
                             <div class="card-content">
