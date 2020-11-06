@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <p class="card-title">{{$bencana->judul_bencana}}</p>
                                 @if($bencana->status_join == 1)
-                                    <span class="badge badge-pill badge-success">Di Setujui <span>
+                                    <span class="badge badge-pill badge-success">Di Setujui </span>
                                     <span class="badge badge-pill badge-success">{{ $bencana->tgl_join }}</span>
                                 @elseif($bencana->status_join == 2)
                                     <span class="badge badge-pill badge-danger">Di Tolak</span>
@@ -61,17 +61,21 @@
                             <img class="" src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="Card image cap" style="max-height:150px;">
  
                             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
+                                <p>
                                 @if($bencana->status_join == 1)
                                     <span class="float-left">
                                         <a onclick="return  myFunction();" href="{{ url('relawan/bencana/keluar?relawan_bencana='.$bencana->id_relawan_bencana) }}" class="card-link text-danger"><i class="la la-close keluar_bencana"></i> Tinggalkan Bencana
                                         </a>
                                     </span>
                                 @endif
+                                </p>
+                                <p>
                                 <span class="float-right">
                                     <a type="button"  data-toggle="modal" data-target="#exampleModal_{{$bencana->id}}" class="card-link" > Detail
                                         <i class="la la-angle-right"></i>
                                     </a>
                                 </span>
+                                </p>
                             </div>
                         </div>
                     </div>
