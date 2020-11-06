@@ -174,5 +174,7 @@
 @stop
 
 @section('script')
-<script></script>
+<script>
+
+</script>
 @stop

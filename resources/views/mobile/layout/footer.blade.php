@@ -71,11 +71,11 @@ dalam melibatkan diri pada kegiatan-kegiatan penanggulangan bencana.</p>
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="copyright text-center">
+            <!-- <div class="copyright text-center">
               <p>
                 &copy; Copyright <strong>eRelawan</strong>. All Rights Reserved
               </p>
-            </div>
+            </div> -->
             <div class="credits">
               <!--
               All the links in the footer should remain intact.
