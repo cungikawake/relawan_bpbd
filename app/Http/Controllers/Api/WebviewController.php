@@ -392,7 +392,7 @@ class WebviewController extends Controller
         return "ini profile";
     }
     public function kegiatan(){
-        return "ini kegiatan";
+        return view('mobile.relawan.kegiatan.index');
     }
     public function bantuan(){
         return "ini bantuan";

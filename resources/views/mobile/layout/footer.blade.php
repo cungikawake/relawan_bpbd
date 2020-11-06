@@ -93,7 +93,7 @@ dalam melibatkan diri pada kegiatan-kegiatan penanggulangan bencana.</p>
 
   <a href="#" class="back-to-top" style="bottom: 100px;"><i class="fa fa-chevron-up"></i></a>
    
-  <div id="preloaderX">
+  <div id="preloader">
      
   </div>
 
@@ -115,6 +115,9 @@ dalam melibatkan diri pada kegiatan-kegiatan penanggulangan bencana.</p>
   <script src="{{ asset('frontpage/assets/js/main.js') }}"></script>
 
   <script src="{{ asset('js/app.js') }}" defer></script>
+  <script>
+     
+  </script>
   
   @yield('scripts')
    
