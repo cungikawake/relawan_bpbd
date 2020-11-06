@@ -393,12 +393,13 @@ class WebviewController extends Controller
     }
     public function kegiatan(){
         //cek login 
-        /* $token = $this->getBearerToken();
+        $token = $this->getBearerToken();
         session([
             'token' => $token
-        ]); */
-        
-        $user = User::where('email', 'cungikawake@gmail.com')->first();
+        ]); 
+         
+        $user = User::where('api_token', $token)->first();
+         
         $relawan = Relawan::where('id_user', $user->id)->first();
         $bencanas = array();
         
