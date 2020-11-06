@@ -392,7 +392,24 @@ class WebviewController extends Controller
         return "ini profile";
     }
     public function kegiatan(){
-        return view('mobile.relawan.kegiatan.index');
+        //cek login 
+        $token = $this->getBearerToken();
+        session([
+            'token' => $token
+        ]);
+        
+        $user = User::where('email', 'cungikawake@gmail.com')->first();
+        $relawan = Relawan::where('id_user', $user->id)->first();
+        $bencanas = array();
+        
+        $bencanas = RelawanBencana::join('bencana', 'bencana.id', '=', 'relawan_bencana.id_bencana')
+                ->select('*','relawan_bencana.id as id_relawan_bencana')
+                ->where('relawan_bencana.id_user', $user->id) 
+                ->orderBy('relawan_bencana.id', 'desc')
+                ->paginate(6); 
+        
+        return view('mobile.relawan.kegiatan.index', compact('relawan', 'user', 'bencanas')); 
+         
     }
     public function bantuan(){
         return "ini bantuan";
