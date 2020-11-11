@@ -210,7 +210,7 @@ penanggulangan bencana.
                 </h4>
                 <div class="single-blog-img">
                   <a href="{{url('bencana/detail/'.$bencana->id)}}">
-                    <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="{{ $bencana->judul_bencana }}" style="min-height:200px; max-height:300px;">
+                    <img src="{{ asset('uploads/bencana/'.$bencana->foto_bencana) }}" alt="{{ $bencana->judul_bencana }}" style="height:200px;">
                   </a>
                 </div>
                 <div class="blog-text"> 
