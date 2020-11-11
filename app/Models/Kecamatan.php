@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Kecamatan extends Model
 {
     //
-    protected $table = 'kecamatan';
+    protected $table = 'tb_kecamatan';
     protected $primaryKey = 'kecamatan_id';
 }

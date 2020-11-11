@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Desa extends Model
 {
     //
-    protected $table = 'desakel';
+    protected $table = 'tb_desakel';
     protected $primaryKey  = 'desakel_id';
 }
