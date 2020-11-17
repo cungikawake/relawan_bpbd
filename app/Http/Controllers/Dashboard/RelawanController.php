@@ -392,12 +392,15 @@ class RelawanController extends Controller
      */
     public function destroy($id)
     {
+        
         $model = Relawan::findOrFail($id);
+        
         if($model->user){ 
             $model->user->role = '3';
             $model->user->status_verified = '';
-            $model->user->save();
+            $model->user->delete();
         }
+        
         foreach($model->skills as $row){
             $row->delete();
 
@@ -421,7 +424,7 @@ class RelawanController extends Controller
         $model->nomor_relawan = '';
         $model->ktp_file = '';
         $model->foto_file = '';
-        $model->save();
+        $model->delete();
 
         return redirect()->route('dashboard.relawan.index')->with('message', 'Data berhasil dihapus.');
     }

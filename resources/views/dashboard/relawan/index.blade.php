@@ -128,7 +128,7 @@
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id_relawan}}" title="Hapus"><i class="la la-ban"></i></button>
                                                             <form action="{{route('dashboard.relawan.destroy', $data->id_relawan)}}" id="delete-{{$data->id_relawan}}" method="POST">
                                                                 @csrf
-                                                                @method('DELETE')
+                                                                
                                                             </form>
 
                                                             <a href="{{route('dashboard.relawan.print', $data->id_relawan)}}" target="_blank" class="btn btn-icon btn-primary btn-sm" title="Print" style="margin-top: 0.3rem !important;"><i class="la la-print"></i></a>

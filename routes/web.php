@@ -35,6 +35,7 @@ Route::group(['middleware'=> ['auth', 'cekstatus']], function (){
         Route::post('relawan/{id}/verify', 'RelawanController@verify')->name('relawan.verify');
         Route::get('relawan/{id}/print', 'RelawanController@print')->name('relawan.print');
         Route::get('relawan/search/data', 'RelawanController@search')->name('relawan.search');
+        Route::post('relawan/{id}/destroy', 'RelawanController@destroy')->name('relawan.destroy');
         
         Route::get('list-kegiatan', 'ListKegiatanController@index')->name('list_kegiatan.index');
         Route::get('list-kegiatan/{id}/detail', 'ListKegiatanController@detail')->name('list_kegiatan.detail');
