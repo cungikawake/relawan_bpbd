@@ -39,15 +39,16 @@ class RelawanController extends Controller
 
         //$model = new Relawan();
         $skills = Skill::orderBy('nama_skill', 'asc')->get();
-        $model_skills = array();
+        $model_skills = SkillRelawan::where('id_relawan', '=', $model->id)->pluck('id_skill')->toArray();
         $organisasi = IndukOrganisasi::orderBy('nama_organisasi', 'asc')->get();
         
-        $pelatihan[] = new RelawanPelatihan;
-        $pengalaman[] = new RelawanPengalaman;
+        $pelatihan = $model->pelatihanEdit();
+        $pengalaman = $model->pengalamanEdit();
+
         $kota = Kota::orderBy('name', 'asc')->get();
         $kecamatan = Kecamatan::orderBy('kecamatan_nama', 'asc')->get();
         $desa = Desa::orderBy('desakel_nama', 'asc')->get();
-
+ 
         return view('relawan.register.verifikasi', compact('desa','kecamatan','kota','model', 'skills', 'model_skills', 'organisasi', 'pelatihan', 'pengalaman', 'user'));
     }
 
@@ -64,7 +65,7 @@ class RelawanController extends Controller
                 'pekerjaan' => 'required',
                 'ktp' => 'required',
                 'ktp_file' => 'mimes:jpg,jpeg,png,bmp|max:5000',
-                'foto_file' => 'mimes:jpg,jpeg,png,bmp|max:5000',
+                'foto_file' => 'mimes:jpg,jpeg,png,bmp|max:5000', 
                 'alamat' => 'required',
                 'tlp' => 'required',
                 //'jenis_relawan' => 'required',
@@ -73,7 +74,8 @@ class RelawanController extends Controller
                 'kota' => 'required', 
                 'skill' => 'required',
                 'kecamatan' => 'required',
-                'desa' => 'required'
+                'desa' => 'required',
+                'sertifikat_pelatihan.*' => 'mimes:jpg,jpeg,png,bmp|max:5000',
             ]
         );
 
@@ -100,6 +102,12 @@ class RelawanController extends Controller
             $data->kota_id = $request->kota;
             $data->kecamatan_id = $request->kecamatan;
             $data->desakel_id = $request->desa;
+
+            $data->kota_domisili = $request->kota_domisili;
+            $data->kec_domisili = $request->kec_domisili;
+            $data->desa_domisili = $request->desa_domisili;
+            $data->alamat_domisili = $request->alamat_domisili;
+
             $data->save();
 
             $user_data = Auth::user();
@@ -171,6 +179,15 @@ class RelawanController extends Controller
                 $detail->tempat = $request->tempat_pelatihan[$i];
                 $detail->penyelenggara = $request->penyelenggara_pelatihan[$i];
                 $detail->tahun = $request->tahun_pelatihan[$i];
+                
+
+                $image = $request->sertifikat_pelatihan[$i];
+                if(!empty($image)){
+                    $imageName = 'sertifikat_pelatihan-'.$i.'-'.Str::slug(strtolower($request->nama_lengkap), '_').'-'.date('dmYHis').'.'.$image->guessExtension();
+                    $upload = $image->move(public_path('uploads/relawan/'.$data->id.'/'), $imageName);
+                    $data->foto_file = $imageName;
+                    $detail->sertifikat_pelatihan = $imageName;
+                } 
                 $detail->save();
 
             }

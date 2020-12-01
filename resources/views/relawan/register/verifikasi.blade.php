@@ -165,6 +165,10 @@
                                                             <input type="text" class="form-control" name="nomor_relawan" value="{{old('nomor_relawan', $model->nomor_relawan)}}" placeholder="nomor_relawan" readonly>
                                                         </fieldset>
                                                     </div>
+                                                    <div class="col-md-12">
+                                                    <hr>
+                                                    <h4>Alamat sesuai KTP</h4>
+                                                    </div>
                                                     <div class="col-md-4">
                                                         <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
@@ -199,12 +203,55 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">Alamat Domisili Bali<span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">Alamat KTP<span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <textarea class="form-control" name="alamat" rows="3">{{old('alamat', $model->alamat)}}</textarea>
                                                         </fieldset>
                                                     </div>
                                                     
+                                                    <div class="col-md-12">
+                                                    <hr>
+                                                    <h4>Alamat Domisili Bali</h4>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kota_domisili">
+                                                                <option hidden>Pilih Kabupaten/Kota</option>
+                                                                @foreach($kota as $row)
+                                                                    <option value="{{$row->id}}" {{ old('kota_domisili', $model->kota_domisili) == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Kecamatan <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kec_domisili">
+                                                                <option hidden>Pilih Kecamatan</option>
+                                                                @foreach($kecamatan as $row)
+                                                                    <option value="{{$row->kecamatan_id}}" {{ old('kec_domisili', $model->kec_domisili) == $row->kecamatan_id ? 'selected' : '' }}>{{$row->kecamatan_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Desa <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="desa_domisili">
+                                                                <option hidden>Pilih Desa</option>
+                                                                @foreach($desa as $row)
+                                                                    <option value="{{$row->desakel_id}}" {{ old('desa_domisili', $model->desa_domisili) == $row->desakel_id ? 'selected' : '' }}>{{$row->desakel_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5 class="mt-2">Alamat Domisili<span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <textarea class="form-control" name="alamat_domisili" rows="3">{{old('alamat_domisili', $model->alamat_domisili)}}</textarea>
+                                                        </fieldset>
+                                                    </div>
                                                     <div class="col-md-12">
                                                         <div class="float-right">
                                                             <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab" id="to-tab-2">Selanjutnya</a>
@@ -240,7 +287,7 @@
                                                     <div class="col-md-12">
                                                         <h5 class="my-2">KECAKAPAN PENDUKUNG DALAM PENANGGULANGAN BENCANA <span class="danger">*</span></h5>
                                                         @if(count($skills) > 0)
-                                                            @foreach($skills as $row)
+                                                            @foreach($skills as $row) 
                                                                 <fieldset class="form-group">
                                                                     <input class="form-check-input m-0" type="checkbox" value="{{$row->id}}" name="skill[]" {{ in_array($row->id, old('skill', $model_skills)) ? 'checked' : '' }}> <span class="ml-2">{{$row->nama_skill}}</span>
                                                                 </fieldset>
@@ -278,16 +325,23 @@
                                                                 <textarea class="form-control" name="detail_pelatihan[]"  placeholder="Detail Pelatihan"> {{ $pelatihan[$i]->detail_pelatihan }} </textarea>     
                                                                 </fieldset>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-3">
                                                                 <h5 class="mt-0">Penyelenggara</h5>
                                                                 <fieldset class="form-group">
                                                                     <input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="{{ $pelatihan[$i]->penyelenggara }}" placeholder="Penyelenggara">
                                                                 </fieldset>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <h5 class="mt-0">Tahun</h5>
                                                                 <fieldset class="form-group">
                                                                     <input type="text" class="form-control" name="tahun_pelatihan[]" value="{{ $pelatihan[$i]->tahun }}" placeholder="Tahun">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5 class="mt-0">Sertifikat</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="file" class="form-control" name="sertifikat_pelatihan[]" value="{{ $pelatihan[$i]->sertifikat_pelatihan }}" placeholder="sertifikat pelatihan">
+                                                                    <a>{{ $pelatihan[$i]->sertifikat_pelatihan }} </a>
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-2">
@@ -429,16 +483,22 @@
                                 '<textarea class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pelatihan"></textarea>'+
                             '</fieldset>'+
                         '</div>'+
-                        '<div class="col-md-6">'+
+                        '<div class="col-md-3">'+
                             '<h5 class="mt-0">Penyelenggara</h5>'+
                             '<fieldset class="form-group">'+
                                 '<input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="" placeholder="Penyelenggara">'+
                             '</fieldset>'+
                         '</div>'+
-                        '<div class="col-md-4">'+
+                        '<div class="col-md-3">'+
                             '<h5 class="mt-0">Tahun</h5>'+
                             '<fieldset class="form-group">'+
                                 '<input type="text" class="form-control" name="tahun_pelatihan[]" value="" placeholder="Tahun">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-3">'+
+                            '<h5 class="mt-0">Sertifikat</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="file" class="form-control" name="sertifikat_pelatihan[]" value="" placeholder="sertifikat pelatihan">'+
                             '</fieldset>'+
                         '</div>'+
                         '<div class="col-md-2">'+

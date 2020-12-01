@@ -56,10 +56,18 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>#</th>
-                                                <th>Nama</th>
-                                                <th>Telepone</th>
-                                                <th>Email</th>
-                                                <th>Nama Pimpinan</th>
+                                                <th>Nama Organiasi</th>
+                                                <th>Admin Telepone</th>
+                                                <th>Admin Email</th>
+                                                <th>Admin Nama </th>
+
+                                                <th>Ketua Telepone</th>
+                                                <th>Ketua Email</th>
+                                                <th>Ketua Nama </th>
+
+                                                <th>Sekretaris Telepone</th>
+                                                <th>Sekretaris Email</th>
+                                                <th>Sekretaris Nama </th>
                                                 <th width="20%"></th>
                                             </tr>
                                         </thead>
@@ -74,6 +82,14 @@
                                                         <td>{{$data->tlp_organisasi}}</td>
                                                         <td>{{$data->email_organisasi}}</td>
                                                         <td>{{$data->nama_pimpinan_organisasi}}</td>
+
+                                                        <td>{{$data->ketua_tlp}}</td>
+                                                        <td>{{$data->ketua_email}}</td>
+                                                        <td>{{$data->ketua_nama}}</td>
+
+                                                        <td>{{$data->sekretaris_tlp}}</td>
+                                                        <td>{{$data->sekretaris_email}}</td>
+                                                        <td>{{$data->sekretaris_nama}}</td>
                                                         <td>
                                                             <a href="{{route('dashboard.induk_organisasi.edit', $data->id)}}" class="btn btn-icon btn-warning btn-sm"><i class="ft-edit"></i></a>
                                                             <button type="button" class="btn btn-icon btn-danger btn-sm delete" data-id="{{$data->id}}"><i class="la la-ban"></i></button>

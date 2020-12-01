@@ -58,6 +58,15 @@ class IndukOrganisasiController extends Controller
             $data->email_organisasi = $request->email;
             $data->nama_pimpinan_organisasi = $request->nama_pimpinan;
             $data->alamat_organisasi = $request->alamat;
+
+            $data->ketua_nama = $request->ketua_nama;
+            $data->ketua_email = $request->ketua_email;
+            $data->ketua_tlp = $request->ketua_tlp;
+
+            $data->sekretaris_nama = $request->sekretaris_nama;
+            $data->sekretaris_email = $request->sekretaris_email;
+            $data->sekretaris_tlp = $request->sekretaris_tlp;
+
             $data->save();
 
             return redirect()->route('dashboard.induk_organisasi.index')->with('message', 'Data berhasil disimpan.');
@@ -113,6 +122,14 @@ class IndukOrganisasiController extends Controller
             $data->email_organisasi = $request->email;
             $data->nama_pimpinan_organisasi = $request->nama_pimpinan;
             $data->alamat_organisasi = $request->alamat;
+
+            $data->ketua_nama = $request->ketua_nama;
+            $data->ketua_email = $request->ketua_email;
+            $data->ketua_tlp = $request->ketua_tlp;
+
+            $data->sekretaris_nama = $request->sekretaris_nama;
+            $data->sekretaris_email = $request->sekretaris_email;
+            $data->sekretaris_tlp = $request->sekretaris_tlp;
             $data->save();
 
             return redirect()->route('dashboard.induk_organisasi.index')->with('message', 'Data berhasil diubah.');

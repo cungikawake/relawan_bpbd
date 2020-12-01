@@ -176,12 +176,16 @@
                                                     <div class="col-md-6">
                                                         <h5 class="mt-2">Jenis Relawan <span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
-                                                            <select  class="form-control" name="jenis_relawan">
+                                                            <select  class="form-control" name="jenis_relawan" readonly>
                                                                 <option hidden>Pikih Jenis Relawan</option>
                                                                 <option value="1" {{ old('jenis_relawan', $model->jenis_relawan) == '1' ? 'selected' : '' }}>Terverifikasi </option>
                                                                 <option value="2" {{ old('jenis_relawan', $model->jenis_relawan) == '2' ? 'selected' : '' }}>Umum</option>
                                                             </select>
                                                         </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    <hr>
+                                                    <h4>Alamat sesuai KTP</h4>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
@@ -217,12 +221,56 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h5 class="mt-2">Alamat domisili bali<span class="danger">*</span></h5>
+                                                        <h5 class="mt-2">Alamat KTP<span class="danger">*</span></h5>
                                                         <fieldset class="form-group">
                                                             <textarea class="form-control" name="alamat" rows="3">{{old('alamat', $model->alamat)}}</textarea>
                                                         </fieldset>
                                                     </div>
                                                     
+                                                    <div class="col-md-12">
+                                                    <hr>
+                                                    <h4>Alamat Domisili Bali</h4>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Kabupaten/Kota <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kota_domisili">
+                                                                <option hidden>Pilih Kabupaten/Kota</option>
+                                                                @foreach($kota as $row)
+                                                                    <option value="{{$row->id}}" {{ old('kota_domisili', $model->kota_domisili) == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Kecamatan <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="kec_domisili">
+                                                                <option hidden>Pilih Kecamatan</option>
+                                                                @foreach($kecamatan as $row)
+                                                                    <option value="{{$row->kecamatan_id}}" {{ old('kec_domisili', $model->kec_domisili) == $row->kecamatan_id ? 'selected' : '' }}>{{$row->kecamatan_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="mt-2">Desa <span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <select  class="form-control" name="desa_domisili">
+                                                                <option hidden>Pilih Desa</option>
+                                                                @foreach($desa as $row)
+                                                                    <option value="{{$row->desakel_id}}" {{ old('desa_domisili', $model->desa_domisili) == $row->desakel_id ? 'selected' : '' }}>{{$row->desakel_nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5 class="mt-2">Alamat Domisili<span class="danger">*</span></h5>
+                                                        <fieldset class="form-group">
+                                                            <textarea class="form-control" name="alamat_domisili" rows="3">{{old('alamat_domisili', $model->alamat_domisili)}}</textarea>
+                                                        </fieldset>
+                                                    </div>
+
                                                     <div class="col-md-12">
                                                         <div class="float-right">
                                                             <a class="btn btn-primary btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab">Selanjutnya</a>
@@ -294,16 +342,23 @@
                                                                     <input type="text" class="form-control" name="detail_pelatihan[]" value="{{ $pelatihan[$i]->detail_pelatihan }}" placeholder="Detail Pengalaman">
                                                                 </fieldset>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-3">
                                                                 <h5 class="mt-0">Penyelenggara</h5>
                                                                 <fieldset class="form-group">
                                                                     <input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="{{ $pelatihan[$i]->penyelenggara }}" placeholder="Penyelenggara">
                                                                 </fieldset>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <h5 class="mt-0">Tahun</h5>
                                                                 <fieldset class="form-group">
                                                                     <input type="text" class="form-control" name="tahun_pelatihan[]" value="{{ $pelatihan[$i]->tahun }}" placeholder="Tahun">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5 class="mt-0">Sertifikat</h5>
+                                                                <fieldset class="form-group">
+                                                                    <input type="file" class="form-control" name="sertifikat_pelatihan[]" value="{{ $pelatihan[$i]->sertifikat_pelatihan }}" placeholder="sertifikat pelatihan">
+                                                                    <a>{{ $pelatihan[$i]->sertifikat_pelatihan }} </a>
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-2">
@@ -384,19 +439,25 @@
                                                         </div>
                                                     @endfor
                                                 </div>
-                                                    
+                                                <div class="row mt-2">
+                                                    <div class="col-md-12"> 
+                                                        <div class="float-left">
+                                                            <a href="{{ route('dashboard.bencana.index') }}">
+                                                                <a class="btn btn-danger btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab">Sebelumnya</a>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
                                                 <div class="row mt-2">
                                                     <div class="col-md-12">
+                                                        <hr>
                                                         <div class="float-right">
                                                             <p>Apakah relawan ini sudah layak ?<p>
                                                             <button type="submit" class="btn btn-danger btn-min-width mr-1 mb-1" value="0" name="approve">Tolak & Hapus</button>
 
                                                             <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1" value="1" name="approve">Simpan & Verifikasi</button>
-                                                        </div>
-                                                        <div class="float-left">
-                                                            <a href="{{ route('dashboard.bencana.index') }}">
-                                                                <a class="btn btn-danger btn-min-width mr-1 mb-1 text-white btnNav" data-target="pills-profile-tab">Sebelumnya</a>
-                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -447,16 +508,22 @@
                                 '<input type="text" class="form-control" name="detail_pelatihan[]" value="" placeholder="Detail Pengalaman">'+
                             '</fieldset>'+
                         '</div>'+
-                        '<div class="col-md-6">'+
+                        '<div class="col-md-3">'+
                             '<h5 class="mt-0">Penyelenggara</h5>'+
                             '<fieldset class="form-group">'+
                                 '<input type="text" class="form-control" name="penyelenggara_pelatihan[]" value="" placeholder="Penyelenggara">'+
                             '</fieldset>'+
                         '</div>'+
-                        '<div class="col-md-4">'+
+                        '<div class="col-md-3">'+
                             '<h5 class="mt-0">Tahun</h5>'+
                             '<fieldset class="form-group">'+
                                 '<input type="text" class="form-control" name="tahun_pelatihan[]" value="" placeholder="Tahun">'+
+                            '</fieldset>'+
+                        '</div>'+
+                        '<div class="col-md-3">'+
+                            '<h5 class="mt-0">Sertifikat</h5>'+
+                            '<fieldset class="form-group">'+
+                                '<input type="file" class="form-control" name="sertifikat_pelatihan[]" value="" placeholder="sertifikat pelatihan">'+
                             '</fieldset>'+
                         '</div>'+
                         '<div class="col-md-2">'+

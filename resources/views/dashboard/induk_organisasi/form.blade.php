@@ -43,35 +43,66 @@
                                                     <li>{{ $error }}</li>
                                                 @endforeach
                                             </div>
-                                        @endif
-                                        
-                                        <h5 class="mt-2">Nama <span class="danger">*</span></h5>
+                                        @endif 
+                                        <h5 class="mt-2">Nama Organisasi <span class="danger">*</span></h5>
                                         <fieldset class="form-group">
                                             <input type="text" class="form-control" name="nama" value="{{old('nama', $model->nama_organisasi)}}" placeholder="Nama">
-                                        </fieldset>
-                                        
-                                        <h5 class="mt-2">Telepone <span class="danger">*</span></h5>
-                                        <fieldset class="form-group">
-                                            <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp_organisasi)}}" placeholder="Telepone">
-                                        </fieldset>
+                                        </fieldset> 
                                         
                                         <h5 class="mt-2">Alamat</h5>
                                         <fieldset class="form-group">
                                             <textarea class="form-control" name="alamat" rows="3" placeholder="Alamat">{{old('alamat', $model->alamat_organisasi)}}</textarea>
                                         </fieldset>
                                         
-                                        <h5 class="mt-2">Email <span class="danger">*</span></h5>
-                                        <fieldset class="form-group">
-                                            <input type="text" class="form-control" name="email" value="{{old('email', $model->email_organisasi)}}" placeholder="Email">
-                                        </fieldset>
                                         
                                         <h5 class="mt-2">Nama Admin</h5>
                                         <fieldset class="form-group">
-                                            <input type="text" class="form-control" name="nama_pimpinan" value="{{old('nama_pimpinan', $model->nama_pimpinan_organisasi)}}" placeholder="Nama Pimpinan">
+                                            <input type="text" class="form-control" name="nama_pimpinan" value="{{old('nama_pimpinan', $model->nama_pimpinan_organisasi)}}" placeholder="Nama ">
                                         </fieldset>
+
+                                        <h5 class="mt-2">Telepone Admin<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="tlp" value="{{old('tlp', $model->tlp_organisasi)}}" placeholder="Telepone">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Email Admin<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="email" value="{{old('email', $model->email_organisasi)}}" placeholder="Email">
+                                        </fieldset>
+                                        <hr> 
                                         
+                                        <h5 class="mt-2">Nama Ketua</h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="ketua_nama" value="{{old('ketua_nama', $model->ketua_nama)}}" placeholder="Nama ">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Telepone Ketua<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="ketua_tlp" value="{{old('ketua_tlp', $model->ketua_tlp)}}" placeholder="Telepone">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Email Ketua<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="ketua_email" value="{{old('ketua_email', $model->ketua_email)}}" placeholder="Email">
+                                        </fieldset>
+                                        <hr>
                                         
+                                        <h5 class="mt-2">Nama Sekretaris</h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="sekretaris_nama" value="{{old('sekretaris_nama', $model->sekretaris_nama)}}" placeholder="Nama ">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Telepone Sekretaris<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="sekretaris_tlp" value="{{old('sekretaris_tlp', $model->sekretaris_tlp)}}" placeholder="Telepone">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Email Sekretaris<span class="danger">*</span></h5>
+                                        <fieldset class="form-group">
+                                            <input type="text" class="form-control" name="sekretaris_email" value="{{old('sekretaris_email', $model->sekretaris_email)}}" placeholder="Email">
+                                        </fieldset>
                                     </div>
+                                    
                                     <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                                         <div class="float-left">
                                             <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Simpan</button>

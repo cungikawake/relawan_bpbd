@@ -25,6 +25,12 @@ class Relawan extends Model
         'tlp',
         'jenis_relawan',
         'nomor_relawan',
+        'provinsi_domisili',
+        'kota_domisili',
+        'kec_domisili',
+        'desa_domisili',
+        'alamat_domisili',
+
     ];
     
     public function displayKtp()
